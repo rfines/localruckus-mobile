@@ -1,6 +1,6 @@
 function Controller() {
     function openDetail(e) {
-        $.trigger("detail", e);
+        $.trigger("detail", e.rowData.eventData);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "master";
@@ -12,8 +12,6 @@ function Controller() {
     var __defers = {};
     $.__views.master = Ti.UI.createWindow({
         backgroundColor: "#fff",
-        navBarHidden: true,
-        exitOnClose: true,
         title: "Local Ruckus",
         id: "master"
     });
@@ -22,24 +20,6 @@ function Controller() {
         id: "table"
     });
     $.__views.master.add($.__views.table);
-    $.__views.__alloyId5 = Ti.UI.createButton({
-        title: "...",
-        id: "__alloyId5"
-    });
-    $.__views.header = Ti.UI.createLabel({
-        width: Ti.UI.FILL,
-        height: "50dp",
-        color: "#fff",
-        textAlign: "center",
-        backgroundColor: "#44f",
-        font: {
-            fontSize: "24dp",
-            fontWeight: "bold"
-        },
-        text: "Events",
-        id: "header"
-    });
-    $.__views.table.headerView = $.__views.header;
     openDetail ? $.__views.table.addEventListener("click", openDetail) : __defers["$.__views.table!click!openDetail"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
@@ -67,6 +47,7 @@ function Controller() {
                     for (var i = 0; data.length > i; i++) {
                         item = data[i];
                         tableData.push(Alloy.createController("row", {
+                            eventData: item,
                             name: item.name
                         }).getView());
                     }

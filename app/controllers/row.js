@@ -1,3 +1,3 @@
 var args = arguments[0] || {};
-
-$.row.fighterName = $.name.text = args.name;
+$.row.eventData = args.eventData;
+$.row.name = $.name.text = args.eventData.name;

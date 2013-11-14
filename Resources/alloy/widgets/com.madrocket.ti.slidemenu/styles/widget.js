@@ -1,7 +1,7 @@
 function WPATH(s) {
     var index = s.lastIndexOf("/");
     var path = -1 === index ? "com.madrocket.ti.slidemenu/" + s : s.substring(0, index) + "/com.madrocket.ti.slidemenu/" + s.substring(index + 1);
-    return true && 0 !== path.indexOf("/") ? "/" + path : path;
+    return path;
 }
 
 module.exports = [ {
@@ -19,12 +19,5 @@ module.exports = [ {
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000"
-    }
-}, {
-    isApi: true,
-    priority: 1101.0002,
-    key: "Window",
-    style: {
-        navBarHidden: true
     }
 } ];

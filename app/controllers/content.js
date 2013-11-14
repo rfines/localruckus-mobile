@@ -8,7 +8,7 @@ $.master.on('detail', function(e) {
 	var win = controller.getView();
 
 	// get boxer stats by name
-	controller.setBoxerStats(e.row.fighterName);
+	controller.setBoxerStats(e);
 
 	// open the detail windows
 	if (OS_IOS && Alloy.isHandheld) {

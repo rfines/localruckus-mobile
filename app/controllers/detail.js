@@ -1,8 +1,9 @@
-exports.setBoxerStats = function(name) {
+exports.setBoxerStats = function(eventData) {
 	//var stats = Alloy.Globals.data[name];
+	alert(eventData);
 	if (OS_ANDROID) {
-		$.name.text = 'Name: ' + name;
+		$.name.text = 'Name: ' + eventData.name;
 	} else {
-		$.detail.title = name;
+		$.detail.title = eventData.name;
 	}
 };

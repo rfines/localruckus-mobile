@@ -8,25 +8,10 @@ function Controller() {
     var exports = {};
     $.__views.detail = Ti.UI.createWindow({
         backgroundColor: "#fff",
-        navBarHidden: true,
         layout: "vertical",
         id: "detail"
     });
     $.__views.detail && $.addTopLevelView($.__views.detail);
-    $.__views.name = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        left: 15,
-        top: 10,
-        font: {
-            fontSize: "18dp",
-            fontWeight: "normal"
-        },
-        textAlign: "left",
-        id: "name"
-    });
-    $.__views.detail.add($.__views.name);
     $.__views.height = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -85,8 +70,9 @@ function Controller() {
     $.__views.detail.add($.__views.record);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    exports.setBoxerStats = function(name) {
-        $.name.text = "Name: " + name;
+    exports.setBoxerStats = function(eventData) {
+        alert(eventData);
+        $.detail.title = eventData.name;
     };
     _.extend($, exports);
 }

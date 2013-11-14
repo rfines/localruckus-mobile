@@ -28,7 +28,8 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.row.fighterName = $.name.text = args.name;
+    $.row.eventData = args.eventData;
+    $.row.name = $.name.text = args.eventData.name;
     _.extend($, exports);
 }
 

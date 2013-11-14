@@ -1,5 +1,5 @@
 function openDetail(e) {
-	$.trigger('detail', e);
+	$.trigger('detail',e.rowData.eventData);
 }
 
 var data = [];
@@ -26,6 +26,7 @@ if (Ti.Geolocation.locationServicesEnabled) {
 				for (var i=0; i < data.length; i++) {
 					item = data[i];
 					tableData.push(Alloy.createController('row', {
+						eventData : item,
 						name: item.name
 					}).getView());			
 				}
