@@ -1,0 +1,9 @@
+<Alloy>
+	<Window title="Local Ruckus">
+		<TableView id="table" onClick="openDetail">
+			<HeaderView platform="android">
+				<Label id="header">Events</Label>
+			</HeaderView>
+		</TableView>
+	</Window>
+</Alloy>
