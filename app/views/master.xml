@@ -2,6 +2,7 @@
 	<Window title="Local Ruckus">
 		<TableView id="table" onClick="openDetail">
 			<HeaderView platform="android">
+				<Button>...</Button>
 				<Label id="header">Events</Label>
 			</HeaderView>
 		</TableView>
