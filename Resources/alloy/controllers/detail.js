@@ -12,7 +12,7 @@ function Controller() {
         id: "detail"
     });
     $.__views.detail && $.addTopLevelView($.__views.detail);
-    $.__views.height = Ti.UI.createLabel({
+    $.__views.description = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -23,10 +23,10 @@ function Controller() {
             fontWeight: "normal"
         },
         textAlign: "left",
-        id: "height"
+        id: "description"
     });
-    $.__views.detail.add($.__views.height);
-    $.__views.weight = Ti.UI.createLabel({
+    $.__views.detail.add($.__views.description);
+    $.__views.businessName = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -37,42 +37,20 @@ function Controller() {
             fontWeight: "normal"
         },
         textAlign: "left",
-        id: "weight"
+        id: "businessName"
     });
-    $.__views.detail.add($.__views.weight);
-    $.__views.age = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        left: 15,
-        top: 10,
-        font: {
-            fontSize: "18dp",
-            fontWeight: "normal"
-        },
-        textAlign: "left",
-        id: "age"
+    $.__views.detail.add($.__views.businessName);
+    $.__views.detailImage = Ti.UI.createImageView({
+        id: "detailImage"
     });
-    $.__views.detail.add($.__views.age);
-    $.__views.record = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        left: 15,
-        top: 10,
-        font: {
-            fontSize: "18dp",
-            fontWeight: "normal"
-        },
-        textAlign: "left",
-        id: "record"
-    });
-    $.__views.detail.add($.__views.record);
+    $.__views.detail.add($.__views.detailImage);
     exports.destroy = function() {};
     _.extend($, $.__views);
     exports.setBoxerStats = function(eventData) {
         alert(eventData);
         $.detail.title = eventData.name;
+        $.description.text = eventData.description || "No description provided.";
+        $.detailImage.image = eventData.media[0].url;
     };
     _.extend($, exports);
 }

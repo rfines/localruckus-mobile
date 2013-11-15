@@ -5,5 +5,7 @@ exports.setBoxerStats = function(eventData) {
 		$.name.text = 'Name: ' + eventData.name;
 	} else {
 		$.detail.title = eventData.name;
+		$.description.text = eventData.description || "No description provided.";
+		$.detailImage.image = eventData.media[0].url;
 	}
 };
