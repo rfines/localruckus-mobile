@@ -3,14 +3,9 @@ if (OS_IOS && Alloy.isHandheld) {
 }
 
 $.master.on('detail', function(e) {
-	// get the detail controller and window references
 	var controller = OS_IOS && Alloy.isTablet ? $.detail : Alloy.createController('detail');
 	var win = controller.getView();
-
-	// get boxer stats by name
 	controller.setBoxerStats(e);
-
-	// open the detail windows
 	if (OS_IOS && Alloy.isHandheld) {
 		Alloy.Globals.navgroup.open(win);
 	} else if (OS_ANDROID) {
@@ -18,8 +13,31 @@ $.master.on('detail', function(e) {
 	}
 });
 
-if (OS_ANDROID) {
-	$.master.getView().open();
+alert('i am gonna load location');
+if (Ti.Geolocation.locationServicesEnabled) {
+    Titanium.Geolocation.purpose = 'Get Current Location';
+    Titanium.Geolocation.getCurrentPosition(function(e) {
+        if (e.error) {
+            Ti.API.error('Error: ' + e.error);
+            alert('Your location is not available');
+            e.coords = {};
+        	e.coords.latitude = 39.102704;
+        	e.coords.longitude = -94.595033;
+        }
+        Alloy.Globals.location = e;
+        Titanium.Geolocation.reverseGeocoder(e.coords.latitude, e.coords.longitude, function(reverseGeocoderResonse) {
+        	if(reverseGeocoderResonse.places[0] != undefined){
+        		Alloy.Globals.reverseLocation = reverseGeocoderResonse;
+    		}
+			if (OS_ANDROID) {
+				//$.master.getView().open();
+			} else {
+				alert(Alloy.Globals);
+				$.master.getView().open();
+				$.master.loadInitialData();
+			}
+    	});     
+    });
 } else {
-	$.index.open();
+    alert('Please enable location services');
 }
