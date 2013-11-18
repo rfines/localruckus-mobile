@@ -32,7 +32,6 @@ if (Ti.Geolocation.locationServicesEnabled) {
 			if (OS_ANDROID) {
 				//$.master.getView().open();
 			} else {
-				alert(Alloy.Globals);
 				$.index.open();
 				$.master.loadInitialData();
 			}

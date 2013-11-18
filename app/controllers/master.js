@@ -40,7 +40,6 @@ exports.loadInitialData = function(options) {
 					name: item.name
 				}).getView());			
 			}
-			alert('set table data');
 			$.table.setData(tableData);		    
 	    },
 	    onerror: function(e) {
