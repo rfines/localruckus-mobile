@@ -3,13 +3,32 @@ function openDetail(e) {
 }
 
 function loadEntertainment(e) {
-	alert('entertain me');
+	exports.loadInitialData({tags:'ENTERTAINMENT', radius: 1000});
 }
 
-exports.loadInitialData = function() {
+function loadFood(e) {
+	exports.loadInitialData({tags:'FOOD-AND-DRINK', radius: 1000});
+}
+
+function loadMusic(e) {
+	exports.loadInitialData({tags:'MUSIC', radius: 1000});
+}
+
+function loadArts(e) {
+	exports.loadInitialData({tags:'ARTS', radius: 1000});
+}
+
+function loadFamily(e) {
+	exports.loadInitialData({tags:"FAMILY-AND-CHILDREN", radius:1000})
+}
+
+exports.loadInitialData = function(options) {
 	var data = [];
+	var options = options || {};
+	var radius = options.radius || 1000;
+	var tags = options.tags || 'ENTERTAINMENT'; 
 	var ll = Alloy.Globals.location.coords.longitude + ',' + Alloy.Globals.location.coords.latitude;
-	var url = "http://api-stage.hoopla.io/event?ll="+ ll + "&radius=1000";
+	var url = "http://api-stage.hoopla.io/event?ll="+ ll + "&radius=" + radius + "&tags=" + tags;
 	var xhr = Ti.Network.createHTTPClient({
 	    onload: function(e) {
 	        data = JSON.parse(this.responseText);
@@ -21,6 +40,7 @@ exports.loadInitialData = function() {
 					name: item.name
 				}).getView());			
 			}
+			alert('set table data');
 			$.table.setData(tableData);		    
 	    },
 	    onerror: function(e) {

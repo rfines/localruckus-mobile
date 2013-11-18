@@ -13,7 +13,6 @@ $.master.on('detail', function(e) {
 	}
 });
 
-alert('i am gonna load location');
 if (Ti.Geolocation.locationServicesEnabled) {
     Titanium.Geolocation.purpose = 'Get Current Location';
     Titanium.Geolocation.getCurrentPosition(function(e) {
