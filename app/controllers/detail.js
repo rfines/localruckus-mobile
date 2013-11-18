@@ -39,7 +39,12 @@ exports.setBoxerStats = function(eventData) {
     		}
 		});
 		
-		setRegion(eventData);
+		if (OS_IOS) {
+        	$.mapview.region = {
+            	latitude:eventData.location.geo.coordinates[1], longitude:eventData.location.geo.coordinates[0],
+            	latitudeDelta:0.01, longitudeDelta:0.01
+        	};
+    	}
 		//$.businessName.text = eventData.business.name;
 		//$.location.text = "At: "+eventData.location.address;
 		//alert(eventData.host);
@@ -61,12 +66,7 @@ function doClick(evt){
     }
 };
 
-function setRegion(event) {
+function setRegion(eventData) {
     // For the iOS platform, wait for the complete event to ensure the region is set
-    if (OS_IOS) {
-        $.mapview.region = {
-            latitude:event.location.geo.coordinates[1], longitude:event.location.geo.coordinates[0],
-            latitudeDelta:0.01, longitudeDelta:0.01
-        };
-    }
+    
 }

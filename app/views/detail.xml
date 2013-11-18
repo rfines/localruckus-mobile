@@ -1,11 +1,11 @@
 <Alloy>
 	<Window layout="vertical">
-		
+		<ImageView id="detailImage" height="200" width="250" bottom="10"/>
+		<View id="mapview" ns="Ti.Map" onClick="doClick" onComplete="setRegion" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+        	<!-- Place other child views here, such as an ImageView to add an overlay. -->
+        </View>
 		<ScrollView id="scrollView" height="1500">
-			<ImageView id="detailImage" height="200" width="250" bottom="10"/>
-			<View id="mapview" ns="Ti.Map" onClick="doClick" onComplete="setRegion" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
-            	<!-- Place other child views here, such as an ImageView to add an overlay. -->
-        	</View>
+			
             <Label id="name" platform="android" class="name"/>
 			<Label id="description" />
 			<Label id="location" class="location"/>

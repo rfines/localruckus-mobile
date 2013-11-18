@@ -6,14 +6,7 @@ function Controller() {
         Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
         ("leftButton" == evt.clicksource || "leftPane" == evt.clicksource || "leftView" == evt.clicksource) && Ti.API.info("Annotation " + evt.title + ", left button clicked.");
     }
-    function setRegion(event) {
-        $.mapview.region = {
-            latitude: event.location.geo.coordinates[1],
-            longitude: event.location.geo.coordinates[0],
-            latitudeDelta: .01,
-            longitudeDelta: .01
-        };
-    }
+    function setRegion() {}
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "detail";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -28,18 +21,13 @@ function Controller() {
         id: "detail"
     });
     $.__views.detail && $.addTopLevelView($.__views.detail);
-    $.__views.scrollView = Ti.UI.createScrollView({
-        id: "scrollView",
-        height: "1500"
-    });
-    $.__views.detail.add($.__views.scrollView);
     $.__views.detailImage = Ti.UI.createImageView({
         id: "detailImage",
         height: "200",
         width: "250",
         bottom: "10"
     });
-    $.__views.scrollView.add($.__views.detailImage);
+    $.__views.detail.add($.__views.detailImage);
     var __alloyId3 = [];
     $.__views.mapview = Ti.Map.createView({
         annotations: __alloyId3,
@@ -50,9 +38,14 @@ function Controller() {
         userLocation: "true",
         mapType: Ti.Map.STANDARD_TYPE
     });
-    $.__views.scrollView.add($.__views.mapview);
+    $.__views.detail.add($.__views.mapview);
     doClick ? $.__views.mapview.addEventListener("click", doClick) : __defers["$.__views.mapview!click!doClick"] = true;
     setRegion ? $.__views.mapview.addEventListener("complete", setRegion) : __defers["$.__views.mapview!complete!setRegion"] = true;
+    $.__views.scrollView = Ti.UI.createScrollView({
+        id: "scrollView",
+        height: "1500"
+    });
+    $.__views.detail.add($.__views.scrollView);
     $.__views.description = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -139,7 +132,12 @@ function Controller() {
             Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
             ("leftButton" == evt.clicksource || "leftPane" == evt.clicksource || "leftView" == evt.clicksource) && Ti.API.info("Annotation " + evt.title + ", left button clicked.");
         });
-        setRegion(eventData);
+        $.mapview.region = {
+            latitude: eventData.location.geo.coordinates[1],
+            longitude: eventData.location.geo.coordinates[0],
+            latitudeDelta: .01,
+            longitudeDelta: .01
+        };
     };
     __defers["$.__views.mapview!click!doClick"] && $.__views.mapview.addEventListener("click", doClick);
     __defers["$.__views.mapview!complete!setRegion"] && $.__views.mapview.addEventListener("complete", setRegion);
