@@ -1,4 +1,19 @@
 function Controller() {
+    function showBusinessDetails(e) {
+        alert(e);
+    }
+    function doClick(evt) {
+        Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
+        ("leftButton" == evt.clicksource || "leftPane" == evt.clicksource || "leftView" == evt.clicksource) && Ti.API.info("Annotation " + evt.title + ", left button clicked.");
+    }
+    function setRegion() {
+        $.mapview.region = {
+            latitude: 37.390749,
+            longitude: -122.081651,
+            latitudeDelta: .01,
+            longitudeDelta: .01
+        };
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "detail";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -6,12 +21,38 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.detail = Ti.UI.createWindow({
         backgroundColor: "#fff",
         layout: "vertical",
         id: "detail"
     });
     $.__views.detail && $.addTopLevelView($.__views.detail);
+    $.__views.scrollView = Ti.UI.createScrollView({
+        id: "scrollView",
+        height: "1500"
+    });
+    $.__views.detail.add($.__views.scrollView);
+    var __alloyId3 = [];
+    $.__views.mapview = Ti.Map.createView({
+        annotations: __alloyId3,
+        id: "mapview",
+        ns: Ti.Map,
+        animate: "true",
+        regionFit: "true",
+        userLocation: "true",
+        mapType: Ti.Map.STANDARD_TYPE
+    });
+    $.__views.scrollView.add($.__views.mapview);
+    doClick ? $.__views.mapview.addEventListener("click", doClick) : __defers["$.__views.mapview!click!doClick"] = true;
+    setRegion ? $.__views.mapview.addEventListener("complete", setRegion) : __defers["$.__views.mapview!complete!setRegion"] = true;
+    $.__views.detailImage = Ti.UI.createImageView({
+        id: "detailImage",
+        height: "200",
+        width: "250",
+        bottom: "10"
+    });
+    $.__views.mapview.add($.__views.detailImage);
     $.__views.description = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -19,13 +60,27 @@ function Controller() {
         left: 15,
         top: 10,
         font: {
-            fontSize: "18dp",
+            fontSize: "11dp",
             fontWeight: "normal"
         },
-        textAlign: "left",
+        textAlign: "center",
         id: "description"
     });
-    $.__views.detail.add($.__views.description);
+    $.__views.scrollView.add($.__views.description);
+    $.__views.location = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        left: 15,
+        top: 10,
+        font: {
+            fontSize: "12dp",
+            fontWeight: "normal"
+        },
+        textAlign: "center",
+        id: "location"
+    });
+    $.__views.scrollView.add($.__views.location);
     $.__views.businessName = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -34,24 +89,67 @@ function Controller() {
         top: 10,
         font: {
             fontSize: "18dp",
-            fontWeight: "normal"
+            fontWeight: "bold"
         },
         textAlign: "left",
         id: "businessName"
     });
-    $.__views.detail.add($.__views.businessName);
-    $.__views.detailImage = Ti.UI.createImageView({
-        id: "detailImage"
+    $.__views.scrollView.add($.__views.businessName);
+    showBusinessDetails ? $.__views.businessName.addEventListener("click", showBusinessDetails) : __defers["$.__views.businessName!click!showBusinessDetails"] = true;
+    $.__views.time = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        left: 15,
+        top: 10,
+        font: {
+            fontSize: "11dp",
+            fontWeight: "normal"
+        },
+        textAlign: "center",
+        id: "time"
     });
-    $.__views.detail.add($.__views.detailImage);
+    $.__views.scrollView.add($.__views.time);
     exports.destroy = function() {};
     _.extend($, $.__views);
     exports.setBoxerStats = function(eventData) {
-        alert(eventData);
         $.detail.title = eventData.name;
-        $.description.text = eventData.description || "No description provided.";
-        $.detailImage.image = eventData.media[0].url;
+        var d = eventData.description || "No description provided.";
+        d = "At: " + eventData.location.address + " \r" + d;
+        $.description.text = d;
+        void 0 != eventData.media && eventData.media.length > 0 && ($.detailImage.image = eventData.media[0].url);
+        alert(eventData.location.geo.coordinates[1]);
+        var location = Titanium.Map.createAnnotation({
+            latitude: eventData.location.geo.coordinates[1],
+            longitude: eventData.location.geo.coordinates[0],
+            title: eventData.name,
+            pincolor: Titanium.Map.ANNOTATION_GREEN,
+            animate: true,
+            myid: eventData._id
+        });
+        alert(location.latitude);
+        var mapview = Titanium.Map.createView({
+            mapType: Titanium.Map.STANDARD_TYPE,
+            region: {
+                latitude: 39.102704,
+                longitude: -94.595033,
+                latitudeDelta: .01,
+                longitudeDelta: .01
+            },
+            animate: true,
+            regionFit: true,
+            userLocation: true,
+            annotations: [ location ]
+        });
+        $.mapview = mapview;
+        mapview.addEventListener("click", function(evt) {
+            Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
+            ("leftButton" == evt.clicksource || "leftPane" == evt.clicksource || "leftView" == evt.clicksource) && Ti.API.info("Annotation " + evt.title + ", left button clicked.");
+        });
     };
+    __defers["$.__views.mapview!click!doClick"] && $.__views.mapview.addEventListener("click", doClick);
+    __defers["$.__views.mapview!complete!setRegion"] && $.__views.mapview.addEventListener("complete", setRegion);
+    __defers["$.__views.businessName!click!showBusinessDetails"] && $.__views.businessName.addEventListener("click", showBusinessDetails);
     _.extend($, exports);
 }
 

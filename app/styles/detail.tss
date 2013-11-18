@@ -2,8 +2,26 @@
     left: 15,
     top: 10,
     font: {
-        fontSize: '18dp',
+        fontSize: '11dp',
         fontWeight: 'normal'
     },
+    textAlign: 'center'
+}
+
+".name": {
+    left: 15,
+    top: 10,
+    font: {
+        fontSize: '18dp',
+        fontWeight: 'bold'
+    },
     textAlign: 'left'
+}
+
+".location": {
+    font: {
+        fontSize: '12dp',
+        fontWeight: 'normal'
+    },
+    textAlign: 'center'
 }

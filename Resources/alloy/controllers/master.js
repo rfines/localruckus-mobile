@@ -35,10 +35,11 @@ function Controller() {
                 e.coords.longitude = -94.595033;
             }
             Titanium.Geolocation.reverseGeocoder(e.coords.latitude, e.coords.longitude, function(reverseGeocoderResonse) {
-                alert(reverseGeocoderResonse.places[0].city);
+                void 0 != reverseGeocoderResonse.places[0] && alert(reverseGeocoderResonse.places[0].city);
             });
             var ll = e.coords.longitude + "," + e.coords.latitude;
             var url = "http://api-stage.hoopla.io/event?ll=" + ll + "&radius=1000";
+            alert(url);
             var xhr = Ti.Network.createHTTPClient({
                 onload: function() {
                     alert("got data");
@@ -54,14 +55,14 @@ function Controller() {
                     $.table.setData(tableData);
                 },
                 onerror: function(e) {
-                    alert(e.error);
-                    alert(e.code);
+                    alert(e);
+                    alert(e.source || "");
                     Ti.API.error(e);
-                },
-                timeout: 1e4
+                }
             });
             Ti.API.error("Sending xh request");
             xhr.open("GET", url);
+            xhr.setTimeout(3e4);
             xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
             xhr.send();
         });
