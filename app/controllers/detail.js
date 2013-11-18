@@ -1,7 +1,5 @@
 
 exports.setBoxerStats = function(eventData) {
-	
-	alert("details page");
 	if (OS_ANDROID) {
 		$.name.text = 'Name: ' + eventData.name;
 	} else {
@@ -15,6 +13,7 @@ exports.setBoxerStats = function(eventData) {
 		if(eventData.ticketUrl != undefined && eventData.ticketUrl.lenght >0 ){
 			$.tickets = eventData.ticketUrl;
 		}
+
 		var loc = Ti.Map.createAnnotation({latitude:eventData.location.geo.coordinates[1], longitude:eventData.location.geo.coordinates[0],
 			title:eventData.name, subtitle:eventData.location.address, myid:eventData._id, animate:true, pincolor:Ti.Map.ANNOTATION_RED
 			});

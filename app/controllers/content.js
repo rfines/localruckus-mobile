@@ -7,6 +7,7 @@ $.master.on('detail', function(e) {
 	var win = controller.getView();
 	controller.setBoxerStats(e);
 	if (OS_IOS && Alloy.isHandheld) {
+		alert('open win');
 		Alloy.Globals.navgroup.open(win);
 	} else if (OS_ANDROID) {
 		win.open();

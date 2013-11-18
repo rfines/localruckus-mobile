@@ -1,12 +1,16 @@
 "#row": {
 	backgroundColor: "#fff",
-	height: '60dp'
+	height: '60dp',
+	textAlign: 'left'
 },
 "#name": {
     top: '5dp',
-    left: '10dp',
+    left: '65dp',
     font: {
-        fontSize: '24dp',
-        fontWeight: 'bold'
+        fontSize: '12dp'
     }
+}
+"#detailImage": {
+	top: '5dp',
+	left: '5dp'
 }

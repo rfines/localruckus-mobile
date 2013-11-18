@@ -1,5 +1,6 @@
 <Alloy>
 	<TableViewRow>
-		<Label id="name"/>
+		<ImageView id="detailImage" height="50" width="50" bottom="10"/>
+		<Label id="name" left="60" />
 	</TableViewRow>
 </Alloy>

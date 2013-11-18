@@ -4,7 +4,7 @@
 "#header": {
     height: '50dp',
     width: Ti.UI.FILL,
-    textAlign: 'center',
+    textAlign: 'left',
     backgroundColor: '#44f',
     color: '#fff',
     font: {
