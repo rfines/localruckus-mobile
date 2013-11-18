@@ -11,7 +11,6 @@ exports.setBoxerStats = function(eventData) {
 		if(eventData.media != undefined && eventData.media.length >0){
 			$.detailImage.image = eventData.media[0].url;
 		}
-		alert(eventData.location.geo.coordinates[1]);
 		var location = Titanium.Map.createAnnotation({
 			latitude:eventData.location.geo.coordinates[1], 
 			longitude:eventData.location.geo.coordinates[0],
@@ -23,8 +22,6 @@ exports.setBoxerStats = function(eventData) {
 		alert(location.latitude);
 		var mapview = Titanium.Map.createView({
 			mapType: Titanium.Map.STANDARD_TYPE,
-    		region: {latitude:39.102704, longitude:-94.595033,
-            latitudeDelta:0.01, longitudeDelta:0.01},
     		animate:true,
     		regionFit:true,
     		userLocation:true,
@@ -42,7 +39,7 @@ exports.setBoxerStats = function(eventData) {
     		}
 		});
 		
-		
+		setRegion(eventData);
 		//$.businessName.text = eventData.business.name;
 		//$.location.text = "At: "+eventData.location.address;
 		//alert(eventData.host);
@@ -64,11 +61,11 @@ function doClick(evt){
     }
 };
 
-function setRegion(evt) {
+function setRegion(event) {
     // For the iOS platform, wait for the complete event to ensure the region is set
     if (OS_IOS) {
         $.mapview.region = {
-            latitude:37.390749, longitude:-122.081651,
+            latitude:event.location.geo.coordinates[1], longitude:event.location.geo.coordinates[0],
             latitudeDelta:0.01, longitudeDelta:0.01
         };
     }

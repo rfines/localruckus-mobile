@@ -19,7 +19,7 @@ function loadArts(e) {
 }
 
 function loadFamily(e) {
-	exports.loadInitialData({tags:"FAMILY-AND-CHILDREN", radius:1000})
+	exports.loadInitialData({tags:"FAMILY-AND-CHILDREN", radius:1000});
 }
 
 exports.loadInitialData = function(options) {
@@ -54,4 +54,4 @@ exports.loadInitialData = function(options) {
 	xhr.setTimeout(30000);
 	xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
 	xhr.send();	      
-}
+};
