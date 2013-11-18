@@ -1,3 +1,4 @@
+
 exports.setBoxerStats = function(eventData) {
 	//var stats = Alloy.Globals.data[name];
 	//alert(eventData);
@@ -11,25 +12,30 @@ exports.setBoxerStats = function(eventData) {
 		if(eventData.media != undefined && eventData.media.length >0){
 			$.detailImage.image = eventData.media[0].url;
 		}
-		var location = Titanium.Map.createAnnotation({
-			latitude:eventData.location.geo.coordinates[1], 
-			longitude:eventData.location.geo.coordinates[0],
-			title: eventData.name,
-			pincolor:Titanium.Map.ANNOTATION_GREEN,
+		if(eventData.website != undefined && eventData.website.length > 0){
+			$.website  = eventData.website;
+		}
+		if(eventData.ticketUrl != undefined && eventData.ticketUrl.lenght >0 ){
+			$.tickets = eventData.ticketUrl;
+		}
+		var loc = Ti.Map.createAnnotation({latitude:eventData.location.geo.coordinates[1], longitude:eventData.location.geo.coordinates[0],
+			title:eventData.name, subtitle:eventData.location.address, myid:eventData._id, animate:true, pincolor:Ti.Map.ANNOTATION_GREEN
+			});
+		var map = Ti.Map.createView({
+			mapType: Ti.Map.STANDARD_TYPE,
+			annotations:[loc],
 			animate:true,
-			myid:eventData._id
+			regionFit:true,
+			userLocation:true	
 		});
-		alert(location.latitude);
-		var mapview = Titanium.Map.createView({
-			mapType: Titanium.Map.STANDARD_TYPE,
-    		animate:true,
-    		regionFit:true,
-    		userLocation:true,
-    		annotations:[location]
-		});
-		$.mapview = mapview;
+		$.mapView = map;
+		//Alloy.Globals.location.coords.latitude, longitude:Alloy.Globals.coords.location.longitude
+		$.mapview.region = {
+        	latitude:Alloy.Globals.location.coords.latitude, longitude:Alloy.Globals.coords.location.longitude,
+        	latitudeDelta:0.01, longitudeDelta:0.01
+        };
 		// Handle click events on any annotations on this map.
-		mapview.addEventListener('click', function(evt) {
+		$.mapview.addEventListener('click', function(evt) {
     		Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
     		// Check for all of the possible names that clicksouce
     		// can report for the left button/view.
@@ -38,13 +44,7 @@ exports.setBoxerStats = function(eventData) {
         		Ti.API.info("Annotation " + evt.title + ", left button clicked.");
     		}
 		});
-		
-		if (OS_IOS) {
-        	$.mapview.region = {
-            	latitude:eventData.location.geo.coordinates[1], longitude:eventData.location.geo.coordinates[0],
-            	latitudeDelta:0.01, longitudeDelta:0.01
-        	};
-    	}
+		alert($.mapview.annotations.length);
 		//$.businessName.text = eventData.business.name;
 		//$.location.text = "At: "+eventData.location.address;
 		//alert(eventData.host);
@@ -64,9 +64,12 @@ function doClick(evt){
         evt.clicksource == 'leftView') {
         Ti.API.info("Annotation " + evt.title + ", left button clicked.");
     }
-};
-
-function setRegion(eventData) {
-    // For the iOS platform, wait for the complete event to ensure the region is set
-    
+}
+function linkToPage(evt){
+	alert(evt);
+	if(evt.clicksource == 'website'){
+		
+	}else if(evt.clicksource == 'tickets'){
+		
+	}
 }

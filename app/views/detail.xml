@@ -1,16 +1,17 @@
 <Alloy>
 	<Window layout="vertical">
-		<ImageView id="detailImage" height="200" width="250" bottom="10"/>
-		<View id="mapview" ns="Ti.Map" onClick="doClick" onComplete="setRegion" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+		<ImageView id="detailImage" height="100" bottom="10"/>
+		<View id="mapview" ns="Ti.Map" onClick="doClick" height="100" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         	<!-- Place other child views here, such as an ImageView to add an overlay. -->
         </View>
-		<ScrollView id="scrollView" height="1500">
-			
-            <Label id="name" platform="android" class="name"/>
+        <View id="details" height="500" >
+        	<Label id="name" platform="android" class="name"/>
 			<Label id="description" />
 			<Label id="location" class="location"/>
 			<Label id="businessName" class="name" onClick="showBusinessDetails" />
 			<Label id="time" />
-        </ScrollView>
+			<Label id="website" onClick="linkToPage" />
+			<Label id="tickets" onClick="linkToPage"/>
+		</View>
 	</Window>
 </Alloy>
