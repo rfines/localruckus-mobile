@@ -32,7 +32,7 @@ if (Ti.Geolocation.locationServicesEnabled) {
 				//$.master.getView().open();
 			} else {
 				alert(Alloy.Globals);
-				$.master.getView().open();
+				$.index.open();
 				$.master.loadInitialData();
 			}
     	});     

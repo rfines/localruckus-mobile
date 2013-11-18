@@ -24,18 +24,12 @@ function Controller() {
         id: "detail"
     });
     $.__views.detail && $.addTopLevelView($.__views.detail);
-    $.__views.detailImage = Ti.UI.createImageView({
-        id: "detailImage",
-        height: "100",
-        bottom: "10"
-    });
-    $.__views.detail.add($.__views.detailImage);
     var __alloyId3 = [];
     $.__views.mapview = Ti.Map.createView({
         annotations: __alloyId3,
         id: "mapview",
         ns: Ti.Map,
-        height: "100",
+        height: "200",
         animate: "true",
         regionFit: "true",
         userLocation: "true",
@@ -138,11 +132,11 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     exports.setBoxerStats = function(eventData) {
+        alert("details page");
         $.detail.title = eventData.name;
         var d = eventData.description || "No description provided.";
         d = "At: " + eventData.location.address + " \r" + d;
         $.description.text = d;
-        void 0 != eventData.media && eventData.media.length > 0 && ($.detailImage.image = eventData.media[0].url);
         void 0 != eventData.website && eventData.website.length > 0 && ($.website = eventData.website);
         void 0 != eventData.ticketUrl && eventData.ticketUrl.lenght > 0 && ($.tickets = eventData.ticketUrl);
         var loc = Ti.Map.createAnnotation({
@@ -163,8 +157,8 @@ function Controller() {
         });
         $.mapView = map;
         $.mapview.region = {
-            latitude: 39.102704,
-            longitude: -94.595033,
+            latitude: Alloy.Globals.location.coords.latitude,
+            longitude: Alloy.Globals.location.coords.longitude,
             latitudeDelta: .01,
             longitudeDelta: .01
         };
@@ -172,6 +166,7 @@ function Controller() {
             Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
             ("leftButton" == evt.clicksource || "leftPane" == evt.clicksource || "leftView" == evt.clicksource) && Ti.API.info("Annotation " + evt.title + ", left button clicked.");
         });
+        $.mapview.addAnnotation(loc);
         alert($.mapview.annotations.length);
     };
     __defers["$.__views.mapview!click!doClick"] && $.__views.mapview.addEventListener("click", doClick);

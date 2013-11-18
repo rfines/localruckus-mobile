@@ -1,7 +1,7 @@
 
 exports.setBoxerStats = function(eventData) {
-	//var stats = Alloy.Globals.data[name];
-	//alert(eventData);
+	
+	alert("details page");
 	if (OS_ANDROID) {
 		$.name.text = 'Name: ' + eventData.name;
 	} else {
@@ -9,9 +9,6 @@ exports.setBoxerStats = function(eventData) {
 		var d = eventData.description || "No description provided.";
 		d ="At: "+ eventData.location.address+" \r" + d;
 		$.description.text = d;
-		if(eventData.media != undefined && eventData.media.length >0){
-			$.detailImage.image = eventData.media[0].url;
-		}
 		if(eventData.website != undefined && eventData.website.length > 0){
 			$.website  = eventData.website;
 		}
@@ -19,7 +16,7 @@ exports.setBoxerStats = function(eventData) {
 			$.tickets = eventData.ticketUrl;
 		}
 		var loc = Ti.Map.createAnnotation({latitude:eventData.location.geo.coordinates[1], longitude:eventData.location.geo.coordinates[0],
-			title:eventData.name, subtitle:eventData.location.address, myid:eventData._id, animate:true, pincolor:Ti.Map.ANNOTATION_GREEN
+			title:eventData.name, subtitle:eventData.location.address, myid:eventData._id, animate:true, pincolor:Ti.Map.ANNOTATION_RED
 			});
 		var map = Ti.Map.createView({
 			mapType: Ti.Map.STANDARD_TYPE,
@@ -31,7 +28,7 @@ exports.setBoxerStats = function(eventData) {
 		$.mapView = map;
 		//Alloy.Globals.location.coords.latitude, longitude:Alloy.Globals.coords.location.longitude
 		$.mapview.region = {
-        	latitude:Alloy.Globals.location.coords.latitude, longitude:Alloy.Globals.coords.location.longitude,
+        	latitude:Alloy.Globals.location.coords.latitude, longitude:Alloy.Globals.location.coords.longitude,
         	latitudeDelta:0.01, longitudeDelta:0.01
         };
 		// Handle click events on any annotations on this map.
@@ -44,6 +41,7 @@ exports.setBoxerStats = function(eventData) {
         		Ti.API.info("Annotation " + evt.title + ", left button clicked.");
     		}
 		});
+		$.mapview.addAnnotation(loc);
 		alert($.mapview.annotations.length);
 		//$.businessName.text = eventData.business.name;
 		//$.location.text = "At: "+eventData.location.address;
