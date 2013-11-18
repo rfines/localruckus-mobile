@@ -8,7 +8,21 @@
     backgroundColor: '#44f',
     color: '#fff',
     font: {
-        fontSize: '24dp',
-        fontWeight: 'bold'
+        fontSize: '12dp'
     }
+}
+"#table" : {
+	height: Ti.UI.FILL
+}
+"#categoryNav" : {
+	width: Ti.UI.FILL
+}
+"#categoryNav label" : {
+	width: "25%"
+}
+"#categoryNav #entertainment" : {
+	left: "0"
+}
+"#categoryNav #food" : {
+	left: "25%"
 }

@@ -15,15 +15,12 @@ if (Ti.Geolocation.locationServicesEnabled) {
         }
         Titanium.Geolocation.reverseGeocoder(e.coords.latitude, e.coords.longitude, function(reverseGeocoderResonse) {
         	if(reverseGeocoderResonse.places[0] != undefined){
-    			alert(reverseGeocoderResonse.places[0].city);
     		}
     	});
     	var ll = e.coords.longitude + ',' + e.coords.latitude;
 		var url = "http://api-stage.hoopla.io/event?ll="+ ll + "&radius=1000";
-		alert(url);
 		var xhr = Ti.Network.createHTTPClient({
 		    onload: function(e) {
-		    	alert('got data');
 		        data = JSON.parse(this.responseText);
 				var tableData = [];
 				for (var i=0; i < data.length; i++) {

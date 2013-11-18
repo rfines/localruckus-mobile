@@ -1,10 +1,32 @@
 <Alloy>
 	<Window title="Local Ruckus">
-		<TableView id="table" onClick="openDetail">
+		<TableView id="table" onClick="openDetail" top="0" height="80%">
 			<HeaderView platform="android">
 				<Button>...</Button>
 				<Label id="header">Events</Label>
-			</HeaderView>
+			</HeaderView>		
 		</TableView>
+        <!-- <ButtonBar id="categoryNav" bottom="0" height="20%">
+         	<Label id="entertainment">Button 1</Label>
+         	<Label id="food">Button 2</Label>
+        </ButtonBar>	 -->	
+		<Toolbar platform="ios" bottom="0" height="20%">
+                        <!-- These get added to the Toolbar "items" array -->
+                        <Items>
+                                <Button>button 1</Button>
+                                <FlexSpace/>
+                                <Button>button 2</Button>
+                                <FlexSpace/>
+                                <Button>button 3</Button>
+                                <FlexSpace/>
+                                <Button>button 4</Button>
+                        </Items>
+
+                        <!-- 
+                                additional views get added as normal, over the items, as
+                            per the documentation of the add() function.
+                         -->
+                        <!-- <View opacity="0.25" backgroundColor="#a00" width="50%"/> -->
+                </Toolbar>        
 	</Window>
 </Alloy>
