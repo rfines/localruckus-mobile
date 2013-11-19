@@ -14,12 +14,8 @@
     }
 }
 
-".location": {
-    font: {
-        fontSize: '12dp',
-        fontWeight: 'normal'
-    }
-}
+
+
 "#detailActions" : {
 	width: Ti.UI.FILL,
 	height:40,

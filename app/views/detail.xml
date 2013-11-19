@@ -4,7 +4,7 @@
         </View>
         <ScrollView layout="vertical">
         	<View id="locationView" layout="vertical">
-        		<Label id="businessName" class="name" onClick="showBusinessDetails" />
+        		<Label id="businessName" onClick="showBusinessDetails" />
         		<Label id="location" class="location" onClick="getDirections"/>
         	</View>
         	<View id="nameView" layout="vertical">

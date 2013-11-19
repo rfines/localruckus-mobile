@@ -33,14 +33,9 @@ function Controller() {
         fb.addEventListener("login", function(e) {
             e.success ? Ti.API.info("Logged In") : e.error ? Ti.API.info(e.error) : e.cancelled && Ti.API.info("Cancelled");
         });
-        var social = require("alloy/social").create({
-            consumerSecret: Ti.App.Properties.getString("ti.twitter.consumerSecret"),
-            consumerKey: Ti.App.Properties.getString("ti.twitter.consumerKey")
-        });
-        Ti.API.error(social);
         var optionsAlertOpts = {
-            buttonNames: [ "Cancel", "Facebook", "Twitter" ],
-            message: "Facebook or Twitter?",
+            buttonNames: [ "Cancel", "Facebook" ],
+            message: "Post to Facebook?",
             title: "Share this event"
         };
         var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
@@ -83,138 +78,37 @@ function Controller() {
         fb.loggedIn || fb.authorize();
     }
     function getDirections() {}
-    require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    this.__controllerPath = "detail";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
-    var $ = this;
-    var exports = {};
-    var __defers = {};
-    $.__views.myWindow = Ti.UI.createWindow({
-        backgroundColor: "#fff",
-        layout: "vertical",
-        id: "myWindow"
-    });
-    $.__views.myWindow && $.addTopLevelView($.__views.myWindow);
-    var __alloyId2 = [];
-    $.__views.mapview = Ti.Map.createView({
-        annotations: __alloyId2,
-        id: "mapview",
-        ns: Ti.Map,
-        layout: "vertical",
-        height: "150",
-        animate: "true",
-        regionFit: "true",
-        userLocation: "true",
-        mapType: Ti.Map.STANDARD_TYPE
-    });
-    $.__views.myWindow.add($.__views.mapview);
-    doClick ? $.__views.mapview.addEventListener("click", doClick) : __defers["$.__views.mapview!click!doClick"] = true;
-    $.__views.__alloyId3 = Ti.UI.createScrollView({
-        layout: "vertical",
-        id: "__alloyId3"
-    });
-    $.__views.myWindow.add($.__views.__alloyId3);
-    $.__views.locationView = Ti.UI.createView({
-        height: 30,
-        id: "locationView",
-        layout: "vertical"
-    });
-    $.__views.__alloyId3.add($.__views.locationView);
-    $.__views.businessName = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        top: 1,
-        font: {
-            fontSize: "18dp",
-            fontWeight: "bold"
-        },
-        textAlign: "center",
-        id: "businessName"
-    });
-    $.__views.locationView.add($.__views.businessName);
-    showBusinessDetails ? $.__views.businessName.addEventListener("click", showBusinessDetails) : __defers["$.__views.businessName!click!showBusinessDetails"] = true;
-    $.__views.location = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        top: 1,
-        font: {
-            fontSize: "12dp",
-            fontWeight: "normal"
-        },
-        textAlign: "center",
-        id: "location"
-    });
-    $.__views.locationView.add($.__views.location);
-    getDirections ? $.__views.location.addEventListener("click", getDirections) : __defers["$.__views.location!click!getDirections"] = true;
-    $.__views.nameView = Ti.UI.createView({
-        height: 40,
-        id: "nameView",
-        layout: "vertical"
-    });
-    $.__views.__alloyId3.add($.__views.nameView);
-    $.__views.name = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        top: 1,
-        font: {
-            fontSize: "18dp",
-            fontWeight: "bold"
-        },
-        textAlign: "center",
-        id: "name"
-    });
-    $.__views.nameView.add($.__views.name);
-    $.__views.time = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        top: 1,
-        font: {
-            fontSize: "11dp",
-            fontWeight: "normal"
-        },
-        textAlign: "center",
-        id: "time"
-    });
-    $.__views.nameView.add($.__views.time);
-    $.__views.descriptionView = Ti.UI.createView({
-        id: "descriptionView",
-        layout: "vertical"
-    });
-    $.__views.__alloyId3.add($.__views.descriptionView);
-    $.__views.description = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        top: 1,
-        font: {
-            fontSize: "11dp",
-            fontWeight: "normal"
-        },
-        textAlign: "center",
-        id: "description"
-    });
-    $.__views.descriptionView.add($.__views.description);
-    exports.destroy = function() {};
-    _.extend($, $.__views);
-    var data = {};
-    require("alloy/moment");
-    exports.setBoxerStats = function(eventData) {
-        data = eventData;
+    function getBusiness(id, callback) {
+        var url = "http://api-stage.hoopla.io/business/" + id;
+        var xhr = Ti.Network.createHTTPClient({
+            onload: function() {
+                data = JSON.parse(this.responseText);
+                alert("calling callback with null " + data.name);
+                callback(null, data);
+            },
+            onerror: function(e) {
+                Ti.API.error(e);
+                callback(e, null);
+            }
+        });
+        Ti.API.error("Sending xhr request to get business");
+        xhr.open("GET", url);
+        xhr.setTimeout(3e4);
+        xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
+        xhr.send();
+    }
+    function setWindow(eventData, business) {
+        Ti.API.error(business);
         var win = $.myWindow;
         win.title = eventData.name;
         var buttons = [];
         var d = eventData.description || "No description provided.";
-        var l = "At: " + eventData.location.address;
+        var l = eventData.location.address;
         $.description.text = d;
         $.location.text = l;
         $.name.text = eventData.name;
         $.time.text = eventData.scheduleText;
+        $.businessName.text = business.name;
         Ti.API.error(eventData);
         if (void 0 != eventData.website && eventData.website.length > 0) {
             var webBtn = Ti.UI.createButton({
@@ -280,6 +174,141 @@ function Controller() {
             ("leftButton" == evt.clicksource || "leftPane" == evt.clicksource || "leftView" == evt.clicksource) && Ti.API.info("Annotation " + evt.title + ", left button clicked.");
         });
         $.mapview.addAnnotation(loc);
+    }
+    require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "detail";
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
+    $.__views.myWindow = Ti.UI.createWindow({
+        backgroundColor: "#fff",
+        layout: "vertical",
+        id: "myWindow"
+    });
+    $.__views.myWindow && $.addTopLevelView($.__views.myWindow);
+    var __alloyId2 = [];
+    $.__views.mapview = Ti.Map.createView({
+        annotations: __alloyId2,
+        id: "mapview",
+        ns: Ti.Map,
+        layout: "vertical",
+        height: "150",
+        animate: "true",
+        regionFit: "true",
+        userLocation: "true",
+        mapType: Ti.Map.STANDARD_TYPE
+    });
+    $.__views.myWindow.add($.__views.mapview);
+    doClick ? $.__views.mapview.addEventListener("click", doClick) : __defers["$.__views.mapview!click!doClick"] = true;
+    $.__views.__alloyId3 = Ti.UI.createScrollView({
+        layout: "vertical",
+        id: "__alloyId3"
+    });
+    $.__views.myWindow.add($.__views.__alloyId3);
+    $.__views.locationView = Ti.UI.createView({
+        height: 30,
+        id: "locationView",
+        layout: "vertical"
+    });
+    $.__views.__alloyId3.add($.__views.locationView);
+    $.__views.businessName = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: 1,
+        font: {
+            fontSize: "11dp",
+            fontWeight: "normal"
+        },
+        textAlign: "center",
+        id: "businessName"
+    });
+    $.__views.locationView.add($.__views.businessName);
+    showBusinessDetails ? $.__views.businessName.addEventListener("click", showBusinessDetails) : __defers["$.__views.businessName!click!showBusinessDetails"] = true;
+    $.__views.location = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: 1,
+        font: {
+            fontSize: "11dp",
+            fontWeight: "normal"
+        },
+        textAlign: "center",
+        id: "location"
+    });
+    $.__views.locationView.add($.__views.location);
+    getDirections ? $.__views.location.addEventListener("click", getDirections) : __defers["$.__views.location!click!getDirections"] = true;
+    $.__views.nameView = Ti.UI.createView({
+        height: 40,
+        id: "nameView",
+        layout: "vertical"
+    });
+    $.__views.__alloyId3.add($.__views.nameView);
+    $.__views.name = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: 1,
+        font: {
+            fontSize: "18dp",
+            fontWeight: "bold"
+        },
+        textAlign: "center",
+        id: "name"
+    });
+    $.__views.nameView.add($.__views.name);
+    $.__views.time = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: 1,
+        font: {
+            fontSize: "11dp",
+            fontWeight: "normal"
+        },
+        textAlign: "center",
+        id: "time"
+    });
+    $.__views.nameView.add($.__views.time);
+    $.__views.descriptionView = Ti.UI.createView({
+        id: "descriptionView",
+        layout: "vertical"
+    });
+    $.__views.__alloyId3.add($.__views.descriptionView);
+    $.__views.description = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: 1,
+        font: {
+            fontSize: "11dp",
+            fontWeight: "normal"
+        },
+        textAlign: "center",
+        id: "description"
+    });
+    $.__views.descriptionView.add($.__views.description);
+    exports.destroy = function() {};
+    _.extend($, $.__views);
+    var data = {};
+    require("alloy/moment");
+    exports.setBoxerStats = function(eventData) {
+        data = eventData;
+        var business = {};
+        void 0 != Alloy.Globals.businesses && Alloy.Globals.businesses.length > 0 ? business = _.find(Alloy.Globals.businesses, function(b) {
+            return b._id == eventData.host;
+        }) : Alloy.Globals.businesses = [];
+        void 0 == business._id ? getBusiness(eventData.host, function(err, bus) {
+            if (err) Ti.API.error(err); else {
+                Alloy.Globals.businesses.push(bus);
+                setWindow(eventData, bus);
+            }
+        }) : setWindow(eventData, business);
+        alert(Alloy.Globals.businesses.length);
     };
     __defers["$.__views.mapview!click!doClick"] && $.__views.mapview.addEventListener("click", doClick);
     __defers["$.__views.businessName!click!showBusinessDetails"] && $.__views.businessName.addEventListener("click", showBusinessDetails);
