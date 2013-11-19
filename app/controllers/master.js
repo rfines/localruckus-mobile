@@ -1,5 +1,8 @@
 function openDetail(e) {
-	$.trigger('detail',e.rowData.eventData);
+	controller = Alloy.createController('detail');
+	d = controller.getView();
+	controller.setBoxerStats(e.rowData.eventData);
+	d.open();
 }
 
 function loadEntertainment(e) {
@@ -54,3 +57,4 @@ exports.loadInitialData = function(options) {
 	xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
 	xhr.send();	      
 };
+$.master.open();

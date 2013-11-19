@@ -1,23 +1,26 @@
 <Alloy>
-	<Window title="Local Ruckus">
-		<TableView id="table" onClick="openDetail" top="0" height="Ti.UI.FILL" backgroundColor="transparent"  borderColor="#55a9a7a7">
+	<Window class="eventList" title="Local Ruckus">
+		<View height="60dp" top="0">
+			<Label>Search Bar</Label>
+		</View>
+		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<HeaderView platform="android">
 				<Button>...</Button>
 				<Label id="header">Events</Label>
 			</HeaderView>		
 		</TableView>
-		<Toolbar platform="ios" bottom="0" height="20%">
-                        <Items>
-                                <Button onClick="loadEntertainment">Entertainment</Button>
-                                <FlexSpace/>
-                                <Button onClick="loadMusic">Music</Button>
-                                <FlexSpace/>
-                                <Button onClick="loadArts">Arts</Button>
-                                <FlexSpace/>
-                                <Button onClick="loadFamily">Family</Button>
-                                <FlexSpace/>                                
-                                <Button onClick="loadFood">Food</Button>
-                        </Items>
-                </Toolbar>        
+		<Toolbar platform="ios" bottom="0" height="60dp">
+            <Items>
+                    <Button onClick="loadEntertainment">Entertainment</Button>
+                    <FlexSpace/>
+                    <Button onClick="loadMusic">Music</Button>
+                    <FlexSpace/>
+                    <Button onClick="loadArts">Arts</Button>
+                    <FlexSpace/>
+                    <Button onClick="loadFamily">Family</Button>
+                    <FlexSpace/>                                
+                    <Button onClick="loadFood">Food</Button>
+            </Items>
+        </Toolbar>        
 	</Window>
 </Alloy>

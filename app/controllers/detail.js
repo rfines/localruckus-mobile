@@ -1,3 +1,7 @@
+function backToList() {
+	$.myWindow.close();
+}
+
 var data = {};
 var business = {};
 var moment = require('alloy/moment');
@@ -207,7 +211,6 @@ function getBusiness(id, callback) {
 function setWindow(eventData, business) {
 	Ti.API.error(business);
 	var win = $.myWindow;
-	win.title = eventData.name;
 	var buttons = [];
 	var d = eventData.description || "No description provided.";
 	var l = eventData.location.address;
@@ -256,12 +259,21 @@ function setWindow(eventData, business) {
 	});
 	shareBtn.addEventListener('click', share);
 	buttons.push(shareBtn);
-	win.setToolbar(buttons, {
+	var toolbar = Titanium.UI.iOS.createToolbar({
+	    items:buttons,
+	    bottom:0,
+	    borderTop:true,
+	    borderBottom:false
+	}); 
+	alert(win.id);
+	win.add(toolbar);
+	/*win.setToolbar(buttons, {
 		animated : true,
 		barColor : 'black',
 		tintColor : 'white',
 		id : "detailToolbar"
 	});
+	*/
 
 	var loc = Ti.Map.createAnnotation({
 		latitude : eventData.location.geo.coordinates[1],
