@@ -25,3 +25,20 @@
     },
     textAlign: 'center'
 }
+"#detailActions" : {
+	width: Ti.UI.FILL,
+	height:40,
+	zIndex:10000,
+	top:100,
+	bottom:0
+	
+}
+"#categoryNav label" : {
+	width: "25%"
+}
+"#categoryNav #entertainment" : {
+	left: "0"
+}
+"#categoryNav #food" : {
+	left: "25%"
+}
