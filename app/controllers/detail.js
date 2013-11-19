@@ -1,5 +1,5 @@
 var data = {};
-var moment = require('moment');
+var moment = require('alloy/moment');
 exports.setBoxerStats = function(eventData) {
 	data = eventData;
 	if (OS_ANDROID) {
@@ -121,7 +121,7 @@ function buyTickets(evt){
 }
 function share(evt){
 	var fb = require('facebook');
- 	fb.appid = "1433425413548423";
+ 	fb.appid = Ti.App.Properties.getString('ti.facebook.appid');
  	fb.permissions = ['read_stream'];
  	fb.forceDialogAuth = false;
  	fb.addEventListener('login', function(e){
@@ -133,6 +133,11 @@ function share(evt){
  			Ti.API.info('Cancelled');
  		}
  	});
+ 	var social= require('alloy/social').create({
+ 		consumerSecret:Ti.App.Properties.getString('ti.twitter.consumerSecret'),
+ 		consumerKey:Ti.App.Properties.getString('ti.twitter.consumerKey')
+ 	});
+ 	Ti.API.error(social);
  	var optionsAlertOpts = {
     	buttonNames:['Cancel','Facebook', "Twitter"],
     	message: "Facebook or Twitter?",
@@ -185,6 +190,16 @@ function share(evt){
         		}
     		});
 		}else if (e.index =='2'){
+			if(!social.isAuthorized()) { 
+    			social.authorize();
+			}
+			social.share({
+    			message: "Salut, Monde!",
+    			success: function(e) {Ti.API.error('Success!');},
+    			error: function(e) {Ti.API.error('Error!');}
+			}); 
+
+
 			alert('twitter');
 		}
 	});

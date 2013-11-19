@@ -27,12 +27,17 @@ function Controller() {
     }
     function share() {
         var fb = require("facebook");
-        fb.appid = "1433425413548423";
+        fb.appid = Ti.App.Properties.getString("ti.facebook.appid");
         fb.permissions = [ "read_stream" ];
         fb.forceDialogAuth = false;
         fb.addEventListener("login", function(e) {
             e.success ? Ti.API.info("Logged In") : e.error ? Ti.API.info(e.error) : e.cancelled && Ti.API.info("Cancelled");
         });
+        var social = require("alloy/social").create({
+            consumerSecret: Ti.App.Properties.getString("ti.twitter.consumerSecret"),
+            consumerKey: Ti.App.Properties.getString("ti.twitter.consumerKey")
+        });
+        Ti.API.error(social);
         var optionsAlertOpts = {
             buttonNames: [ "Cancel", "Facebook", "Twitter" ],
             message: "Facebook or Twitter?",
@@ -40,7 +45,7 @@ function Controller() {
         };
         var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
         dialog.addEventListener("click", function(e) {
-            "1" == e.index ? fb.reauthorize([ "publish_stream", "rsvp_event", "publish_actions" ], "friends", function(e) {
+            if ("1" == e.index) fb.reauthorize([ "publish_stream", "rsvp_event", "publish_actions" ], "friends", function(e) {
                 if (e.success) {
                     var defaultMessage = "Check out this awesome event! I'm thinking about going, who wants to go with me?";
                     var mediaUrl = "";
@@ -60,7 +65,19 @@ function Controller() {
                         e.success && e.result ? Ti.API.info("Success! New Post ID: " + e.result) : e.error ? Ti.API.info(e.error) : Ti.API.info("User canceled dialog.");
                     });
                 } else e.error ? Ti.API.info(e.error) : Ti.API.error("Unknown result");
-            }) : "2" == e.index && alert("twitter");
+            }); else if ("2" == e.index) {
+                social.isAuthorized() || social.authorize();
+                social.share({
+                    message: "Salut, Monde!",
+                    success: function() {
+                        Ti.API.error("Success!");
+                    },
+                    error: function() {
+                        Ti.API.error("Error!");
+                    }
+                });
+                alert("twitter");
+            }
         });
         dialog.show();
         fb.loggedIn || fb.authorize();
@@ -100,7 +117,7 @@ function Controller() {
     });
     $.__views.myWindow.add($.__views.__alloyId3);
     $.__views.locationView = Ti.UI.createView({
-        height: 25,
+        height: 30,
         id: "locationView",
         layout: "vertical"
     });
@@ -186,6 +203,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var data = {};
+    require("alloy/moment");
     exports.setBoxerStats = function(eventData) {
         data = eventData;
         var win = $.myWindow;
@@ -196,7 +214,7 @@ function Controller() {
         $.description.text = d;
         $.location.text = l;
         $.name.text = eventData.name;
-        $.time.text = "This will be the nextOccurrence";
+        $.time.text = eventData.scheduleText;
         Ti.API.error(eventData);
         if (void 0 != eventData.website && eventData.website.length > 0) {
             var webBtn = Ti.UI.createButton({
