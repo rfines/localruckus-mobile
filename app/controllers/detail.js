@@ -1,4 +1,5 @@
 var data = {};
+var moment = require('moment');
 exports.setBoxerStats = function(eventData) {
 	data = eventData;
 	if (OS_ANDROID) {
@@ -12,6 +13,11 @@ exports.setBoxerStats = function(eventData) {
 		var l ="At: "+ eventData.location.address;
 		$.description.text = d;
 		$.location.text = l;
+		$.name.text = eventData.name;
+		$.time.text = eventData.scheduleText;
+		//moment(eventData.nextOccurrence.start).format('h:mm a')+" to "+moment(eventData.nextOccurrence.end).format("h:mm a");
+		Ti.API.error(eventData);
+		//Toolbar buttons
 		if(eventData.website != undefined && eventData.website.length > 0){
 			var webBtn = Ti.UI.createButton({title:"More Info", id:"moreInfoBtn"});
 			webBtn.addEventListener('click',moreInfo);

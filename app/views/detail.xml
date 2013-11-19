@@ -1,18 +1,19 @@
 <Alloy>
 	<Window layout="vertical" id="myWindow">
-		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" height="150" bottom="2" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" height="150" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
         <ScrollView layout="vertical">
-        <View id="descriptionView" layout="vertical">
-        	<Label id="name" platform="android" class="name"/>
-			<Label id="location" class="location" onClick="getDirections"/>
-			
-			<Label id="description" />
-			<Label id="businessName" class="name" onClick="showBusinessDetails" />
-			<Label id="time"/>
-			<Label id="website" onClick="linkToPage" />
-			<Label id="tickets" onClick="linkToPage" class="ticketLink"/>
-		</View>
+        	<View id="locationView" layout="vertical">
+        		<Label id="businessName" class="name" onClick="showBusinessDetails" />
+        		<Label id="location" class="location" onClick="getDirections"/>
+        	</View>
+        	<View id="nameView" layout="vertical">
+        		<Label id="name" class="name"/>
+        		<Label id="time"/>
+        	</View>
+        	<View id="descriptionView" layout="vertical">
+				<Label id="description" />
+			</View>
 		</ScrollView>
 	</Window>
 </Alloy>

@@ -1,6 +1,5 @@
 "Label": {
-    left: 15,
-    top: 10,
+    top: 1,
     font: {
         fontSize: '11dp',
         fontWeight: 'normal'
@@ -9,21 +8,17 @@
 }
 
 ".name": {
-    left: 15,
-    top: 10,
     font: {
         fontSize: '18dp',
         fontWeight: 'bold'
-    },
-    textAlign: 'left'
+    }
 }
 
 ".location": {
     font: {
         fontSize: '12dp',
         fontWeight: 'normal'
-    },
-    textAlign: 'center'
+    }
 }
 "#detailActions" : {
 	width: Ti.UI.FILL,
@@ -41,4 +36,10 @@
 }
 "#categoryNav #food" : {
 	left: "25%"
+}
+"#locationView":{
+	height:30
+}
+"#nameView":{
+	height:40
 }
