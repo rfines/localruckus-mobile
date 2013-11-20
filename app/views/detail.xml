@@ -1,14 +1,14 @@
 <Alloy>
 	<Window id="myWindow">
-		<Button onClick="backToList" height="50dp" top="0">Back</Button>
-		<ImageView id="detailImage" height="50dp" top="50dp"></ImageView>
-		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="100dp" height="150dp" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+		<Button onClick="backToList" height="50dp" right="20dp" top="0">Back</Button>
+		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="150dp" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
         <View id="locationView" top="250dp" height="50dp" layout="vertical">
     		<Label id="businessName" onClick="showBusinessDetails" />
     		<Label id="location" class="location" onClick="getDirections"/>
         </View>
         <ScrollView height="Ti.UI.FILL" top="300dp" layout="vertical">
+        	<ImageView id="detailImage" height="50dp" top="50dp"></ImageView>
         	<View id="nameView" layout="vertical">
         		<Label id="name" class="name"/>
         		<Label id="time"/>

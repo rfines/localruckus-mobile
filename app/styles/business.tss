@@ -9,14 +9,53 @@
 
 ".name": {
     font: {
-        fontSize: '18dp',
-        fontWeight: 'bold'
-    }
+        fontSize: '24dp',
+        fontFamily: 'HelveticaNeue-Ultralight'
+    },
+    color:'686767'
 }
 
+
+
+
+"#categoryNav label" : {
+	width: "25%"
+}
+"#categoryNav #entertainment" : {
+	left: "0"
+}
+"#categoryNav #food" : {
+	left: "25%"
+}
+"#location":{
+font: {
+		fontFamily: 'HelveticaNeue-Light',
+		fontSize:'10dp'
+	},
+	color:'#686767'
+}
 "#locationView":{
-	height:15
+	height:"20"
 }
 "#nameView":{
-	height:40
+	color:'#686767',
+	width:'98%',
+	height:"30"
+}
+"#name":{
+font: {
+		fontFamily: 'HelveticaNeue-Light'
+	},
+	color:'#686767',
+	top:"10"
+}
+"#time":{
+	color:'#686767'
+}
+"#descriptionView":{
+	font: {
+		fontFamily: 'HelveticaNeue-Medium',
+		fontSize:'11dp'
+	},
+	color:'red'
 }

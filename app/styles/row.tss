@@ -23,8 +23,10 @@
 	top: '6dp'
 },
 ".calendarPage": {
-	backgroundColor: 'rgba(255,255,255,0.3)',
-	borderLeft: "1px solid #000"
+	backgroundColor: 'rgba(255,255,255,0.4)',
+	borderLeft: "1px solid #000",
+	height:"54dp",
+	top:"5dp"
 },
 ".time": {
 	font: {
@@ -32,15 +34,17 @@
 		fontFamily: 'HelveticaNeue-Regular'
 		},
 	color: 'rgba(104,103,103,0.8)',
-	bottom: '5%'
+	bottom: '6%'
 },
 ".date": {
-	color: 'rgba(104,103,103,0.8)',
+	color: 'rgba(104,103,103,0.9)',
+	shadowColor: 'rgba(0,0,0,0.1)',
+    shadowOffset: {x: 0, y:-1},
 	font: {
-		fontSize: '28dp',
+		fontSize: '33dp',
 		fontFamily: 'HelveticaNeue-CondensedBold'
 		},
-	top: "5%"
+	top: "0dp"
 },
 ".day": {
 	font: {
@@ -48,6 +52,6 @@
 		fontFamily: 'HelveticaNeue-Medium'
 		},
 	color: 'rgba(104,103,103,0.8)',
-	bottom: '20%'
+	bottom: '21%'
 
 }
