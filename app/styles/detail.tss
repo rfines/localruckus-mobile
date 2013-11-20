@@ -9,9 +9,8 @@
 
 ".name": {
     font: {
-        fontSize: '18dp',
-        fontWeight: 'bold',
-        fontFamily: 'HelveticaNeue-CondensedBold'
+        fontSize: '24dp',
+        fontFamily: 'HelveticaNeue-Ultralight'
     },
     color:'686767'
 }
@@ -35,9 +34,23 @@
 "#categoryNav #food" : {
 	left: "25%"
 }
+"#location":{
+font: {
+		fontFamily: 'HelveticaNeue-Light',
+		fontSize:'11dp'
+	},
+	color:'686767'
+}
 "#locationView":{
-	height:30
+	height:70,
+	top: 10
 }
 "#nameView":{
-	height:40
+	color:'686767'
+}
+"#businessName":{
+font: {
+		fontFamily: 'HelveticaNeue-Light'
+	},
+	color:'686767'
 }

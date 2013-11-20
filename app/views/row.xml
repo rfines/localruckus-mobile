@@ -1,16 +1,16 @@
 <Alloy>
-	<TableViewRow className="tableRow" selectedBackgroundColor="#cbea3f">
+	<TableViewRow className="tableRow" selectedBackgroundColor="white" selectedColor="white">
 		<View class="eventImage" width="20%" left="0">
 			<ImageView id="detailImage" height="50" width="50"/>
 		</View>
-		<View class="eventDetails" width="62%">
+		<View class="eventDetails" width="62%" selectedColor="white">
 			<Label id="name" />
 		</View>
 		<View class="eventTime" width="18%" right="0">
 			<View class="calendarPage">
-				<Label class="date"></Label>
-				<Label class="day"></Label>
-				<Label class="time"></Label>
+				<Label id="date" class="date" selectedColor="white"></Label>
+				<Label id="day" class="day"></Label>
+				<Label id="time" class="time"></Label>
 			</View>
 		</View>
 	</TableViewRow>

@@ -260,7 +260,7 @@ function setWindow(eventData, business) {
 	win.setToolbar(buttons, {
 		animated : true,
 		barColor : 'black',
-		tintColor : 'lime',
+		tintColor : 'white',
 		id : "detailToolbar"
 	});
 
