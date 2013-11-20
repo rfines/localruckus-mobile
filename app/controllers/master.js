@@ -33,7 +33,7 @@ exports.loadInitialData = function(options) {
 	var tags = options.tags || 'ENTERTAINMENT'; 
 	var ll = Alloy.Globals.location.coords.longitude + ',' + Alloy.Globals.location.coords.latitude;
 	var start = moment().toISOString();
-	var url = "http://api-stage.hoopla.io/event?ll="+ ll + "&radius=" + radius + "&tags=" + tags + "&height=50&width=50&start="+start;
+	var url = "http://api-stage.hoopla.io/event?ll="+ ll + "&radius=" + radius + "&tags=" + tags + "&height=50&imageType=circle&width=50&start="+start;
 	var xhr = Ti.Network.createHTTPClient({
 	    onload: function(e) {
 	        data = JSON.parse(this.responseText);
