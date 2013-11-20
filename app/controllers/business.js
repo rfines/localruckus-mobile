@@ -10,6 +10,11 @@ exports.setBusinessInfo = function(bus) {
 		$.name.text = bus.name;
 		$.location.text = bus.location.address;
 		$.descriptionView.setHtml(bus.description || "No Description Provided");
+		var image = "";
+		if (bus.media != undefined && bus.media.length > 0) {
+			image = bus.media[0].url;
+		}
+		$.detailImage.image = image;
 		//Toolbar buttons
 		if (bus.website != undefined && bus.website.length > 0) {
 			var webBtn = Ti.UI.createButton({
@@ -123,7 +128,7 @@ function share(evt) {
 	var social = require('alloy/social').create({
 		consumerSecret : Ti.App.Properties.getString('ti.twitter.consumerSecret'),
 		consumerKey : Ti.App.Properties.getString('ti.twitter.consumerKey')
-	}); 
+	});
 	//Ti.API.error(social);
 	var optionsAlertOpts = {
 		buttonNames : ['Cancel', 'Facebook'],
@@ -198,5 +203,5 @@ function share(evt) {
 }
 
 function getDirections(evt) {
-	Ti.Platform.openURL("http://maps.apple.com/?saddr="+Alloy.Globals.location.coords.latitude+","+Alloy.Globals.location.coords.longitude+"&daddr="+business.location.geo.coordinates[1]+","+business.location.geo.coordinates[0]);
+	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + business.location.geo.coordinates[1] + "," + business.location.geo.coordinates[0]);
 }
