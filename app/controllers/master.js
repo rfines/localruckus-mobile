@@ -45,12 +45,10 @@ exports.loadInitialData = function(options) {
 			$.table.setData(tableData);		    
 	    },
 	    onerror: function(e) {
-	        alert(e);
-	        alert(e.source || "");
 	        Ti.API.error(e);
 	    }
 	});
-	Ti.API.error("Sending xh request");
+	Ti.API.error("Sending xhr request");
 	xhr.open("GET", url);
 	xhr.setTimeout(30000);
 	xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");

@@ -7,7 +7,6 @@ $.master.on('detail', function(e) {
 	var win = controller.getView();
 	controller.setBoxerStats(e);
 	if (OS_IOS && Alloy.isHandheld) {
-		alert('open win');
 		Alloy.Globals.navgroup.open(win);
 	} else if (OS_ANDROID) {
 		win.open();
@@ -19,7 +18,6 @@ if (Ti.Geolocation.locationServicesEnabled) {
     Titanium.Geolocation.getCurrentPosition(function(e) {
         if (e.error) {
             Ti.API.error('Error: ' + e.error);
-            alert('Your location is not available');
             e.coords = {};
         	e.coords.latitude = 39.102704;
         	e.coords.longitude = -94.595033;

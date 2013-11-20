@@ -190,7 +190,6 @@ function getBusiness(id, callback) {
 	var xhr = Ti.Network.createHTTPClient({
 		onload : function(e) {
 			data = JSON.parse(this.responseText);
-			alert("calling callback with null " + data.name);
 			callback(null, data);
 		},
 		onerror : function(e) {
