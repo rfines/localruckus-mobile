@@ -1,0 +1,22 @@
+"Label": {
+    top: 1,
+    font: {
+        fontSize: '11dp',
+        fontWeight: 'normal'
+    },
+    textAlign: 'center'
+}
+
+".name": {
+    font: {
+        fontSize: '18dp',
+        fontWeight: 'bold'
+    }
+}
+
+"#locationView":{
+	height:15
+}
+"#nameView":{
+	height:40
+}

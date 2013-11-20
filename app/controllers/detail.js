@@ -20,6 +20,7 @@ exports.setBoxerStats = function(eventData) {
 					Ti.API.error(err);
 				} else {
 					Alloy.Globals.businesses.push(bus);
+					business = bus;
 					setWindow(eventData, bus);
 				}
 
@@ -31,11 +32,14 @@ exports.setBoxerStats = function(eventData) {
 };
 
 function showBusinessDetails(e) {
-	alert(e);
-	Alloy.createController('business', {
-		business : business,
-		name : business.name
-	}).getView();
+	var controller = OS_IOS && Alloy.isTablet ? $.business : Alloy.createController('business');
+	var win = controller.getView();
+	controller.setBusinessInfo(business);
+	if (OS_IOS && Alloy.isHandheld) {
+		Alloy.Globals.navgroup.open(win);
+	} else if (OS_ANDROID) {
+		win.open();
+	}
 
 }
 

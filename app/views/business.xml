@@ -1,0 +1,17 @@
+<Alloy>
+	<Window layout="vertical" id="myWindow">
+		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" height="150" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+        </View>
+        <ScrollView layout="vertical">
+        	<View id="locationView" layout="vertical">
+        		<Label id="location" class="location" onClick="getDirections"/>
+        	</View>
+        	<View id="nameView" layout="vertical">
+        		<Label id="name" class="name"/>
+        	</View>
+        	<View id="descriptionView" layout="vertical">
+				<Label id="description" />
+			</View>
+		</ScrollView>
+	</Window>
+</Alloy>
