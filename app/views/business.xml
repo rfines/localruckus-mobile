@@ -9,9 +9,8 @@
         	<View id="nameView" layout="vertical">
         		<Label id="name" class="name"/>
         	</View>
-        	<View id="descriptionView" layout="vertical">
-				<Label id="description" />
-			</View>
+        	<WebView id="descriptionView" layout="vertical">
+			</WebView>
 		</ScrollView>
 	</Window>
 </Alloy>

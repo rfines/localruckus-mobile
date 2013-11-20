@@ -11,9 +11,9 @@
         		<Label id="name" class="name"/>
         		<Label id="time"/>
         	</View>
-        	<View id="descriptionView" layout="vertical">
-				<Label id="description" />
-			</View>
+        	<WebView id="descriptionView" layout="vertical">
+				
+			</WebView>
 		</ScrollView>
 	</Window>
 </Alloy>

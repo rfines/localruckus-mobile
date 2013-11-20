@@ -211,7 +211,7 @@ function setWindow(eventData, business) {
 	var buttons = [];
 	var d = eventData.description || "No description provided.";
 	var l = eventData.location.address;
-	$.description.text = d;
+	$.descriptionView.setHtml(d);
 	$.location.text = l;
 	$.name.text = eventData.name;
 	$.time.text = eventData.scheduleText;

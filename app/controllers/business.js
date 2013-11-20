@@ -9,7 +9,7 @@ exports.setBusinessInfo = function(bus) {
 		Ti.API.error(bus);
 		$.name.text = bus.name;
 		$.location.text = bus.location.address;
-		$.description.text = bus.description || "No Description Provided";
+		$.descriptionView.setHtml(bus.description || "No Description Provided");
 		//Toolbar buttons
 		if (bus.website != undefined && bus.website.length > 0) {
 			var webBtn = Ti.UI.createButton({
