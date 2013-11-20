@@ -14,7 +14,7 @@ exports.setBoxerStats = function(eventData) {
 			Alloy.Globals.businesses = [];
 		}
 
-		if (business._id == undefined) {
+		if (business==undefined || business._id == undefined) {
 			getBusiness(eventData.host, function(err, bus) {
 				if (err) {
 					Ti.API.error(err);
@@ -182,6 +182,7 @@ function share(evt) {
 }
 
 function getDirections(evt) {
+	Ti.Platform.openURL("http://maps.apple.com/?saddr="+Alloy.Globals.location.coords.latitude+","+Alloy.Globals.location.coords.longitude+"&daddr="+data.location.geo.coordinates[1]+","+data.location.geo.coordinates[0]);
 }
 
 function getBusiness(id, callback) {
@@ -214,9 +215,9 @@ function setWindow(eventData, business) {
 	$.descriptionView.setHtml(d);
 	$.location.text = l;
 	$.name.text = eventData.name;
-	$.time.text = eventData.scheduleText;
+	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar()+" until "+moment(eventData.nextOccurrence.end).utc().format("h:mm a");
 	$.businessName.text = business.name;
-	//moment(eventData.nextOccurrence.start).format('h:mm a')+" to "+moment(eventData.nextOccurrence.end).format("h:mm a");
+	//
 	Ti.API.error(eventData);
 	//Toolbar buttons
 	if (eventData.website != undefined && eventData.website.length > 0) {

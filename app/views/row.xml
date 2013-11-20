@@ -7,10 +7,10 @@
 			<Label id="name" />
 		</View>
 		<View class="eventTime" width="15%" right="0">
-			<View class="calendarPage" backgroundColor="#ffffff" borderColor="#000000">
-				<Label class="date">9</Label>
-				<Label class="day">Today</Label>
-				<Label class="time">11a-2p</Label>
+			<View class="calendarPage" backgroundColor="#ffffff" borderColor="#000000" layout="vertical">
+				<Label id="date" class="date"></Label>
+				<Label id="day" class="day"></Label>
+				<Label id="time" class="time"></Label>
 			</View>
 		</View>
 	</TableViewRow>

@@ -24,13 +24,16 @@
 	top: '5dp'
 },
 ".calendarPage": {
-	fontSize: '10dp',
+	fontSize: '6dp',
 	backgroundColor: 'rgba(0,0,0,0.6)',
 	color: '#fff'
 },
 ".time": {
+	fontSize:'6dp'
 },
 ".date": {
+	fontSize:'6dp'
 },
 ".day": {
+	fontSize:'6dp'
 }
