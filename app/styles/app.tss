@@ -1,5 +1,8 @@
 "Window": {
-	backgroundColor:"#fff"
+	backgroundImage: 'listBackground.png',
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	fontFamily: 'HelveticaNeue-UltraLight'
 },
 "Window[platform=android]": {
     navBarHidden: true

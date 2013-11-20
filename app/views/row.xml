@@ -1,16 +1,16 @@
 <Alloy>
-	<TableViewRow>
+	<TableViewRow class="tableRow">
 		<View class="eventImage" width="20%" left="0">
 			<ImageView id="detailImage" height="50" width="50"/>
 		</View>
-		<View class="eventDetails" width="60%" left="20%">
+		<View class="eventDetails">
 			<Label id="name" />
 		</View>
-		<View class="eventTime" width="15%" left="80%">
+		<View class="eventTime" width="15%" right="0">
 			<View class="calendarPage" backgroundColor="#ffffff" borderColor="#000000">
-				<Label top=0">9</Label>
-				<Label top=10>Today</Label>
-				<Label top=20>11a-2p</Label>
+				<Label class="date">9</Label>
+				<Label class="day">Today</Label>
+				<Label class="time">11a-2p</Label>
 			</View>
 		</View>
 	</TableViewRow>

@@ -1,22 +1,36 @@
+"#table": {
+	backgroundColor: 'transparent',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT
+},
 "#row": {
-	backgroundColor: "#fff",
 	height: '60dp',
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT
 },
 ".eventDetails": {
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	width: Ti.UI.FILL,
+	color: '#fff'
 },
 "#name": {
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     top: '5dp',
     font: {
-        fontSize: '12dp'
+        fontSize: '12dp',
+        fontFamily: 'HelveticaNeue-UltraLight'
     }
 },
 "#detailImage": {
 	left: '5dp',
 	top: '5dp'
 },
-".calendarPage" : {
-	fontSize: '10dp'
+".calendarPage": {
+	fontSize: '10dp',
+	backgroundColor: 'rgba(0,0,0,0.6)',
+	color: '#fff'
+},
+".time": {
+},
+".date": {
+},
+".day": {
 }
