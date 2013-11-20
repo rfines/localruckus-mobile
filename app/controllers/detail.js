@@ -109,7 +109,7 @@ function share(evt) {
 	// });
 	//Ti.API.error(social);
 	var optionsAlertOpts = {
-		buttonNames : ['Cancel', 'Facebook'],
+		buttonNames : ['Cancel', 'Facebook', 'Twitter'],
 		message : "Post to Facebook?",
 		title : 'Share this event'
 	};
@@ -133,7 +133,7 @@ function share(evt) {
 					var link = "http://www.localruckus.com/event/" + data._id.toString();
 					var fbdata = {
 						link : link,
-						name : "Local Ruckus Mobile",
+						name : data.name,
 						message : defaultMessage,
 						caption : data.name,
 						picture : mediaUrl,
@@ -212,6 +212,12 @@ function setWindow(eventData, business) {
 	var buttons = [];
 	var d = eventData.description || "No description provided.";
 	var l = eventData.location.address;
+	var image ="";
+	if(eventData.media!=undefined&& eventData.media.length > 0)
+	{
+		image = eventData.media[0].url;
+	}
+	$.detailImage.image = image;
 	$.descriptionView.setHtml(d);
 	$.location.text = l;
 	$.name.text = eventData.name;

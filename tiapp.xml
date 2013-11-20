@@ -4,7 +4,7 @@
     <name>localruckus-alloy</name>
     <version>1.0</version>
     <publisher>adamengland</publisher>
-    <url>http://</url>
+    <url>http://localruckus.com</url>
     <description>not specified</description>
     <copyright>2013 by adamengland</copyright>
     <icon>appicon.png</icon>
@@ -17,7 +17,7 @@
     <analytics>true</analytics>
     <guid>7629b725-086e-49ca-9021-5aedf3896b08</guid>
     <property name="ti.ui.defaultunit" type="string">system</property>
-    <property name="ti.facebook.appid" type="string">1433425413548423</property>
+    <property name="ti.facebook.appid" type="string">666711010029041</property>
     <property name="ti.twitter.consumerKey" type="string">2WyThkBDcMV4a0ZNoToXqw</property>
     <property name="ti.twitter.consumerSecret" type="string">FlPlNThh21qxtDP0FRaESSgrC0HWu5CyUXwkFGQhw</property>
     <iphone>
