@@ -10,8 +10,10 @@
 ".name": {
     font: {
         fontSize: '18dp',
-        fontWeight: 'bold'
-    }
+        fontWeight: 'bold',
+        fontFamily: 'HelveticaNeue-CondensedBold'
+    },
+    color:'686767'
 }
 
 

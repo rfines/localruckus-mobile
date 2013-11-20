@@ -1,39 +1,53 @@
 "#table": {
 	backgroundColor: 'transparent',
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT
 },
 "#row": {
 	height: '60dp',
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT
+	textAlign: "left"
 },
 ".eventDetails": {
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-	width: Ti.UI.FILL,
-	color: '#fff'
+	textAlign: "left",
+	width: Ti.UI.FILL
 },
 "#name": {
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    top: '5dp',
+	textAlign:"left",
+	padding:"5dp",
     font: {
-        fontSize: '12dp',
-        fontFamily: 'HelveticaNeue-UltraLight'
-    }
+        fontSize: '14dp',
+        fontFamily: 'HelveticaNeue-Thin'
+    },
+    color: '#201f1f'
 },
 "#detailImage": {
 	left: '5dp',
 	top: '5dp'
 },
 ".calendarPage": {
-	fontSize: '6dp',
-	backgroundColor: 'rgba(0,0,0,0.6)',
+	backgroundColor: 'rgba(255,255,255,0.3)',
 	color: '#fff'
 },
 ".time": {
-	fontSize:'6dp'
+	font: {
+		fontSize: '8dp',
+		fontFamily: 'HelveticaNeue-Medium'
+		},
+	color: 'rgba(104,103,103,0.8)',
+	bottom: '5%'
 },
 ".date": {
-	fontSize:'6dp'
+	color: 'rgba(104,103,103,0.8)',
+	font: {
+		fontSize: '28dp',
+		fontFamily: 'HelveticaNeue-CondensedBold'
+		},
+	top: "8%"
 },
 ".day": {
-	fontSize:'6dp'
+	font: {
+		fontSize: '8dp',
+		fontFamily: 'HelveticaNeue-Medium'
+		},
+	color: 'rgba(104,103,103,0.8)',
+	bottom: '20%'
+
 }

@@ -1,6 +1,6 @@
 <Alloy>
 	<Window title="Local Ruckus">
-		<TableView id="table" onClick="openDetail" top="0" height="80%">
+		<TableView id="table" onClick="openDetail" top="0" height="Ti.UI.FILL" backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<HeaderView platform="android">
 				<Button>...</Button>
 				<Label id="header">Events</Label>

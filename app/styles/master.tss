@@ -12,7 +12,11 @@
     }
 }
 "#table" : {
-	height: Ti.UI.FILL
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	font: {
+        fontFamily: 'HelveticaNeue-Thin'
+       }
 }
 "#categoryNav" : {
 	width: Ti.UI.FILL
