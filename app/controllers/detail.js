@@ -39,12 +39,7 @@ function showBusinessDetails(e) {
 	var controller = OS_IOS && Alloy.isTablet ? $.business : Alloy.createController('business');
 	var win = controller.getView();
 	controller.setBusinessInfo(business);
-	if (OS_IOS && Alloy.isHandheld) {
-		Alloy.Globals.navgroup.open(win);
-	} else if (OS_ANDROID) {
-		win.open();
-	}
-
+	controller.getView().open();	
 }
 
 
@@ -220,7 +215,11 @@ function setWindow(eventData, business) {
 		image = eventData.media[0].url;
 	}
 	$.detailImage.image = image;
-	$.descriptionView.setHtml(d);
+	var regex1 = /<(br\s+\/|br)>/gi;
+	var regex2 = /<(p|\/p)>/gi;
+	var removeBoldItalics = /<(em|\/em|strong|\/strong)>/gi;
+	var newstr = d.replace('&nbsp;', ' ').replace(regex1, "\n").replace(regex2, "\n\n").replace(removeBoldItalics, "");
+	$.descriptionView.setText(newstr);	
 	$.location.text = l;
 	$.name.text = eventData.name;
 	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar()+" until "+moment(eventData.nextOccurrence.end).utc().format("h:mm a");
