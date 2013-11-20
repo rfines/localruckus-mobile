@@ -1,6 +1,6 @@
 <Alloy>
 	<Window layout="vertical" id="myWindow">
-		<ImageView id="detailImage"></ImageView>
+		<ImageView id="detailImage" height="100"></ImageView>
 		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" height="150" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
         <ScrollView layout="vertical">
