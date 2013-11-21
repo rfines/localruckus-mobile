@@ -80,6 +80,8 @@ exports.loadInitialData = function(options) {
 				}).getView());
 			}
 			$.table.setData(tableData);
+			$.locationLabel.text = Alloy.Globals.reverseLocation.places[0].city + ', ' + Alloy.Globals.reverseLocation.places[0].zipcode;
+			$.addressTextField.value = Alloy.Globals.reverseLocation.places[0].address;
 			if(options.success){
 				options.success();
 			}
