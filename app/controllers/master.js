@@ -1,3 +1,6 @@
+api = require('utils/lrApiCall');
+api.hello();
+
 function openDetail(e) {
 	controller = Alloy.createController('detail');
 	d = controller.getView();
