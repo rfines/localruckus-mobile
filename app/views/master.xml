@@ -8,6 +8,7 @@
 			</View>
 		</Window>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
+			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
 			<HeaderView platform="android">
 				<Button>...</Button>
 				<Label id="header">Events</Label>

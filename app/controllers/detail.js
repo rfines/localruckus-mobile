@@ -179,15 +179,16 @@ function share(evt) {
 	// }
 	var defaultMessage = "Check out this awesome event! I'm thinking about going, who wants to go with me?";
 	var link = "http://localruckus.com/event/"+data._id;
+	defaultMessage = defaultMessage + " "+link;
 	var image = "";
-	if(data.media!=undefined && data.media.count >0){
+	if(data.media!=undefined && data.media.length >0){
 		image = data.media[0].url;
 	}	
 	var Social = require('dk.napp.social');
 	Social.activityView({
 		text : defaultMessage,
 		image : image,
-		removeIcons : "print,copy,contact,camera"
+		removeIcons : "print,copy,camera"
 	}, []);
 
 }
