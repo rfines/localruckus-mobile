@@ -18,7 +18,7 @@ exports.setBoxerStats = function(eventData) {
 			Alloy.Globals.businesses = [];
 		}
 
-		if (business==undefined || business._id == undefined) {
+		if (business == undefined || business._id == undefined) {
 			getBusiness(eventData.host, function(err, bus) {
 				if (err) {
 					Ti.API.error(err);
@@ -29,7 +29,7 @@ exports.setBoxerStats = function(eventData) {
 				}
 
 			});
-		}else{
+		} else {
 			setWindow(eventData, business);
 		}
 	}
@@ -39,9 +39,8 @@ function showBusinessDetails(e) {
 	var controller = OS_IOS && Alloy.isTablet ? $.business : Alloy.createController('business');
 	var win = controller.getView();
 	controller.setBusinessInfo(business);
-	controller.getView().open();	
+	controller.getView().open();
 }
-
 
 function doClick(evt) {
 	Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
@@ -89,99 +88,112 @@ function buyTickets(evt) {
 }
 
 function share(evt) {
-	var fb = require('facebook');
-	fb.appid = Ti.App.Properties.getString('ti.facebook.appid');
-	fb.permissions = ['read_stream'];
-	fb.forceDialogAuth = false;
-	fb.addEventListener('login', function(e) {
-		if (e.success) {
-			Ti.API.info('Logged In');
-		} else if (e.error) {
-			Ti.API.info(e.error);
-		} else if (e.cancelled) {
-			Ti.API.info('Cancelled');
-		}
-	});
-	// var social= require('alloy/social').create({
-	// consumerSecret:Ti.App.Properties.getString('ti.twitter.consumerSecret'),
-	// consumerKey:Ti.App.Properties.getString('ti.twitter.consumerKey')
+	// var fb = require('facebook');
+	// fb.appid = Ti.App.Properties.getString('ti.facebook.appid');
+	// fb.permissions = ['read_stream'];
+	// fb.forceDialogAuth = false;
+	// fb.addEventListener('login', function(e) {
+	// if (e.success) {
+	// Ti.API.info('Logged In');
+	// } else if (e.error) {
+	// Ti.API.info(e.error);
+	// } else if (e.cancelled) {
+	// Ti.API.info('Cancelled');
+	// }
 	// });
-	//Ti.API.error(social);
-	var optionsAlertOpts = {
-		buttonNames : ['Cancel', 'Facebook', 'Twitter'],
-		message : "Post to Facebook?",
-		title : 'Share this event'
-	};
-	var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
-	// DIALOG EVENT CLICK
-	dialog.addEventListener('click', function(e) {
-		if (e.index == '1') {//Facebook button
-			// Ask for write permission
-			fb.reauthorize(['publish_stream', 'rsvp_event', 'publish_actions'], 'friends', function(e) {
-				if (e.success) {
-					// If successful, proceed with a publish call
-					var defaultMessage = "Check out this awesome event! I'm thinking about going, who wants to go with me?";
-					var mediaUrl = "";
-					if (data.media != undefined && data.media.length > 0) {
-						mediaUrl = data.media[0].url;
-					}
-					var description = data.name + " at " + data.location.address;
-					if (data.description != undefined && data.description.length > 0) {
-						description = data.description;
-					}
-					var link = "http://www.localruckus.com/event/" + data._id.toString();
-					var fbdata = {
-						link : link,
-						name : data.name,
-						message : defaultMessage,
-						caption : data.name,
-						picture : mediaUrl,
-						description : description
-					};
-					fb.dialog("feed", fbdata, function(e) {
-						if (e.success && e.result) {
-							Ti.API.info("Success! New Post ID: " + e.result);
-						} else {
-							if (e.error) {
-								Ti.API.info(e.error);
-							} else {
-								Ti.API.info("User canceled dialog.");
-							}
-						}
-					});
-				} else {
-					if (e.error) {
-						Ti.API.info(e.error);
-					} else {
-						Ti.API.error("Unknown result");
-					}
-				}
-			});
-		} else if (e.index == '2') {
-			if (!social.isAuthorized()) {
-				social.authorize();
-			}
-			social.share({
-				message : "Salut, Monde!",
-				success : function(e) {
-					Ti.API.error('Success!');
-				},
-				error : function(e) {
-					Ti.API.error('Error!');
-				}
-			});
+	// // var social= require('alloy/social').create({
+	// // consumerSecret:Ti.App.Properties.getString('ti.twitter.consumerSecret'),
+	// // consumerKey:Ti.App.Properties.getString('ti.twitter.consumerKey')
+	// // });
+	// //Ti.API.error(social);
+	// var optionsAlertOpts = {
+	// buttonNames : ['Cancel', 'Facebook', 'Twitter'],
+	// message : "Post to Facebook?",
+	// title : 'Share this event'
+	// };
+	// var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
+	// // DIALOG EVENT CLICK
+	// dialog.addEventListener('click', function(e) {
+	// if (e.index == '1') {//Facebook button
+	// // Ask for write permission
+	// fb.reauthorize(['publish_stream', 'rsvp_event', 'publish_actions'], 'friends', function(e) {
+	// if (e.success) {
+	// // If successful, proceed with a publish call
+	// var defaultMessage = "Check out this awesome event! I'm thinking about going, who wants to go with me?";
+	// var mediaUrl = "";
+	// if (data.media != undefined && data.media.length > 0) {
+	// mediaUrl = data.media[0].url;
+	// }
+	// var description = data.name + " at " + data.location.address;
+	// if (data.description != undefined && data.description.length > 0) {
+	// description = data.description;
+	// }
+	// var link = "http://www.localruckus.com/event/" + data._id.toString();
+	// var fbdata = {
+	// link : link,
+	// name : data.name,
+	// message : defaultMessage,
+	// caption : data.name,
+	// picture : mediaUrl,
+	// description : description
+	// };
+	// fb.dialog("feed", fbdata, function(e) {
+	// if (e.success && e.result) {
+	// Ti.API.info("Success! New Post ID: " + e.result);
+	// } else {
+	// if (e.error) {
+	// Ti.API.info(e.error);
+	// } else {
+	// Ti.API.info("User canceled dialog.");
+	// }
+	// }
+	// });
+	// } else {
+	// if (e.error) {
+	// Ti.API.info(e.error);
+	// } else {
+	// Ti.API.error("Unknown result");
+	// }
+	// }
+	// });
+	// } else if (e.index == '2') {
+	// if (!social.isAuthorized()) {
+	// social.authorize();
+	// }
+	// social.share({
+	// message : "Salut, Monde!",
+	// success : function(e) {
+	// Ti.API.error('Success!');
+	// },
+	// error : function(e) {
+	// Ti.API.error('Error!');
+	// }
+	// });
+	//
+	// alert('twitter');
+	// }
+	// });
+	// dialog.show();
+	// if (!fb.loggedIn) {
+	// fb.authorize();
+	// }
+	var defaultMessage = "Check out this awesome event! I'm thinking about going, who wants to go with me?";
+	var link = "http://localruckus.com/event/"+data._id;
+	var image = "";
+	if(data.media!=undefined && data.media.count >0){
+		image = data.media[0].url;
+	}	
+	var Social = require('dk.napp.social');
+	Social.activityView({
+		text : defaultMessage,
+		image : image,
+		removeIcons : "print,copy,contact,camera"
+	}, []);
 
-			alert('twitter');
-		}
-	});
-	dialog.show();
-	if (!fb.loggedIn) {
-		fb.authorize();
-	}
 }
 
 function getDirections(evt) {
-	Ti.Platform.openURL("http://maps.apple.com/?saddr="+Alloy.Globals.location.coords.latitude+","+Alloy.Globals.location.coords.longitude+"&daddr="+data.location.geo.coordinates[1]+","+data.location.geo.coordinates[0]);
+	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
 }
 
 function getBusiness(id, callback) {
@@ -209,9 +221,8 @@ function setWindow(eventData, business) {
 	var buttons = [];
 	var d = eventData.description || "No description provided.";
 	var l = eventData.location.address;
-	var image ="";
-	if(eventData.media!=undefined&& eventData.media.length > 0)
-	{
+	var image = "";
+	if (eventData.media != undefined && eventData.media.length > 0) {
 		image = eventData.media[0].url;
 	}
 	$.detailImage.image = image;
@@ -219,10 +230,10 @@ function setWindow(eventData, business) {
 	var regex2 = /<(p|\/p)>/gi;
 	var removeBoldItalics = /<(em|\/em|strong|\/strong)>/gi;
 	var newstr = d.replace('&nbsp;', ' ').replace(regex1, "\n").replace(regex2, "\n\n").replace(removeBoldItalics, "");
-	$.descriptionView.setText(newstr);	
+	$.descriptionView.setText(newstr);
 	$.location.text = l;
 	$.name.text = eventData.name;
-	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar()+" until "+moment(eventData.nextOccurrence.end).utc().format("h:mm a");
+	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar() + " until " + moment(eventData.nextOccurrence.end).utc().format("h:mm a");
 	$.businessName.text = business.name;
 	//
 	Ti.API.error(eventData);
@@ -259,19 +270,19 @@ function setWindow(eventData, business) {
 	shareBtn.addEventListener('click', share);
 	buttons.push(shareBtn);
 	var toolbar = Titanium.UI.iOS.createToolbar({
-	    items:buttons,
-	    bottom:0,
-	    borderTop:true,
-	    borderBottom:false
-	}); 
+		items : buttons,
+		bottom : 0,
+		borderTop : true,
+		borderBottom : false
+	});
 	win.add(toolbar);
 	/*win.setToolbar(buttons, {
-		animated : true,
-		barColor : 'black',
-		tintColor : 'white',
-		id : "detailToolbar"
-	});
-	*/
+	 animated : true,
+	 barColor : 'black',
+	 tintColor : 'white',
+	 id : "detailToolbar"
+	 });
+	 */
 
 	var loc = Ti.Map.createAnnotation({
 		latitude : eventData.location.geo.coordinates[1],
