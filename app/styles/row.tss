@@ -11,16 +11,16 @@
 },
 "#name": {
 	textAlign:"left",
-	padding:"5dp",
+	padding:"10dp",
     font: {
-        fontSize: '14dp',
+        fontSize: '16dp',
         fontFamily: 'HelveticaNeue-Thin'
     },
     color: '#201f1f'
 },
 "#detailImage": {
 	left: '5dp',
-	top: '6dp'
+	top: '3dp'
 },
 ".calendarPage": {
 	backgroundColor: 'rgba(255,255,255,0.4)',

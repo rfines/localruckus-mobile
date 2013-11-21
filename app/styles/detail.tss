@@ -42,8 +42,7 @@ font: {
 	color:'686767'
 }
 "#locationView":{
-	height:70,
-	top: 10
+	top: 170
 }
 "#nameView":{
 	color:'686767'

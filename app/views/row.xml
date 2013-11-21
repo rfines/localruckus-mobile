@@ -3,7 +3,7 @@
 		<View class="eventImage" width="20%" left="0">
 			<ImageView id="detailImage"/>
 		</View>
-		<View class="eventDetails" width="62%" selectedColor="white">
+		<View class="eventDetails" width="60%" selectedColor="white">
 			<Label id="name" />
 		</View>
 		<View class="eventTime" width="18%" right="0">
