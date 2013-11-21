@@ -8,7 +8,7 @@
     		<Label id="location" class="location" onClick="getDirections"/>
         </View>
         <ScrollView height="Ti.UI.FILL" top="300dp" layout="vertical">
-        	<ImageView id="detailImage" height="50dp" top="50dp"></ImageView>
+        	<ImageView id="detailImage" top="50dp"></ImageView>
         	<View id="nameView" layout="vertical">
         		<Label id="name" class="name"/>
         		<Label id="time"/>
