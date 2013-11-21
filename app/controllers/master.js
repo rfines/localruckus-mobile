@@ -5,6 +5,23 @@ function openDetail(e) {
 	d.open();
 }
 
+function openSearchDrawer() {		
+	var view = Titanium.UI.createWindow({
+	   id : 'topDrawer',
+	   backgroundColor:'black',
+	   width:Ti.UI.FILL,
+	   height:0,
+	   top: 50,
+	   opacity: 0.8
+	});
+	$.getView().add(view);
+	var slideDown = Titanium.UI.createAnimation();
+    slideDown.height = 300; // to put it back to the left side of the window
+    slideDown.duration = 300;
+	
+	view.open(slideDown);
+}
+
 function loadEntertainment(e) {
 	exports.loadInitialData({tags:'ENTERTAINMENT', radius: 1000});
 }

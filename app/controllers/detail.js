@@ -264,7 +264,6 @@ function setWindow(eventData, business) {
 	    borderTop:true,
 	    borderBottom:false
 	}); 
-	alert(win.id);
 	win.add(toolbar);
 	/*win.setToolbar(buttons, {
 		animated : true,

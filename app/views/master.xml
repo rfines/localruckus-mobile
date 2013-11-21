@@ -1,7 +1,7 @@
 <Alloy>
 	<Window class="eventList" title="Local Ruckus">
 		<View height="60dp" top="0">
-			<Label>Search Bar</Label>
+			<Label onClick="openSearchDrawer">Search Bar</Label>			
 		</View>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<HeaderView platform="android">
