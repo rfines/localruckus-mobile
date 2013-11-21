@@ -3,6 +3,10 @@
 		<View height="60dp" top="0">
 			<Label onClick="openSearchDrawer">Search Bar</Label>			
 		</View>
+		<Window id="topDrawer" backgroundColor='red' width="Ti.UI.FILL" height = "0" top="50" opacity="0.8">
+			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL">
+			</View>
+		</Window>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<HeaderView platform="android">
 				<Button>...</Button>

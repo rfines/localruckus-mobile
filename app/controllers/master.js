@@ -4,8 +4,9 @@ function openDetail(e) {
 	controller.setBoxerStats(e.rowData.eventData);
 	d.open();
 }
-
-function openSearchDrawer() {		
+var drawerOpen = false;
+function openSearchDrawer() {	
+	/*	
 	var view = Titanium.UI.createWindow({
 	   id : 'topDrawer',
 	   backgroundColor:'black',
@@ -15,11 +16,20 @@ function openSearchDrawer() {
 	   opacity: 0.8
 	});
 	$.getView().add(view);
-	var slideDown = Titanium.UI.createAnimation();
-    slideDown.height = 300; // to put it back to the left side of the window
-    slideDown.duration = 300;
-	
-	view.open(slideDown);
+	*/
+	view = $.topDrawer;
+	if (drawerOpen) {
+		var slideUp = Titanium.UI.createAnimation();
+	    slideUp.height = "0";
+	    slideUp.duration = 300;
+		view.close(slideUp);
+	} else {
+		var slideDown = Titanium.UI.createAnimation();
+	    slideDown.height = Ti.UI.FILL;
+	    slideDown.duration = 300;
+		view.open(slideDown);
+	}
+	drawerOpen = !drawerOpen;
 }
 
 function loadEntertainment(e) {
