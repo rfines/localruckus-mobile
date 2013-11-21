@@ -1,4 +1,5 @@
 "Label": {
+    top: 1,
     font: {
         fontSize: '11dp',
         fontWeight: 'normal'
@@ -13,6 +14,26 @@
     },
     color:'686767'
 }
+
+
+
+"#detailActions" : {
+	width: Ti.UI.FILL,
+	height:40,
+	zIndex:10000,
+	top:100,
+	bottom:0
+	
+}
+"#categoryNav label" : {
+	width: "25%"
+}
+"#categoryNav #entertainment" : {
+	left: "0"
+}
+"#categoryNav #food" : {
+	left: "25%"
+}
 "#location":{
 font: {
 		fontFamily: 'HelveticaNeue-Light',
@@ -21,8 +42,9 @@ font: {
 	color:'686767'
 }
 "#locationView":{
+	height:70,
+	top: 10
 }
-"#time":{color:'686767'}
 "#nameView":{
 	color:'686767'
 }

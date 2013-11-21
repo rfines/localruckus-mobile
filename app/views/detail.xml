@@ -13,8 +13,8 @@
         		<Label id="name" class="name"/>
         		<Label id="time"/>
         	</View>
-			<Label id="descriptionView" height="Ti.UI.FILL">
-			</Label>
+			<WebView id="descriptionView" height="Ti.UI.FILL" backgroundCOlor="transparent">
+			</WebView>
 		</ScrollView>
 	</Window>
 </Alloy>

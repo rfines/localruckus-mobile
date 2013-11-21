@@ -1,7 +1,7 @@
 <Alloy>
 	<TableViewRow className="tableRow" selectedBackgroundColor="white" selectedColor="white">
 		<View class="eventImage" width="20%" left="0">
-			<ImageView id="detailImage" height="50" width="50"/>
+			<ImageView id="detailImage"/>
 		</View>
 		<View class="eventDetails" width="62%" selectedColor="white">
 			<Label id="name" />
