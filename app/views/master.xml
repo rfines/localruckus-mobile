@@ -1,45 +1,45 @@
 <Alloy>
 	<Window class="eventList" title="Local Ruckus">
 		<Window id="timePicker" bottom="0" selectionIndicator="true" useSpinner="true" height="0" opacity="1.0" backgroundColor="white" zIndex="999">
-	        <Picker id="picker" width="Ti.UI.FILL" height="Ti.UI.FILL">
-	            <PickerColumn id="column1">
-	            	<PickerRow title="Any Time"/>
-	                <PickerRow title="Today"/>
-	                <PickerRow title="Tomorrow"/>
-	                <PickerRow title="This Weekend"/>
-	                <PickerRow title="Next Week"/>
-	                <PickerRow title="Next Weekend"/>
-	                <PickerRow title="Later"/>
-	            </PickerColumn>
-	        </Picker>
-        </Window>			
+			<Picker id="picker" width="Ti.UI.FILL" height="Ti.UI.FILL">
+				<PickerColumn id="column1">
+					<PickerRow title="Any Time"/>
+					<PickerRow title="Today"/>
+					<PickerRow title="Tomorrow"/>
+					<PickerRow title="This Weekend"/>
+					<PickerRow title="Next Week"/>
+					<PickerRow title="Next Weekend"/>
+					<PickerRow title="Later"/>
+				</PickerColumn>
+			</Picker>
+		</Window>
 		<View height="60dp" top="0">
 			<Label id="locationLabel" onClick="toggleSearchDrawer" />
 		</View>
 		<Window id="topDrawer" backgroundColor='red' width="Ti.UI.FILL" height = "0" top="60" opacity="0.8">
 			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL">
-				<Button onClick="changeSearchCriteria" color="white" zIndex="9999">Done</Button>
+				<Button onClick="changeSearchCriteria" color="white" zIndex="9999" top="150">Done</Button>
 				<TextField id="searchTerms" class="topDrawerText" color="black"/>
 				<Button width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white">***</Button>
 				<TextField id="addressTextField" class="topDrawerText" color="black"/>
-
 				<View layout="horizontal" top="100">
 					<Button onClick="decreaseRadius">-</Button>
 					<Label id="radiusLabel" color="white" width="20">10</Label>
-					<Button onClick="increaseRadius">+</Button>	
+					<Button onClick="increaseRadius">+</Button>
 					<Button onClick="showTimePicker">Any Time</Button>
-				</View>						
-
-				<Label id="addContent" class="addContent" text="Add Event to Local Ruckus" color="silver" onClick="addContent"/>
-				<Label id="suggestContent" class="suggestContent" text="Suggest a Business or Event" color="silver" onClick="suggestContent"/>
-				<Label id="terms" class="terms" text="Terms of use" color="silver" onClick="terms"/>
-				<Label id="privacy" class="privacy" text="Privacy Policy" color="silver" onClick="privacy"/>
+				</View>
+				<View layout="vertical" top="200">
+					<Label id="addContent" class="addContent" text="Add Event to Local Ruckus" color="silver" onClick="addContent"/>
+					<Label id="suggestContent" class="suggestContent" text="Suggest a Business or Event" color="silver" onClick="suggestContent"/>
+					<Label id="terms" class="terms" text="Terms of use" color="silver" onClick="terms"/>
+					<Label id="privacy" class="privacy" text="Privacy Policy" color="silver" onClick="privacy"/>
+				</View>
 			</View>
 
 		</Window>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
-			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMore" />		
+			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMore" />
 		</TableView>
 		<Toolbar platform="ios" bottom="0" height="60dp">
 			<Items>
