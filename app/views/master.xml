@@ -17,22 +17,24 @@
 			<Label id="locationLabel" onClick="toggleSearchDrawer" />
 		</View>
 		<Window id="topDrawer" backgroundColor='red' width="Ti.UI.FILL" height = "0" top="60" opacity="0.8">
-			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL">
-				<Button onClick="changeSearchCriteria" color="white" zIndex="9999" top="150">Done</Button>
-				<TextField id="searchTerms" class="topDrawerText" color="black"/>
-				<Button width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white">***</Button>
-				<TextField id="addressTextField" class="topDrawerText" color="black"/>
-				<View layout="horizontal" top="100">
-					<Button onClick="decreaseRadius">-</Button>
-					<Label id="radiusLabel" color="white" width="20">10</Label>
-					<Button onClick="increaseRadius">+</Button>
-					<Button onClick="showTimePicker">Any Time</Button>
-				</View>
-				<View layout="vertical" top="200">
-					<Label id="addContent" class="addContent" text="Add Event to Local Ruckus" color="silver" onClick="addContent"/>
-					<Label id="suggestContent" class="suggestContent" text="Suggest a Business or Event" color="silver" onClick="suggestContent"/>
-					<Label id="terms" class="terms" text="Terms of use" color="silver" onClick="terms"/>
-					<Label id="privacy" class="privacy" text="Privacy Policy" color="silver" onClick="privacy"/>
+			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL" layout="vertical">
+				<Button onClick="changeSearchCriteria" color="white" zIndex="9999" right="10">Done</Button>
+				<View top="10">
+					<TextField id="searchTerms" class="topDrawerText" color="black"/>
+					<Button width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white">***</Button>
+					<TextField id="addressTextField" class="topDrawerText" color="black"/>
+					<View layout="horizontal" top="100">
+						<Button onClick="decreaseRadius">-</Button>
+						<Label id="radiusLabel" color="white" width="20">10</Label>
+						<Button onClick="increaseRadius">+</Button>
+						<Button onClick="showTimePicker" right="10">Any Time</Button>
+					</View>
+					<View layout="vertical" top="200">
+						<Label id="addContent" class="addContent" text="Add Event to Local Ruckus" color="silver" onClick="addContent"/>
+						<Label id="suggestContent" class="suggestContent" text="Suggest a Business or Event" color="silver" onClick="suggestContent"/>
+						<Label id="terms" class="terms" text="Terms of use" color="silver" onClick="terms"/>
+						<Label id="privacy" class="privacy" text="Privacy Policy" color="silver" onClick="privacy"/>
+					</View>
 				</View>
 			</View>
 
