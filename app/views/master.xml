@@ -1,21 +1,36 @@
 <Alloy>
 	<Window class="eventList" title="Local Ruckus">
+		<Window id="timePicker" bottom="0" selectionIndicator="true" useSpinner="true" height="0" opacity="1.0" backgroundColor="white" zIndex="999">
+	        <Picker id="picker" width="Ti.UI.FILL" height="Ti.UI.FILL">
+	            <PickerColumn id="column1">
+	            	<PickerRow title="Any Time"/>
+	                <PickerRow title="Today"/>
+	                <PickerRow title="Tomorrow"/>
+	                <PickerRow title="This Weekend"/>
+	                <PickerRow title="Next Week"/>
+	                <PickerRow title="Next Weekend"/>
+	                <PickerRow title="Later"/>
+	            </PickerColumn>
+	        </Picker>
+        </Window>			
 		<View height="60dp" top="0">
 			<Label id="locationLabel" onClick="openSearchDrawer" />
 		</View>
 		<Window id="topDrawer" backgroundColor='red' width="Ti.UI.FILL" height = "0" top="60" opacity="0.8">
 			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL">
 				<TextField id="searchTerms" class="topDrawerText"/>
-				<Button width="10" left="0" top="50" borderStyle="Ti.UI.INPUT_BORDERSTYLE_ROUNDED" >*</Button>
+				<Button width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white">***</Button>
 				<TextField id="addressTextField" class="topDrawerText" color="black"/>
+				<View layout="horizontal" top="100">
+					<Button onClick="decreaseRadius">-</Button>
+					<Label id="radiusLabel" color="white" width="20">10</Label>
+					<Button onClick="increaseRadius">+</Button>	
+					<Button onClick="showTimePicker">Any Time</Button>
+				</View>						
 			</View>
 		</Window>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
-			<HeaderView platform="android">
-				<Button>...</Button>
-				<Label id="header">Events</Label>
-			</HeaderView>
 			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMore" />		
 		</TableView>
 		<Toolbar platform="ios" bottom="0" height="60dp">

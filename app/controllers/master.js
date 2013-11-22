@@ -1,9 +1,40 @@
 var api = require('utils/lrApiCall');
+function showTimePicker() {
+	view = $.timePicker;
+	var slideUp = Titanium.UI.createAnimation();
+	slideUp.height = "200";
+	slideUp.duration = 300;
+	view.open(slideUp);	
+	
+}
 function openDetail(e) {
 	controller = Alloy.createController('detail');
 	d = controller.getView();
 	controller.setBoxerStats(e.rowData.eventData);
 	d.open();
+}
+
+function decreaseRadius(e) {
+	var currentRadius = parseInt($.radiusLabel.text);
+	var newRadius = currentRadius;
+	if (currentRadius == 5) {
+		newRadius = 1;
+	} else if (currentRadius != 1) {
+		newRadius = currentRadius - 5;	
+	}
+	$.radiusLabel.text = newRadius;
+	
+}
+function increaseRadius(e) {
+	var currentRadius = parseInt($.radiusLabel.text);
+	var newRadius = currentRadius;
+	if (currentRadius == 1) {
+		newRadius = 5;
+	} else if (currentRadius != 50) {
+		newRadius = currentRadius + 5;	
+	}
+	$.radiusLabel.text = newRadius;	
+	
 }
 
 var drawerOpen = false;
