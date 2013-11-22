@@ -3,18 +3,15 @@
 		<Button onClick="backToList" height="50dp" right="20dp" top="8dp">Back</Button>
 		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="150dp" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
-        
-        <View id="locationView" top="210dp"  layout="vertical">
-        	<View id="nameView" layout="vertical">
+        <ScrollView height="Ti.UI.FILL" top="210dp" layout="vertical">
+        	<View id="nameView" layout="vertical" height="Ti.UI.SIZE">
         		<Label id="name" class="name"/>
         		<Label id="time"/>
         	</View>
     		<Label id="businessName" onClick="showBusinessDetails" />
-    		<Label id="location" class="location" onClick="getDirections"/>
-        </View>
-        <ScrollView height="Ti.UI.FILL" top="280dp" layout="vertical">
-        	<ImageView id="detailImage" top="50dp"></ImageView><WebView id="descriptionView" height="Ti.UI.FILL" backgroundCOlor="transparent">
-			</WebView>
+    		<Label id="location" class="location" onClick="getDirections"/>        	
+        	<ImageView id="detailImage"></ImageView>
+        	<Label id="descriptionView" height="Ti.UI.FILL"></Label>
 		</ScrollView>
 	</Window>
 </Alloy>
