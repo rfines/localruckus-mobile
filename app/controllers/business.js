@@ -1,5 +1,9 @@
 var business = {};
 var buttons = [];
+function backToList() {
+	$.myWindow.close();
+}
+
 exports.setBusinessInfo = function(bus) {
 	business = bus;
 	var win = $.myWindow;
@@ -112,94 +116,108 @@ function callBusiness(bus) {
 }
 
 function share(evt) {
-	var fb = require('facebook');
-	fb.appid = Ti.App.Properties.getString('ti.facebook.appid');
-	fb.permissions = ['read_stream'];
-	fb.forceDialogAuth = false;
-	fb.addEventListener('login', function(e) {
-		if (e.success) {
-			Ti.API.info('Logged In');
-		} else if (e.error) {
-			Ti.API.info(e.error);
-		} else if (e.cancelled) {
-			Ti.API.info('Cancelled');
-		}
-	});
-	var social = require('alloy/social').create({
-		consumerSecret : Ti.App.Properties.getString('ti.twitter.consumerSecret'),
-		consumerKey : Ti.App.Properties.getString('ti.twitter.consumerKey')
-	});
-	//Ti.API.error(social);
-	var optionsAlertOpts = {
-		buttonNames : ['Cancel', 'Facebook'],
-		message : "Post to Facebook?",
-		title : 'Share this business'
-	};
-	var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
-	// DIALOG EVENT CLICK
-	dialog.addEventListener('click', function(e) {
-		if (e.index == '1') {//Facebook button
-			// Ask for write permission
-			fb.reauthorize(['publish_stream', 'rsvp_event', 'publish_actions'], 'friends', function(e) {
-				if (e.success) {
-					// If successful, proceed with a publish call
-					var defaultMessage = "Check out this awesome business! I'm thinking about checking it out, who wants to go with me?";
-					var mediaUrl = "";
-					if (business.media != undefined && business.media.length > 0) {
-						mediaUrl = business.media[0].url;
-					}
-					var description = business.name + " at " + business.location.address;
-					if (business.description != undefined && business.description.length > 0) {
-						description = business.description;
-					}
-					var link = "http://www.localruckus.com/business/" + business._id.toString();
-					var fbdata = {
-						link : link,
-						name : "Local Ruckus Mobile",
-						message : defaultMessage,
-						caption : business.name,
-						picture : mediaUrl,
-						description : description
-					};
-					fb.dialog("feed", fbdata, function(e) {
-						if (e.success && e.result) {
-							Ti.API.info("Success! New Post ID: " + e.result);
-						} else {
-							if (e.error) {
-								Ti.API.info(e.error);
-							} else {
-								Ti.API.info("User canceled dialog.");
-							}
-						}
-					});
-				} else {
-					if (e.error) {
-						Ti.API.info(e.error);
-					} else {
-						Ti.API.error("Unknown result");
-					}
-				}
-			});
-		} else if (e.index == '2') {
-			if (!social.isAuthorized()) {
-				social.authorize();
-			}
-			social.share({
-				message : "Salut, Monde!",
-				success : function(e) {
-					Ti.API.error('Success!');
-				},
-				error : function(e) {
-					Ti.API.error('Error!');
-				}
-			});
-
-		}
-	});
-	dialog.show();
-	if (!fb.loggedIn) {
-		fb.authorize();
+	// var fb = require('facebook');
+	// fb.appid = Ti.App.Properties.getString('ti.facebook.appid');
+	// fb.permissions = ['read_stream'];
+	// fb.forceDialogAuth = false;
+	// fb.addEventListener('login', function(e) {
+		// if (e.success) {
+			// Ti.API.info('Logged In');
+		// } else if (e.error) {
+			// Ti.API.info(e.error);
+		// } else if (e.cancelled) {
+			// Ti.API.info('Cancelled');
+		// }
+	// });
+	// var social = require('alloy/social').create({
+		// consumerSecret : Ti.App.Properties.getString('ti.twitter.consumerSecret'),
+		// consumerKey : Ti.App.Properties.getString('ti.twitter.consumerKey')
+	// });
+	// //Ti.API.error(social);
+	// var optionsAlertOpts = {
+		// buttonNames : ['Cancel', 'Facebook'],
+		// message : "Post to Facebook?",
+		// title : 'Share this business'
+	// };
+	// var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
+	// // DIALOG EVENT CLICK
+	// dialog.addEventListener('click', function(e) {
+		// if (e.index == '1') {//Facebook button
+			// // Ask for write permission
+			// fb.reauthorize(['publish_stream', 'rsvp_event', 'publish_actions'], 'friends', function(e) {
+				// if (e.success) {
+					// // If successful, proceed with a publish call
+					// var defaultMessage = "Check out this awesome business! I'm thinking about checking it out, who wants to go with me?";
+					// var mediaUrl = "";
+					// if (business.media != undefined && business.media.length > 0) {
+						// mediaUrl = business.media[0].url;
+					// }
+					// var description = business.name + " at " + business.location.address;
+					// if (business.description != undefined && business.description.length > 0) {
+						// description = business.description;
+					// }
+					// var link = "http://www.localruckus.com/business/" + business._id.toString();
+					// var fbdata = {
+						// link : link,
+						// name : "Local Ruckus Mobile",
+						// message : defaultMessage,
+						// caption : business.name,
+						// picture : mediaUrl,
+						// description : description
+					// };
+					// fb.dialog("feed", fbdata, function(e) {
+						// if (e.success && e.result) {
+							// Ti.API.info("Success! New Post ID: " + e.result);
+						// } else {
+							// if (e.error) {
+								// Ti.API.info(e.error);
+							// } else {
+								// Ti.API.info("User canceled dialog.");
+							// }
+						// }
+					// });
+				// } else {
+					// if (e.error) {
+						// Ti.API.info(e.error);
+					// } else {
+						// Ti.API.error("Unknown result");
+					// }
+				// }
+			// });
+		// } else if (e.index == '2') {
+			// if (!social.isAuthorized()) {
+				// social.authorize();
+			// }
+			// social.share({
+				// message : "Salut, Monde!",
+				// success : function(e) {
+					// Ti.API.error('Success!');
+				// },
+				// error : function(e) {
+					// Ti.API.error('Error!');
+				// }
+			// });
+// 
+		// }
+	// });
+	// dialog.show();
+	// if (!fb.loggedIn) {
+		// fb.authorize();
+	// }
+	var defaultMessage = "Check out this cool looking business! I'm thinking about going, who wants to go with me?";
+	var link = "http://localruckus.com/business/" + data._id;
+	defaultMessage = defaultMessage + " " + link;
+	var image = "";
+	if (data.media != undefined && data.media.length > 0) {
+		image = data.media[0].url;
 	}
+	var Social = require('dk.napp.social');
+	Social.activityView({
+		text : defaultMessage,
+		image : image,
+		removeIcons : "print,copy,camera,contact"
+	}, []);
+
 }
 
 function getDirections(evt) {
