@@ -14,10 +14,11 @@
 	        </Picker>
         </Window>			
 		<View height="60dp" top="0">
-			<Label id="locationLabel" onClick="openSearchDrawer" />
+			<Label id="locationLabel" onClick="toggleSearchDrawer" />
 		</View>
 		<Window id="topDrawer" backgroundColor='red' width="Ti.UI.FILL" height = "0" top="60" opacity="0.8">
 			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL">
+				<Button onClick="changeSearchCriteria" color="white" zIndex="9999">Done</Button>
 				<TextField id="searchTerms" class="topDrawerText"/>
 				<Button width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white">***</Button>
 				<TextField id="addressTextField" class="topDrawerText" color="black"/>

@@ -37,9 +37,18 @@ function increaseRadius(e) {
 	
 }
 
-var drawerOpen = false;
-function openSearchDrawer() {
+function changeSearchCriteria(e) {
+	toggleSearchDrawer();
+	exports.loadInitialData({
+		tags : tag,
+		radius : parseInt($.radiusLabel.text) * 1609,
+		skip : 0
+	});	
+	
+}
 
+var drawerOpen = false;
+function toggleSearchDrawer() {
 	view = $.topDrawer;
 	if (drawerOpen) {
 		var slideUp = Titanium.UI.createAnimation();
