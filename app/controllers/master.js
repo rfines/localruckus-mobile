@@ -45,7 +45,7 @@ function changeSearchCriteria(e) {
 		skip : 0
 	};
 	if ($.searchTerms.value && $.searchTerms.value != '') {
-		params.keyword = $.searchTerm.value;
+		params.keyword = $.searchTerms.value;
 	} else {
 		params.tags = tag;
 	};
