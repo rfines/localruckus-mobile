@@ -4,7 +4,7 @@ function showTimePicker() {
 	var slideUp = Titanium.UI.createAnimation();
 	slideUp.height = "200";
 	slideUp.duration = 300;
-	view.open(slideUp);	
+	view.open(slideUp);
 	
 }
 function openDetail(e) {
@@ -39,11 +39,17 @@ function increaseRadius(e) {
 
 function changeSearchCriteria(e) {
 	toggleSearchDrawer();
-	exports.loadInitialData({
-		tags : tag,
+	keyword = undefined;
+	params = {
 		radius : parseInt($.radiusLabel.text) * 1609,
 		skip : 0
-	});	
+	};
+	if ($.searchTerms.value && $.searchTerms.value != '') {
+		params.keyword = $.searchTerm.value;
+	} else {
+		params.tags = tag;
+	};
+	exports.loadInitialData(params);	
 }
 
 var drawerOpen = false;
@@ -126,19 +132,11 @@ function loadFamily(e) {
 exports.loadInitialData = function(options) {
 	var moment = require('alloy/moment');
 	var options = options || {};
-	var radius = options.radius || radius;
-	var tags = options.tags || 'ENTERTAINMENT';
-	var ll = Alloy.Globals.location.coords.longitude + ',' + Alloy.Globals.location.coords.latitude;
-	var start = moment().toISOString();
-	var end = '';
-	if (options.end) {
-		end = moment(options.end).toISOString();
-	}
-	var skip = '';
-	if (options.skip) {
-		skip = options.skip;
-	}
-	api.getEvents(skip, 25, tag, radius, ll, start, end, function(err, tableData) {
+	options.radius = options.radius || radius;
+	options.tags = options.tags || 'ENTERTAINMENT';
+	options.ll = Alloy.Globals.location.coords.longitude + ',' + Alloy.Globals.location.coords.latitude;
+	options.start = options.start || moment().toISOString();
+	options.callback = function(err, tableData) {
 		if (err) {
 			Ti.API.error(err);
 			if(options.error){
@@ -153,9 +151,8 @@ exports.loadInitialData = function(options) {
 				options.success(tableData);
 			}
 		}
-
-	});
-
+	};
+	api.getEvents(options);
 };
 $.master.open();
 function myLoader(e) {
@@ -182,12 +179,7 @@ function loadMore(e) {
 		skip : skipNum,
 		success : function(data) {
 			$.table.appendRow(data);
-			if (data.length == 25) {
-				el.success();
-			} else {
-				el.done();
-			}
-
+			(data.length == 25) ? el.success() : el.done();
 		},
 		error : function() {
 			el.error();
