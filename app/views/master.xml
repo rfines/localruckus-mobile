@@ -35,23 +35,24 @@
 				<Label id="terms" class="terms" text="Terms of use" color="silver" onClick="terms"/>
 				<Label id="privacy" class="privacy" text="Privacy Policy" color="silver" onClick="privacy"/>
 			</View>
+
 		</Window>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
 			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMore" />		
 		</TableView>
 		<Toolbar platform="ios" bottom="0" height="60dp">
-            <Items>
-                    <Button onClick="loadEntertainment">Entertainment</Button>
-                    <FlexSpace/>
-                    <Button onClick="loadMusic">Music</Button>
-                    <FlexSpace/>
-                    <Button onClick="loadArts">Arts</Button>
-                    <FlexSpace/>
-                    <Button onClick="loadFamily">Family</Button>
-                    <FlexSpace/>                                
-                    <Button onClick="loadFood">Food</Button>
-            </Items>
-        </Toolbar>        
+			<Items>
+				<Button onClick="loadEntertainment">Entertainment</Button>
+				<FlexSpace/>
+				<Button onClick="loadMusic">Music</Button>
+				<FlexSpace/>
+				<Button onClick="loadArts">Arts</Button>
+				<FlexSpace/>
+				<Button onClick="loadFamily">Family</Button>
+				<FlexSpace/>
+				<Button onClick="loadFood">Food</Button>
+			</Items>
+		</Toolbar>
 	</Window>
 </Alloy>

@@ -139,7 +139,7 @@ exports.loadInitialData = function(options) {
 	options.callback = function(err, tableData) {
 		if (err) {
 			Ti.API.error(err);
-			if(options.error){
+			if (options.error) {
 				options.error(err);
 			}
 		} else {
@@ -186,9 +186,46 @@ function loadMore(e) {
 		}
 	});
 }
-function addContent(evt){
-	controller = Alloy.createController('externalLinks');
-	d = controller.getView();
-	controller.setBoxerStats(e.rowData.eventData);
-	d.open();
+
+function addContent(evt) {
+	
+	var popup = Ti.UI.createAlertDialog({
+		title : "Add Event?",
+		backgroundColor : 'white',
+		buttonNames : ['Cancel', 'OK'],
+		exitOnCLose : true,
+		fullscreen : false,
+		message : "Local Ruckus is powered by the Hoopla.io event platform, click 'OK' to enter your event for free."
+	});
+	popup.addEventListener('click', function(e) {
+		if (e.index === e.source.cancel) {
+			Ti.API.info('The cancel button was clicked');
+			popup.hide();
+		}else if(e.index === 1){
+			popup.hide();
+			Titanium.Platform.openURL("https://www.hoopla.io");
+		}
+		Ti.API.info('e.cancel: ' + e.cancel);
+		Ti.API.info('e.source.cancel: ' + e.source.cancel);
+		Ti.API.info('e.index: ' + e.index);
+	});
+	popup.show();
+
+}
+
+function privacy(evt) {
+	controller = Alloy.createController('privacy');
+	controller.openPrivacy();
+}
+
+function terms(evt) {
+	controller = Alloy.createController('terms');
+	controller.openTerms();
+}
+
+function suggestContent(evt) {
+	var emailDialog = Ti.UI.createEmailDialog();
+	emailDialog.subject = "Event/Business Suggestion";
+	emailDialog.toRecipients = ['info@localruckus.com'];
+	emailDialog.open();
 }

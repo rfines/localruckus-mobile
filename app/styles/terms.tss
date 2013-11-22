@@ -1,0 +1,25 @@
+
+".container" : {
+  	fontSize:8,
+	textAlign:"center",
+  
+}
+"#terms":{
+	fontSize:8,
+  	textAlign:"center"
+}
+".buttons":{
+	top:10,
+	bottom:10,
+
+}
+".heading":{
+	bottom:5,
+	fontSize:12,
+	fontWeight:'bold'
+}
+".body":{
+	bottom:5,
+	fontSize:8,
+	fontWeight:'normal'
+}
