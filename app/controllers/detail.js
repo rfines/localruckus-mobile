@@ -66,19 +66,19 @@ function moreInfo(evt) {
 
 function callEvent(evt) {
 	var url = 'tel:' + data.contactPhone;
-	var win = Titanium.UI.currentWindow;
 	var optionsAlertOpts = {
 		buttonNames : ['Cancel', 'Call'],
 		message : "Would you like to call now?",
 		title : 'Call Contact Number'
 	};
-	var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts).show();
+	var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
 	// DIALOG EVENT CLICK
 	dialog.addEventListener('click', function(e) {
 		if (e.index == '1') {
 			Titanium.Platform.openURL(url);
 		}
 	});
+	dialog.show();
 }
 
 function buyTickets(evt) {

@@ -1,6 +1,4 @@
-api = require('utils/lrApiCall');
-api.hello();
-
+var api = require('utils/lrApiCall');
 function openDetail(e) {
 	controller = Alloy.createController('detail');
 	d = controller.getView();
@@ -9,26 +7,27 @@ function openDetail(e) {
 }
 
 var drawerOpen = false;
-function openSearchDrawer() {	
+function openSearchDrawer() {
 
 	view = $.topDrawer;
 	if (drawerOpen) {
 		var slideUp = Titanium.UI.createAnimation();
-	    slideUp.height = "0";
-	    slideUp.duration = 300;
+		slideUp.height = "0";
+		slideUp.duration = 300;
 		view.close(slideUp);
 	} else {
 		var slideDown = Titanium.UI.createAnimation();
-	    slideDown.height = Ti.UI.FILL;
-	    slideDown.duration = 300;
+		slideDown.height = Ti.UI.FILL;
+		slideDown.duration = 300;
 		view.open(slideDown);
 	}
 	drawerOpen = !drawerOpen;
 
 }
-var tag="ENTERTAINMENT";
+
+var tag = "ENTERTAINMENT";
 var reset = false;
-var page=0;
+var page = 0;
 var radius = 10000;
 function loadEntertainment(e) {
 	page = 0;
@@ -36,7 +35,7 @@ function loadEntertainment(e) {
 	exports.loadInitialData({
 		tags : 'ENTERTAINMENT',
 		radius : radius,
-		skip:0
+		skip : 0
 	});
 }
 
@@ -47,9 +46,9 @@ function loadFood(e) {
 	exports.loadInitialData({
 		tags : tag,
 		radius : radius,
-		skip:0
+		skip : 0
 	});
-	
+
 }
 
 function loadMusic(e) {
@@ -59,7 +58,7 @@ function loadMusic(e) {
 	exports.loadInitialData({
 		tags : tag,
 		radius : radius,
-		skip:0
+		skip : 0
 	});
 }
 
@@ -70,7 +69,7 @@ function loadArts(e) {
 	exports.loadInitialData({
 		tags : tag,
 		radius : radius,
-		skip:0
+		skip : 0
 	});
 }
 
@@ -81,55 +80,43 @@ function loadFamily(e) {
 	exports.loadInitialData({
 		tags : tag,
 		radius : radius,
-		skip:0
+		skip : 0
 	});
 }
 
 exports.loadInitialData = function(options) {
-	var data = [];
 	var moment = require('alloy/moment');
 	var options = options || {};
 	var radius = options.radius || radius;
 	var tags = options.tags || 'ENTERTAINMENT';
 	var ll = Alloy.Globals.location.coords.longitude + ',' + Alloy.Globals.location.coords.latitude;
 	var start = moment().toISOString();
-	var skip='';
-	if(options.skip){
+	var end = '';
+	if (options.end) {
+		end = moment(options.end).toISOString();
+	}
+	var skip = '';
+	if (options.skip) {
 		skip = options.skip;
 	}
-	var url = "http://api-stage.hoopla.io/event?ll=" + ll + "&radius=" + radius + "&tags=" + tags + "&height=150&imageType=circle&width=150&start=" + start+"&limit=25&skip="+skip;
-	var xhr = Ti.Network.createHTTPClient({
-		onload : function(e) {
-			data = JSON.parse(this.responseText);
-			var tableData = [];
-			for (var i = 0; i < data.length; i++) {
-				item = data[i];
-				tableData.push(Alloy.createController('row', {
-					eventData : item,
-					name : item.name
-				}).getView());
+	api.getEvents(skip, 25, tag, radius, ll, start, end, function(err, tableData) {
+		if (err) {
+			Ti.API.error(err);
+			if(options.error){
+				options.error(err);
 			}
+		} else {
 			$.locationLabel.text = Alloy.Globals.reverseLocation.places[0].city + ', ' + Alloy.Globals.reverseLocation.places[0].zipcode;
 			$.addressTextField.value = Alloy.Globals.reverseLocation.places[0].address;
-			
-			if(!options.skip){
+			if (!options.skip) {
 				$.table.setData(tableData);
-			}else if(options.success){
+			} else if (options.success) {
 				options.success(tableData);
 			}
-		},
-		onerror : function(e) {
-			Ti.API.error(e);
-			if(options.error){
-				options.error();
-			}
 		}
+
 	});
-	Ti.API.error("Sending xhr request");
-	xhr.open("GET", url);
-	xhr.setTimeout(30000);
-	xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
-	xhr.send();
+
 };
 $.master.open();
 function myLoader(e) {
@@ -140,29 +127,30 @@ function myLoader(e) {
 		success : function() {
 			el.hide();
 		},
-		error : function(){
+		error : function() {
 			el.hide();
 		}
 	});
 }
-function loadMore(e){
+
+function loadMore(e) {
 	var el = e;
-	page = page+1;
-	var skipNum=page*25;
+	page = page + 1;
+	var skipNum = page * 25;
 	exports.loadInitialData({
 		tags : tag,
 		radius : radius,
-		skip:skipNum,
+		skip : skipNum,
 		success : function(data) {
 			$.table.appendRow(data);
-			if(data.length == 25){
+			if (data.length == 25) {
 				el.success();
-			}else{
+			} else {
 				el.done();
 			}
-			
+
 		},
-		error : function(){
+		error : function() {
 			el.error();
 		}
 	});
