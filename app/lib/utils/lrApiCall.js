@@ -3,7 +3,7 @@ exports.hello = function() {
 };
 exports.getEvents = function(skip, limit, tag, radius, ll, start, end, callback){
 	var data = [];
-	var url = "http://api-stage.hoopla.io/event?ll=" + ll + "&radius=" + radius + "&tags=" + tag + "&height=150&imageType=circle&width=150&start=" + start+"&end=" + end + "&limit=25&skip="+skip;
+	var url = Alloy.Globals.baseUrl + "/event?ll=" + ll + "&radius=" + radius + "&tags=" + tag + "&height=150&imageType=circle&width=150&start=" + start+"&end=" + end + "&limit=25&skip="+skip;
 	var xhr = Ti.Network.createHTTPClient({
 		onload : function(e) {
 			data = JSON.parse(this.responseText);

@@ -44,7 +44,6 @@ function changeSearchCriteria(e) {
 		radius : parseInt($.radiusLabel.text) * 1609,
 		skip : 0
 	});	
-	
 }
 
 var drawerOpen = false;

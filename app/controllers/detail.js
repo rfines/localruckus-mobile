@@ -198,7 +198,7 @@ function getDirections(evt) {
 }
 
 function getBusiness(id, callback) {
-	var url = "http://api-stage.hoopla.io/business/" + id;
+	var url = Alloy.Globals.baseUrl + "/business/" + id;
 	var xhr = Ti.Network.createHTTPClient({
 		onload : function(e) {
 			data = JSON.parse(this.responseText);
