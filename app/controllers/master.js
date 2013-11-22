@@ -186,3 +186,9 @@ function loadMore(e) {
 		}
 	});
 }
+function addContent(evt){
+	controller = Alloy.createController('externalLinks');
+	d = controller.getView();
+	controller.setBoxerStats(e.rowData.eventData);
+	d.open();
+}

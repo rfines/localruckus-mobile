@@ -22,12 +22,18 @@
 				<TextField id="searchTerms" class="topDrawerText" color="black"/>
 				<Button width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white">***</Button>
 				<TextField id="addressTextField" class="topDrawerText" color="black"/>
+
 				<View layout="horizontal" top="100">
 					<Button onClick="decreaseRadius">-</Button>
 					<Label id="radiusLabel" color="white" width="20">10</Label>
 					<Button onClick="increaseRadius">+</Button>	
 					<Button onClick="showTimePicker">Any Time</Button>
 				</View>						
+
+				<Label id="addContent" class="addContent" text="Add Event to Local Ruckus" color="silver" onClick="addContent"/>
+				<Label id="suggestContent" class="suggestContent" text="Suggest a Business or Event" color="silver" onClick="suggestContent"/>
+				<Label id="terms" class="terms" text="Terms of use" color="silver" onClick="terms"/>
+				<Label id="privacy" class="privacy" text="Privacy Policy" color="silver" onClick="privacy"/>
 			</View>
 		</Window>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
