@@ -178,12 +178,12 @@ function share(evt) {
 	// fb.authorize();
 	// }
 	var defaultMessage = "Check out this awesome event! I'm thinking about going, who wants to go with me?";
-	var link = "http://localruckus.com/event/"+data._id;
-	defaultMessage = defaultMessage + " "+link;
+	var link = "http://localruckus.com/event/" + data._id;
+	defaultMessage = defaultMessage + " " + link;
 	var image = "";
-	if(data.media!=undefined && data.media.length >0){
+	if (data.media != undefined && data.media.length > 0) {
 		image = data.media[0].url;
-	}	
+	}
 	var Social = require('dk.napp.social');
 	Social.activityView({
 		text : defaultMessage,
@@ -216,7 +216,6 @@ function getBusiness(id, callback) {
 }
 
 function setWindow(eventData, business) {
-	Ti.API.error(business);
 	var win = $.myWindow;
 	var buttons = [];
 	var d = eventData.description || "No description provided.";
@@ -235,9 +234,7 @@ function setWindow(eventData, business) {
 	$.name.text = eventData.name;
 	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar() + " until " + moment(eventData.nextOccurrence.end).utc().format("h:mm a");
 	$.businessName.text = business.name;
-	//
-	Ti.API.error(eventData);
-	//Toolbar buttons
+	
 	if (eventData.website != undefined && eventData.website.length > 0) {
 		var webBtn = Ti.UI.createButton({
 			title : "More Info",
@@ -276,13 +273,6 @@ function setWindow(eventData, business) {
 		borderBottom : false
 	});
 	win.add(toolbar);
-	/*win.setToolbar(buttons, {
-	 animated : true,
-	 barColor : 'black',
-	 tintColor : 'white',
-	 id : "detailToolbar"
-	 });
-	 */
 
 	var loc = Ti.Map.createAnnotation({
 		latitude : eventData.location.geo.coordinates[1],
@@ -299,20 +289,19 @@ function setWindow(eventData, business) {
 		animate : true,
 		regionFit : true,
 		userLocation : true
+
 	});
 	$.mapView = map;
-	//Alloy.Globals.location.coords.latitude, longitude:Alloy.Globals.coords.location.longitude
+	
 	$.mapview.region = {
-		latitude : Alloy.Globals.location.coords.latitude,
-		longitude : Alloy.Globals.location.coords.longitude,
+		latitude : eventData.location.geo.coordinates[1],
+		longitude : eventData.location.geo.coordinates[0],
 		latitudeDelta : 0.01,
 		longitudeDelta : 0.01
 	};
-	// Handle click events on any annotations on this map.
 	$.mapview.addEventListener('click', function(evt) {
 		Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
-		// Check for all of the possible names that clicksouce
-		// can report for the left button/view.
+		
 		if (evt.clicksource == 'leftButton' || evt.clicksource == 'leftPane' || evt.clicksource == 'leftView') {
 			Ti.API.info("Annotation " + evt.title + ", left button clicked.");
 		}

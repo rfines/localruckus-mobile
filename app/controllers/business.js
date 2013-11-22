@@ -66,8 +66,8 @@ exports.setBusinessInfo = function(bus) {
 		$.mapView = map;
 
 		$.mapview.region = {
-			latitude : Alloy.Globals.location.coords.latitude,
-			longitude : Alloy.Globals.location.coords.longitude,
+			latitude : bus.location.geo.coordinates[1],
+			longitude : bus.location.geo.coordinates[0],
 			latitudeDelta : 0.01,
 			longitudeDelta : 0.01
 		};
