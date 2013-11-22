@@ -10,7 +10,7 @@
         	</View>
     		<Label id="businessName" onClick="showBusinessDetails" />
     		<Label id="location" class="location" onClick="getDirections"/>        	
-        	<ImageView id="detailImage"></ImageView>
+        	<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"></ImageView>
         	<Label id="descriptionView" height="Ti.UI.FILL"></Label>
 		</ScrollView>
 	</Window>

@@ -1,7 +1,7 @@
 <Alloy>
 	<Window layout="vertical" id="myWindow">
 		<Button onClick="backToList" height="50dp" right="20dp" top="8dp">Back</Button>
-		<ImageView id="detailImage" height="100"></ImageView>
+		<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"></ImageView>
 		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" height="150" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
         <ScrollView layout="vertical">
