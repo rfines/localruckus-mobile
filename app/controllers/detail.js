@@ -5,7 +5,7 @@ function backToList() {
 var data = {};
 var business = {};
 var moment = require('alloy/moment');
-exports.setBoxerStats = function(eventData) {
+exports.setEvent = function(eventData) {
 	data = eventData;
 	if (OS_ANDROID) {
 		$.name.text = 'Name: ' + eventData.name;

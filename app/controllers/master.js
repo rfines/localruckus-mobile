@@ -10,7 +10,7 @@ function showTimePicker() {
 function openDetail(e) {
 	controller = Alloy.createController('detail');
 	d = controller.getView();
-	controller.setBoxerStats(e.rowData.eventData);
+	controller.setEvent(e.rowData.eventData);
 	d.open();
 }
 
