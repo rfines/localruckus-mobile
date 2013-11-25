@@ -1,4 +1,4 @@
- function backToList() {
+function backToList() {
 	$.myWindow.close();
 }
 
@@ -198,7 +198,7 @@ function getDirections(evt) {
 }
 
 function getBusiness(id, callback) {
-	var url = Alloy.Globals.baseUrl + "/business/" + id+"?height=150&width=150&imageType=circle";
+	var url = Alloy.Globals.baseUrl + "/business/" + id + "?height=150&width=150&imageType=circle";
 	var xhr = Ti.Network.createHTTPClient({
 		onload : function(e) {
 			data = JSON.parse(this.responseText);
@@ -229,13 +229,13 @@ function setWindow(eventData, business) {
 	var regex2 = /<(p|\/p)>/gi;
 	var regex3 = /<(span|\/span)>/gi;
 	var removeBoldItalics = /<(em|\/em|strong|\/strong)>/gi;
-	var newstr = d.replace('&nbsp;', ' ').replace(regex1, "\n").replace(regex2, "\n\n").replace(regex3,"\n").replace(removeBoldItalics, "");
+	var newstr = d.replace('&nbsp;', ' ').replace(regex1, "\n").replace(regex2, "\n\n").replace(regex3, "\n").replace(removeBoldItalics, "");
 	$.descriptionView.setText(newstr);
 	$.location.text = l;
 	$.name.text = eventData.name;
 	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar() + " until " + moment(eventData.nextOccurrence.end).utc().format("h:mm a");
 	$.businessName.text = business.name;
-	
+
 	if (eventData.website != undefined && eventData.website.length > 0) {
 		var webBtn = Ti.UI.createButton({
 			title : "More Info",
@@ -293,7 +293,7 @@ function setWindow(eventData, business) {
 
 	});
 	$.mapView = map;
-	
+
 	$.mapview.region = {
 		latitude : eventData.location.geo.coordinates[1],
 		longitude : eventData.location.geo.coordinates[0],
@@ -302,7 +302,7 @@ function setWindow(eventData, business) {
 	};
 	$.mapview.addEventListener('click', function(evt) {
 		Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
-		
+
 		if (evt.clicksource == 'leftButton' || evt.clicksource == 'leftPane' || evt.clicksource == 'leftView') {
 			Ti.API.info("Annotation " + evt.title + ", left button clicked.");
 		}
