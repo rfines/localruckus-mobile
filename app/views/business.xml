@@ -1,18 +1,18 @@
 <Alloy>
-	<Window layout="vertical" id="myWindow">
+	<Window id="businessWindow" height="Ti.UI.FILL">
 		<Button onClick="backToList" height="50dp" right="20dp" top="8dp">Back</Button>
-		<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"></ImageView>
-		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" height="150" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
-        </View>
-        <ScrollView layout="vertical">
-        	<View id="nameView" layout="vertical">
-        		<Label id="name" class="name"/>
-        	</View>
-        	<View id="locationView" layout="vertical">
-        		<Label id="location" class="location" onClick="getDirections"/>
-        	</View>
-        	<WebView id="descriptionView" layout="vertical" backgroundColor="transparent">
-			</WebView>
+		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="150dp" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+        </View> 
+		<ScrollView height="Ti.UI.FILL" top="210dp" layout="vertical">
+			<View id="nameView" layout="vertical">
+				<Label id="name" class="name"/>
+			</View>
+			<View id="locationView" layout="vertical">
+				<Label id="location" class="location" onClick="getDirections"/>
+			</View>
+			<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"/>
+			<Label id="descriptionView" height="Ti.UI.FILL"></Label>
 		</ScrollView>
+		
 	</Window>
 </Alloy>

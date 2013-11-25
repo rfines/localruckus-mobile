@@ -15,18 +15,6 @@
     color:'686767'
 }
 
-
-
-
-"#categoryNav label" : {
-	width: "25%"
-}
-"#categoryNav #entertainment" : {
-	left: "0"
-}
-"#categoryNav #food" : {
-	left: "25%"
-}
 "#location":{
 font: {
 		fontFamily: 'HelveticaNeue-Light',

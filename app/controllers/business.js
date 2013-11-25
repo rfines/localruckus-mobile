@@ -1,12 +1,13 @@
+var api = require('utils/lrApiCall');
 var business = {};
 var buttons = [];
 function backToList() {
-	$.myWindow.close();
+	$.businessWindow.close();
 }
 
 exports.setBusinessInfo = function(bus) {
 	business = bus;
-	var win = $.myWindow;
+	var win = $.businessWindow;
 	if (OS_ANDROID) {
 		$.name.text = 'Name: ' + bus.name;
 	} else {
@@ -43,12 +44,20 @@ exports.setBusinessInfo = function(bus) {
 		});
 		shareBtn.addEventListener('click', share);
 		buttons.push(shareBtn);
-		win.setToolbar(buttons, {
-			animated : true,
-			barColor : 'black',
-			tintColor : 'lime',
-			id : "detailToolbar"
+		var eventBtn = Ti.UI.createButton({
+			title : "Events",
+			id : "eventsBtn"
 		});
+		eventBtn.addEventListener('click', businessEvents);
+		buttons.push(eventBtn);
+		var toolbar = Ti.UI.iOS.createToolbar({
+			items : buttons,
+			bottom : 0,
+			borderTop : true,
+			borderBottom : false
+		});
+		win.add(toolbar);
+		Ti.API.error(toolbar.items.length);
 
 		var loc = Ti.Map.createAnnotation({
 			latitude : bus.location.geo.coordinates[1],
@@ -83,8 +92,26 @@ exports.setBusinessInfo = function(bus) {
 			}
 		});
 		$.mapview.addAnnotation(loc);
+
 	}
 };
+function businessEvents(evt) {
+	var options = {
+		id : bus._id,
+		callback : function(err, data) {
+			if (err && err.length > 0) {
+				Ti.API.error(err);
+			} else {
+				controller = Alloy.createController('businessEvents');
+				d = controller.getView();
+				controller.setBusinesEvents(data, bus);
+				d.open();
+			}
+		}
+	};
+	api.getBusinessEvents(options);
+}
+
 function doClick(evt) {
 	Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
 	if (evt.clicksource == 'leftButton' || evt.clicksource == 'leftPane' || evt.clicksource == 'leftView') {
@@ -121,88 +148,88 @@ function share(evt) {
 	// fb.permissions = ['read_stream'];
 	// fb.forceDialogAuth = false;
 	// fb.addEventListener('login', function(e) {
-		// if (e.success) {
-			// Ti.API.info('Logged In');
-		// } else if (e.error) {
-			// Ti.API.info(e.error);
-		// } else if (e.cancelled) {
-			// Ti.API.info('Cancelled');
-		// }
+	// if (e.success) {
+	// Ti.API.info('Logged In');
+	// } else if (e.error) {
+	// Ti.API.info(e.error);
+	// } else if (e.cancelled) {
+	// Ti.API.info('Cancelled');
+	// }
 	// });
 	// var social = require('alloy/social').create({
-		// consumerSecret : Ti.App.Properties.getString('ti.twitter.consumerSecret'),
-		// consumerKey : Ti.App.Properties.getString('ti.twitter.consumerKey')
+	// consumerSecret : Ti.App.Properties.getString('ti.twitter.consumerSecret'),
+	// consumerKey : Ti.App.Properties.getString('ti.twitter.consumerKey')
 	// });
 	// //Ti.API.error(social);
 	// var optionsAlertOpts = {
-		// buttonNames : ['Cancel', 'Facebook'],
-		// message : "Post to Facebook?",
-		// title : 'Share this business'
+	// buttonNames : ['Cancel', 'Facebook'],
+	// message : "Post to Facebook?",
+	// title : 'Share this business'
 	// };
 	// var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
 	// // DIALOG EVENT CLICK
 	// dialog.addEventListener('click', function(e) {
-		// if (e.index == '1') {//Facebook button
-			// // Ask for write permission
-			// fb.reauthorize(['publish_stream', 'rsvp_event', 'publish_actions'], 'friends', function(e) {
-				// if (e.success) {
-					// // If successful, proceed with a publish call
-					// var defaultMessage = "Check out this awesome business! I'm thinking about checking it out, who wants to go with me?";
-					// var mediaUrl = "";
-					// if (business.media != undefined && business.media.length > 0) {
-						// mediaUrl = business.media[0].url;
-					// }
-					// var description = business.name + " at " + business.location.address;
-					// if (business.description != undefined && business.description.length > 0) {
-						// description = business.description;
-					// }
-					// var link = "http://www.localruckus.com/business/" + business._id.toString();
-					// var fbdata = {
-						// link : link,
-						// name : "Local Ruckus Mobile",
-						// message : defaultMessage,
-						// caption : business.name,
-						// picture : mediaUrl,
-						// description : description
-					// };
-					// fb.dialog("feed", fbdata, function(e) {
-						// if (e.success && e.result) {
-							// Ti.API.info("Success! New Post ID: " + e.result);
-						// } else {
-							// if (e.error) {
-								// Ti.API.info(e.error);
-							// } else {
-								// Ti.API.info("User canceled dialog.");
-							// }
-						// }
-					// });
-				// } else {
-					// if (e.error) {
-						// Ti.API.info(e.error);
-					// } else {
-						// Ti.API.error("Unknown result");
-					// }
-				// }
-			// });
-		// } else if (e.index == '2') {
-			// if (!social.isAuthorized()) {
-				// social.authorize();
-			// }
-			// social.share({
-				// message : "Salut, Monde!",
-				// success : function(e) {
-					// Ti.API.error('Success!');
-				// },
-				// error : function(e) {
-					// Ti.API.error('Error!');
-				// }
-			// });
-// 
-		// }
+	// if (e.index == '1') {//Facebook button
+	// // Ask for write permission
+	// fb.reauthorize(['publish_stream', 'rsvp_event', 'publish_actions'], 'friends', function(e) {
+	// if (e.success) {
+	// // If successful, proceed with a publish call
+	// var defaultMessage = "Check out this awesome business! I'm thinking about checking it out, who wants to go with me?";
+	// var mediaUrl = "";
+	// if (business.media != undefined && business.media.length > 0) {
+	// mediaUrl = business.media[0].url;
+	// }
+	// var description = business.name + " at " + business.location.address;
+	// if (business.description != undefined && business.description.length > 0) {
+	// description = business.description;
+	// }
+	// var link = "http://www.localruckus.com/business/" + business._id.toString();
+	// var fbdata = {
+	// link : link,
+	// name : "Local Ruckus Mobile",
+	// message : defaultMessage,
+	// caption : business.name,
+	// picture : mediaUrl,
+	// description : description
+	// };
+	// fb.dialog("feed", fbdata, function(e) {
+	// if (e.success && e.result) {
+	// Ti.API.info("Success! New Post ID: " + e.result);
+	// } else {
+	// if (e.error) {
+	// Ti.API.info(e.error);
+	// } else {
+	// Ti.API.info("User canceled dialog.");
+	// }
+	// }
+	// });
+	// } else {
+	// if (e.error) {
+	// Ti.API.info(e.error);
+	// } else {
+	// Ti.API.error("Unknown result");
+	// }
+	// }
+	// });
+	// } else if (e.index == '2') {
+	// if (!social.isAuthorized()) {
+	// social.authorize();
+	// }
+	// social.share({
+	// message : "Salut, Monde!",
+	// success : function(e) {
+	// Ti.API.error('Success!');
+	// },
+	// error : function(e) {
+	// Ti.API.error('Error!');
+	// }
+	// });
+	//
+	// }
 	// });
 	// dialog.show();
 	// if (!fb.loggedIn) {
-		// fb.authorize();
+	// fb.authorize();
 	// }
 	var defaultMessage = "Check out this cool looking business! I'm thinking about going, who wants to go with me?";
 	var link = "http://localruckus.com/business/" + data._id;
@@ -222,4 +249,11 @@ function share(evt) {
 
 function getDirections(evt) {
 	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + business.location.geo.coordinates[1] + "," + business.location.geo.coordinates[0]);
+}
+
+function openDetail(e) {
+	controller = Alloy.createController('detail');
+	d = controller.getView();
+	controller.setEvent(e.rowData.eventData);
+	d.open();
 }

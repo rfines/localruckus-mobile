@@ -35,3 +35,33 @@ exports.getEvents = function(options) {
 	xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
 	xhr.send();
 };
+exports.getBusinessEvents = function(options){
+	options.height = options.height || 150;
+	options.width = options.width || 150;
+	options.imageType = 'circle';
+	var url = Alloy.Globals.baseUrl + "/business/" +options.id+"/events?height=150&width=150&imageType=circle"; 
+	var xhr = Ti.Network.createHTTPClient({
+		onload : function(e) {
+			var data = JSON.parse(this.responseText);
+			var tableData = [];
+			for (var i = 0; i < data.length; i++) {
+				item = data[i];
+				tableData.push(Alloy.createController('row', {
+					eventData : item,
+					name : item.name
+				}).getView());
+			}
+			options.callback(undefined, tableData);
+		},
+		onerror : function(e) {
+			Ti.API.error(e);
+			Ti.API.error(e.source);
+			options.callback(e,undefined);
+		}
+	});
+	Ti.API.error("Sending xhr request to get business Events");
+	xhr.open("GET", url);
+	xhr.setTimeout(30000);
+	xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
+	xhr.send();
+};
