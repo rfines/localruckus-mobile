@@ -1,6 +1,8 @@
 var api = require('utils/lrApiCall');
 var geo = require('utils/geoCoder');
-
+var moment = require('alloy/moment');
+	
+Alloy.Globals.timeFrame = {start: moment().startOf('day')};;
 exports.initialStateNoLocation = function() {
 	toggleSearchDrawer();
 };
@@ -11,7 +13,34 @@ function showTimePicker() {
 	slideUp.height = "200";
 	slideUp.duration = 300;
 	view.open(slideUp);
-	
+}
+function changeTime(e) {
+	switch (e.selectedValue[0]){
+		case "Any Time": 
+			Alloy.Globals.timeFrame = {start: moment().startOf('day')};
+			break;
+		case "Today": 
+			Alloy.Globals.timeFrame = {start: moment().startOf('day'), end : moment().endOf('day')};
+			break;
+		case "Tomorrow": 
+			Alloy.Globals.timeFrame = {start: moment().startOf('day').add('days',1), end : moment().endOf('day').add('days',1)};
+			break;
+		case "This Weekend": 
+			Alloy.Globals.timeFrame = {start: moment().day(5).startOf('day'), end : moment().day(7).endOf('day')};
+			break;
+		case "Next Week": 
+			Alloy.Globals.timeFrame = {start: moment().startOf('week').add('weeks',1).add('days',1), end : moment().endOf('week').add('weeks', 1).add('days',1)};
+			break;
+		case "Next Weekend": 
+			Alloy.Globals.timeFrame = {start: moment().day(5).startOf('day').add('weeks',1), end : moment().day(7).endOf('day').add('weeks',1)};
+			break;
+		case "Later": 
+			Alloy.Globals.timeFrame = {start: moment().startOf('day').day(1).add('weeks',2)};
+			break;														
+		default : 
+			Alloy.Globals.timeFrame = {start: moment().startOf('day')};
+	}
+	alert(Alloy.Globals.timeFrame.start);	
 }
 function openDetail(e) {
 	controller = Alloy.createController('detail');
@@ -93,6 +122,7 @@ var drawerOpen = false;
 function toggleSearchDrawer() {
 	view = $.topDrawer;
 	if (drawerOpen) {
+		$.timePicker.close();
 		var slideUp = Titanium.UI.createAnimation();
 		slideUp.height = "0";
 		slideUp.duration = 300;
@@ -168,12 +198,14 @@ function loadFamily(e) {
 
 exports.loadInitialData = function(options) {
 	Alloy.Globals.startWaiting();
-	var moment = require('alloy/moment');
 	var options = options || {};
 	options.radius = options.radius || radius;
 	options.tags = options.tags || 'ENTERTAINMENT';
 	options.ll = Alloy.Globals.location.coords.longitude + ',' + Alloy.Globals.location.coords.latitude;
-	options.start = options.start || moment().toISOString();
+	options.start = options.start || Alloy.Globals.timeFrame.start.toISOString();
+	if (options.end || Alloy.Globals.timeFrame.end) {
+		options.end = options.end || Alloy.Globals.timeFrame.end.toISOString();
+	}
 	options.callback = function(err, tableData) {
 		if (err) {
 			Ti.API.error(err);

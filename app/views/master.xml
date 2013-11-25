@@ -1,15 +1,15 @@
 <Alloy>
 	<Window class="eventList" title="Local Ruckus">
 		<Window id="timePicker" bottom="0" selectionIndicator="true" useSpinner="true" height="0" opacity="1.0" backgroundColor="white" zIndex="999">
-			<Picker id="picker" width="Ti.UI.FILL" height="Ti.UI.FILL">
+			<Picker id="picker" width="Ti.UI.FILL" height="Ti.UI.FILL" onChange="changeTime">
 				<PickerColumn id="column1">
-					<PickerRow title="Any Time"/>
-					<PickerRow title="Today"/>
-					<PickerRow title="Tomorrow"/>
-					<PickerRow title="This Weekend"/>
-					<PickerRow title="Next Week"/>
-					<PickerRow title="Next Weekend"/>
-					<PickerRow title="Later"/>
+					<PickerRow title="Any Time" value="Any Time"/>
+					<PickerRow title="Today" value="Today"/>
+					<PickerRow title="Tomorrow" value="Tomorrow"/>
+					<PickerRow title="This Weekend" value = "This Weekend"/>
+					<PickerRow title="Next Week" value = "Next Week"/>
+					<PickerRow title="Next Weekend" value="Next Weekend"/>
+					<PickerRow title="Later" value="Later"/>
 				</PickerColumn>
 			</Picker>
 		</Window>
