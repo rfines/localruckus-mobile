@@ -1,4 +1,10 @@
 var api = require('utils/lrApiCall');
+var geo = require('utils/geoCoder');
+
+exports.initialStateNoLocation = function() {
+	toggleSearchDrawer();
+};
+
 function showTimePicker() {
 	view = $.timePicker;
 	var slideUp = Titanium.UI.createAnimation();
@@ -37,28 +43,36 @@ function increaseRadius(e) {
 }
 
 var newAddress = undefined;
+var myLocation = true;
 function changeAddress(e) {
 	newAddress = $.addressTextField.value;
+	myLocation = false;
+}
+
+function myLocation(e) {
+	myLocation = true;
 }
 
 function changeSearchCriteria(e) {
 	toggleSearchDrawer();
+	var failure = function() {
+		alert('Could not get your location');
+	};
+	var success = function() {
+		keyword = undefined;
+		params = {
+			radius : parseInt($.radiusLabel.text) * 1609,
+			skip : 0
+		};
+		if ($.searchTerms.value && $.searchTerms.value != '') {
+			params.keyword = $.searchTerms.value;
+		} else {
+			params.tags = tag;
+		};
+		exports.loadInitialData(params);
+	};
 	if (newAddress) {
-		Titanium.Geolocation.forwardGeocoder(newAddress, function(forwardGeocoderResponse) {
-			Alloy.Globals.location.coords.longitude = forwardGeocoderResponse.longitude;
-			Alloy.Globals.location.coords.latitude = forwardGeocoderResponse.latitude;
-			keyword = undefined;
-			params = {
-				radius : parseInt($.radiusLabel.text) * 1609,
-				skip : 0
-			};
-			if ($.searchTerms.value && $.searchTerms.value != '') {
-				params.keyword = $.searchTerms.value;
-			} else {
-				params.tags = tag;
-			};
-			exports.loadInitialData(params);		
-		});	
+		geo.customLocation(newAddress, failure, success);
 	}
 }
 
