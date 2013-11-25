@@ -41,9 +41,9 @@ font: {
 	color:'#686767'
 }
 "#descriptionView":{
+	textAlign:"left",
 	font: {
-		fontFamily: 'HelveticaNeue-Medium',
-		fontSize:'11dp'
+		fontFamily: 'HelveticaNeue-Light'
 	},
-	color:'red'
+	color:'686767'
 }

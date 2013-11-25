@@ -14,7 +14,7 @@
 			</Picker>
 		</Window>
 		<View height="60dp" top="0">
-			<Label id="locationLabel" onClick="toggleSearchDrawer" />
+			<Label id="locationLabel" onClick="toggleSearchDrawer" color="#c4d82d"/>
 		</View>
 		<Window id="topDrawer" backgroundColor='red' width="Ti.UI.FILL" height = "0" top="60" opacity="0.8">
 			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL" layout="vertical">
@@ -47,15 +47,17 @@
 		</TableView>
 		<Toolbar platform="ios" bottom="0" height="60dp">
 			<Items>
-				<Button onClick="loadEntertainment">Entertainment</Button>
+				<Button onClick="loadEntertainment" backgroundImage="/images/toolbar_icons/everything_star.png"></Button>
 				<FlexSpace/>
-				<Button onClick="loadMusic">Music</Button>
+				<Button onClick="loadMusic" backgroundImage="/images/toolbar_icons/music_note.png"></Button>
 				<FlexSpace/>
-				<Button onClick="loadArts">Arts</Button>
+				<Button onClick="loadArts" backgroundImage="/images/toolbar_icons/arts_pallett.png"></Button>
 				<FlexSpace/>
-				<Button onClick="loadFamily">Family</Button>
+				<Button onClick="loadFamily" backgroundImage="/images/toolbar_icons/family_family.png"></Button>
 				<FlexSpace/>
-				<Button onClick="loadFood">Food</Button>
+				<Button onClick="loadFood" backgroundImage="/images/toolbar_icons/food_utensils.png"></Button>
+				<FlexSpace/>
+				<Button onClick="loadFood" backgroundImage="/images/toolbar_icons/student_only.png"></Button>
 			</Items>
 		</Toolbar>
 	</Window>

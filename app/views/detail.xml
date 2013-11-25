@@ -1,6 +1,6 @@
 <Alloy>
 	<Window id="myWindow">
-		<Button onClick="backToList" height="50dp" right="20dp" top="8dp">Back</Button>
+		<Button onClick="backToList" height="60dp" right="20dp" top="10dp">Back</Button>
 		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="150dp" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
         <ScrollView height="Ti.UI.FILL" top="210dp" layout="vertical">
@@ -8,9 +8,10 @@
         		<Label id="name" class="name"/>
         		<Label id="time"/>
         	</View>
-    		<Label id="businessName" onClick="showBusinessDetails" />
-    		<Label id="location" class="location" onClick="getDirections"/>        	
-        	<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"></ImageView>
+    		<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"></ImageView>
+        	<Label id="businessName" onClick="showBusinessDetails" />
+    		<Label id="location" class="location" onClick="getDirections"/> 
+    		<Button onClick="getDirections" class="getDirections">Get Directions</Button>
         	<Label id="descriptionView" height="Ti.UI.FILL"></Label>
 		</ScrollView>
 	</Window>
