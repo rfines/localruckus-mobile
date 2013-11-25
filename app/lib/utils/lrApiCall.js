@@ -39,7 +39,8 @@ exports.getBusinessEvents = function(options){
 	options.height = options.height || 150;
 	options.width = options.width || 150;
 	options.imageType = 'circle';
-	var url = Alloy.Globals.baseUrl + "/business/" +options.id+"/events?height=150&width=150&imageType=circle"; 
+	options.start || moment().toISOString();
+	var url = Alloy.Globals.baseUrl + "/business/" +options.id+"/events?height="+options.height+"&width="+options.width+"&imageType="+options.imageType+"&start="+options.start; 
 	var xhr = Ti.Network.createHTTPClient({
 		onload : function(e) {
 			var data = JSON.parse(this.responseText);
@@ -47,8 +48,7 @@ exports.getBusinessEvents = function(options){
 			for (var i = 0; i < data.length; i++) {
 				item = data[i];
 				tableData.push(Alloy.createController('row', {
-					eventData : item,
-					name : item.name
+					eventData : item
 				}).getView());
 			}
 			options.callback(undefined, tableData);

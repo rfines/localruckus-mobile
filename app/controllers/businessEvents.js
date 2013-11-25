@@ -4,9 +4,16 @@ var business = {};
 function backToBusiness() {
 	$.businessEventsWindow.close();
 }
-exports.setBusinesEvents = function(events,bus){
-	if(events.length >0){
-		$.table.setData(events);
+function openDetail(e) {
+	controller = Alloy.createController('detail');
+	d = controller.getView();
+	controller.setEvent(e.rowData.eventData);
+	d.open();
+}
+
+exports.setBusinesEvents = function(eventData,bus){
+	if(eventData.length >0){
+		$.table.setData(eventData);
 	}else{
 		$.table.visible=false;
 		$.noContentView.visible = true;

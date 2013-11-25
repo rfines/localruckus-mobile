@@ -97,14 +97,15 @@ exports.setBusinessInfo = function(bus) {
 };
 function businessEvents(evt) {
 	var options = {
-		id : bus._id,
+		id : business._id,
+		start:moment().toISOString(),
 		callback : function(err, data) {
 			if (err && err.length > 0) {
 				Ti.API.error(err);
 			} else {
 				controller = Alloy.createController('businessEvents');
 				d = controller.getView();
-				controller.setBusinesEvents(data, bus);
+				controller.setBusinesEvents(data, business);
 				d.open();
 			}
 		}
@@ -251,9 +252,3 @@ function getDirections(evt) {
 	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + business.location.geo.coordinates[1] + "," + business.location.geo.coordinates[0]);
 }
 
-function openDetail(e) {
-	controller = Alloy.createController('detail');
-	d = controller.getView();
-	controller.setEvent(e.rowData.eventData);
-	d.open();
-}

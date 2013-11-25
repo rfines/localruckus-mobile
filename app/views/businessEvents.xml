@@ -1,7 +1,7 @@
 <Alloy>
 	<Window id="businessEventsWindow">
-		<Button onClick="backToBusiness" height="50dp" right="20dp" top="8dp">Back</Button>
-		<TableView id="table" onClick="openDetail" top="20" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7"></TableView>
+		<Button onClick="backToBusiness" height="50dp" right="20dp" bottom="8dp" top="8dp">Back</Button>
+		<TableView id="table" onClick="openDetail" top="50dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7"></TableView>
 		<View id="noContentView" visible="false">
 			<Label id="noContent" text="Sorry this business has no events." />
 		</View>
