@@ -34,22 +34,32 @@ function increaseRadius(e) {
 		newRadius = currentRadius + 5;	
 	}
 	$.radiusLabel.text = newRadius;	
-	
+}
+
+var newAddress = undefined;
+function changeAddress(e) {
+	newAddress = $.addressTextField.value;
 }
 
 function changeSearchCriteria(e) {
 	toggleSearchDrawer();
-	keyword = undefined;
-	params = {
-		radius : parseInt($.radiusLabel.text) * 1609,
-		skip : 0
-	};
-	if ($.searchTerms.value && $.searchTerms.value != '') {
-		params.keyword = $.searchTerms.value;
-	} else {
-		params.tags = tag;
-	};
-	exports.loadInitialData(params);	
+	if (newAddress) {
+		Titanium.Geolocation.forwardGeocoder(newAddress, function(forwardGeocoderResponse) {
+			Alloy.Globals.location.coords.longitude = forwardGeocoderResponse.longitude;
+			Alloy.Globals.location.coords.latitude = forwardGeocoderResponse.latitude;
+			keyword = undefined;
+			params = {
+				radius : parseInt($.radiusLabel.text) * 1609,
+				skip : 0
+			};
+			if ($.searchTerms.value && $.searchTerms.value != '') {
+				params.keyword = $.searchTerms.value;
+			} else {
+				params.tags = tag;
+			};
+			exports.loadInitialData(params);		
+		});	
+	}
 }
 
 var drawerOpen = false;
