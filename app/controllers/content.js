@@ -7,4 +7,5 @@ var error = function() {
 var success = function() {
 	$.master.loadInitialData();
 };
+Alloy.Globals.startWaiting();
 geo.myLocation(error, success);

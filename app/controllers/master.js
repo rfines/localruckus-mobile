@@ -50,6 +50,7 @@ function changeAddress(e) {
 }
 
 function myLocation(e) {
+	Alloy.Globals.startWaiting();
 	myLocation = true;
 	var failure = function() {
 		alert('Could not get your location');
@@ -166,6 +167,7 @@ function loadFamily(e) {
 }
 
 exports.loadInitialData = function(options) {
+	Alloy.Globals.startWaiting();
 	var moment = require('alloy/moment');
 	var options = options || {};
 	options.radius = options.radius || radius;
@@ -183,8 +185,10 @@ exports.loadInitialData = function(options) {
 			$.addressTextField.value = Alloy.Globals.displayAddress;
 			if (!options.skip) {
 				$.table.setData(tableData);
+				Alloy.Globals.stopWaiting();
 			} else if (options.success) {
 				options.success(tableData);
+				Alloy.Globals.stopWaiting();
 			}
 		}
 	};
