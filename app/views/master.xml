@@ -23,7 +23,7 @@
 				</View>
 				<View top="10" height="Ti.UI.SIZE">
 					<TextField id="searchTerms" class="topDrawerText" color="black"/>
-					<Button width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white">***</Button>
+					<Button id="myLocation" width="10" left="0"top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundColor="white" onClick="myLocation">***</Button>
 					<TextField id="addressTextField" class="topDrawerText" color="black" onChange="changeAddress" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS" />
 					<View layout="horizontal" top="100">
 						<Button onClick="decreaseRadius" left="10">-</Button>

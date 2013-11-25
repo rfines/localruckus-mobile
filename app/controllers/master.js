@@ -51,6 +51,16 @@ function changeAddress(e) {
 
 function myLocation(e) {
 	myLocation = true;
+	var failure = function() {
+		alert('Could not get your location');
+	};
+	var success = function() {
+		$.locationLabel.text = Alloy.Globals.cityState;
+		$.addressTextField.value = Alloy.Globals.displayAddress;
+		changeAddress();
+		myLocation = true;
+	};
+	geo.myLocation(failure, success);
 }
 
 function changeSearchCriteria(e) {
@@ -71,8 +81,10 @@ function changeSearchCriteria(e) {
 		};
 		exports.loadInitialData(params);
 	};
-	if (newAddress) {
+	if (newAddress && !myLocation) {
 		geo.customLocation(newAddress, failure, success);
+	} else {
+		success();
 	}
 }
 
@@ -167,8 +179,8 @@ exports.loadInitialData = function(options) {
 				options.error(err);
 			}
 		} else {
-			$.locationLabel.text = Alloy.Globals.reverseLocation.places[0].city + ', ' + Alloy.Globals.reverseLocation.places[0].zipcode;
-			$.addressTextField.value = Alloy.Globals.reverseLocation.places[0].address;
+			$.locationLabel.text = Alloy.Globals.cityState;
+			$.addressTextField.value = Alloy.Globals.displayAddress;
 			if (!options.skip) {
 				$.table.setData(tableData);
 			} else if (options.success) {
