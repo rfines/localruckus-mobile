@@ -3,7 +3,7 @@
 		<Button onClick="backToList" height="60dp" right="20dp" top="10dp">Back</Button>
 		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="150dp" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
-        <ScrollView height="Ti.UI.FILL" top="210dp" layout="vertical">
+        <ScrollView height="Ti.UI.SIZE" top="210dp" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
         	<View id="nameView" layout="vertical" height="Ti.UI.SIZE">
         		<Label id="name" class="name"/>
         		<Label id="time"/>
@@ -12,7 +12,7 @@
         	<Label id="businessName" onClick="showBusinessDetails" />
     		<Label id="location" class="location" onClick="getDirections"/> 
     		<Button onClick="getDirections" class="getDirections">Get Directions</Button>
-        	<Label><Label id="descriptionView" height="Ti.UI.FILL" top="0" bottom="0" left="10" right="10"></Label></Label>
+        	<Label><Label id="descriptionView" height="Ti.UI.SIZE" top="0" bottom="0" left="10" right="10"></Label></Label>
 		</ScrollView>
 	</Window>
 </Alloy>
