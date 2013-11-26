@@ -32,7 +32,7 @@ exports.getEvents = function(options) {
 	Ti.API.error("Sending xhr request");
 	xhr.open("GET", url);
 	xhr.setTimeout(30000);
-	xhr.setRequestHeader("Authorization", "Basic TUVUa3dJMTVCZzBoZXVSTmFydTY6Nm4wcFJob2s0V1I4eXg4VnVkVUQ3WHNoYm9OQ3o1MW9GWEp2WkEyeQ==");
+	xhr.setRequestHeader("Authorization", "Basic aHJkZmVwU3p6UGVPQ1dvVVNvVDU6Nlg2MlF1SEdCZFIxcExOTXFQSlEwVE5KVU9WcjBnS0daVXlESU01bQ==");
 	xhr.send();
 };
 exports.getBusinessEvents = function(options){
