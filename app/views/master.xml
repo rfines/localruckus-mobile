@@ -57,7 +57,7 @@
 				<FlexSpace/>
 				<Button onClick="loadFood" backgroundImage="/images/toolbar_icons/food_utensils.png"></Button>
 				<FlexSpace/>
-				<Button onClick="loadFood" backgroundImage="/images/toolbar_icons/student_only.png"></Button>
+				<Button onClick="loadCampus" backgroundImage="/images/toolbar_icons/student_only.png"></Button>
 			</Items>
 		</Toolbar>
 	</Window>

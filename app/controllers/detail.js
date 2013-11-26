@@ -250,12 +250,12 @@ function setWindow(eventData, business) {
 		});
 		phoneBtn.addEventListener('click', callEvent);
 		//buttons.push(phoneBtn);
+		var cleanNumb = eventData.contactPhone.replace(/[^0-9]/g,"");
 		var pb = {
 			title : "Call Event",
 			image : "/images/safari.png",
 			callback : function(e) {
-				var url = 'tel:' + data.contactPhone;
-				alert(url);
+				var url = 'tel:'+cleanNumb;
 				Titanium.Platform.openURL(url);
 			}
 		};
@@ -268,7 +268,7 @@ function setWindow(eventData, business) {
 			id : "ticketBtn"
 		});
 		ticketBtn.addEventListener('click', buyTickets);
-		buttons.push(ticketBtn);
+		//buttons.push(ticketBtn);
 		var tb = {
 			title : "Tickets",
 			image : "/images/safari.png",

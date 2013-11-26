@@ -1,6 +1,7 @@
 var api = require('utils/lrApiCall');
 var business = {};
 var buttons = [];
+var activityButtons = [];
 function backToList() {
 	$.businessWindow.close();
 }
@@ -21,26 +22,39 @@ exports.setBusinessInfo = function(bus) {
 		}
 		$.detailImage.image = image;
 		//Toolbar buttons
-		if (bus.website != undefined && bus.website.length > 0) {
-			var webBtn = Ti.UI.createButton({
-				title : "More Info",
-				id : "moreInfoBtn"
-			});
-			webBtn.addEventListener('click', moreInfo);
-			buttons.push(webBtn);
-		}
+		var url = bus.website || "http://localruckus.com/event/" + bus._id.toString();
+		var mi = {
+			title : "More Info",
+			image : "/images/safari.png",
+			callback : function(e) {
+				Titanium.Platform.openURL(url);
+			}
+		};
+		activityButtons.push(mi);
 		if (bus.phone != undefined && bus.phone.length > 0) {
 			var phoneBtn = Ti.UI.createButton({
 				title : "Call Event",
 				id : "callBtn"
 			});
 			phoneBtn.addEventListener('click', callBusiness);
-			buttons.push(phoneBtn);
+			//buttons.push(phoneBtn);
+			var pb = {
+				title : "Call Event",
+				image : "/images/safari.png",
+				callback : function(e) {
+					var url = 'tel:' + bus.contactPhone;
+					alert(url);
+					Titanium.Platform.openURL(url);
+				}
+			};
+			activityButtons.push(pb);
 		}
 
 		var shareBtn = Ti.UI.createButton({
 			title : "Share",
-			id : "shareBtn"
+			systemButton : Ti.UI.iPhone.SystemButton.ACTION,
+			id : "shareBtn",
+			left : 150
 		});
 		shareBtn.addEventListener('click', share);
 		buttons.push(shareBtn);
@@ -50,14 +64,13 @@ exports.setBusinessInfo = function(bus) {
 		});
 		eventBtn.addEventListener('click', businessEvents);
 		buttons.push(eventBtn);
-		var toolbar = Ti.UI.iOS.createToolbar({
+		var toolbar = Titanium.UI.iOS.createToolbar({
 			items : buttons,
 			bottom : 0,
 			borderTop : true,
 			borderBottom : false
 		});
 		win.add(toolbar);
-		Ti.API.error(toolbar.items.length);
 
 		var loc = Ti.Map.createAnnotation({
 			latitude : bus.location.geo.coordinates[1],
@@ -98,7 +111,7 @@ exports.setBusinessInfo = function(bus) {
 function businessEvents(evt) {
 	var options = {
 		id : business._id,
-		start:moment().toISOString(),
+		start : moment().toISOString(),
 		callback : function(err, data) {
 			if (err && err.length > 0) {
 				Ti.API.error(err);
@@ -233,18 +246,18 @@ function share(evt) {
 	// fb.authorize();
 	// }
 	var defaultMessage = "Check out this cool looking business! I'm thinking about going, who wants to go with me?";
-	var link = "http://localruckus.com/business/" + data._id;
+	var link = "http://localruckus.com/business/" + business._id;
 	defaultMessage = defaultMessage + " " + link;
 	var image = "";
-	if (data.media != undefined && data.media.length > 0) {
-		image = data.media[0].url;
+	if (business.media != undefined && business.media.length > 0) {
+		image = business.media[0].url;
 	}
 	var Social = require('dk.napp.social');
 	Social.activityView({
 		text : defaultMessage,
 		image : image,
-		removeIcons : "print,copy,camera,contact"
-	}, []);
+		removeIcons : "camera,contact,print,copy"
+	}, activityButtons);
 
 }
 

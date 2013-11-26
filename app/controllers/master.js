@@ -152,7 +152,15 @@ function loadEntertainment(e) {
 		skip : 0
 	});
 }
-
+function loadCampus(e) {
+	page = 0;
+	reset = true;
+	exports.loadInitialData({
+		tags : 'CAMPUS',
+		radius : radius,
+		skip : 0
+	});
+}
 function loadFood(e) {
 	flurry.logEvent('viewEvents', {category: 'FOOD-AND-DRINK'});
 	page = 0;

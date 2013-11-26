@@ -12,33 +12,29 @@
         fontSize: '24dp',
         fontFamily: 'HelveticaNeue-Ultralight'
     },
-    color:'686767'
+    color: '#201f1f'
 }
-
 "#location":{
-font: {
+	font: {
 		fontFamily: 'HelveticaNeue-Light',
-		fontSize:'10dp'
+		fontSize:'11dp'
 	},
-	color:'#686767'
+	color:'686767'
 }
 "#locationView":{
-	height:"20"
+	top: 10
 }
 "#nameView":{
-	color:'#686767',
-	width:'98%',
-	height:"30"
+	color:'686767'
 }
-"#name":{
-font: {
+"#businessName":{
+	font: {
 		fontFamily: 'HelveticaNeue-Light'
 	},
-	color:'#686767',
-	top:"10"
+	color:'686767'
 }
-"#time":{
-	color:'#686767'
+"#detailImage":{
+	top:"10dp"
 }
 "#descriptionView":{
 	textAlign:"left",
