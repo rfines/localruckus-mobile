@@ -1,4 +1,4 @@
-var string = require('alloy/string');
+var string = require('utils/string');
 var moment = require('alloy/moment');
 
 function backToList() {
@@ -228,13 +228,7 @@ function setWindow(eventData, business) {
 		image = eventData.media[0].url;
 	}
 	$.detailImage.image = image;
-	var regex1 = /<(br\s+\/|br)>/gi;
-	var regex2 = /<(p|\/p)>/gi;
-	var regex3 = /<(span|\/span)>/gi;
-	var allOtherTags = /<(.|\n)*?>/gi;
-	var newstr = d.replace('&nbsp;', ' ').replace(regex1, "\n").replace(regex2, "\n\n").replace(regex3, "\n").replace(allOtherTags, "");
-	$.descriptionView.setText(string.trim(newstr));
-	alert(string.trim(newstr));
+	$.descriptionView.setText(string.htmlToLabel(d));
 	$.location.text = l;
 	$.name.text = eventData.name;
 	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar() + " until " + moment(eventData.nextOccurrence.end).utc().format("h:mm a");
