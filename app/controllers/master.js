@@ -82,12 +82,13 @@ function myLocation(e) {
 	Alloy.Globals.startWaiting();
 	myLocation = true;
 	var failure = function() {
-		alert('Could not get your location');
+		alert('We were unable to get your current location.  Please enable location services.');
 	};
 	var success = function() {
 		$.locationLabel.text = Alloy.Globals.cityState;
 		$.addressTextField.value = Alloy.Globals.displayAddress;
 		changeAddress();
+		Alloy.Globals.stopWaiting();
 		myLocation = true;
 	};
 	geo.myLocation(failure, success);

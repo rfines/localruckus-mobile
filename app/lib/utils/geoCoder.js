@@ -4,7 +4,6 @@ exports.myLocation = function(onError, onSuccess) {
 	    Titanium.Geolocation.purpose = 'Get Current Location';
 	    Titanium.Geolocation.getCurrentPosition(function(e) {
 	        if (e.error) {
-	        	alert('error1');
 				onError();
 	        } else {
 		        Alloy.Globals.location = e;
@@ -19,7 +18,6 @@ exports.myLocation = function(onError, onSuccess) {
 	    	}
 	    });
 	} else {
-		alert('error2');
 	    onError();
 	}	
 };

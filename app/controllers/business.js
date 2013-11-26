@@ -1,3 +1,4 @@
+var string = require('utils/string');
 var api = require('utils/lrApiCall');
 var business = {};
 var buttons = [];
@@ -15,7 +16,7 @@ exports.setBusinessInfo = function(bus) {
 		Ti.API.error(bus);
 		$.name.text = bus.name;
 		$.location.text = bus.location.address;
-		$.descriptionView.setHtml(bus.description || "No Description Provided");
+		$.descriptionView.setText(string.htmlToLabel(bus.description || "No Description Provided"));
 		var image = "";
 		if (bus.media != undefined && bus.media.length > 0) {
 			image = bus.media[0].url;
