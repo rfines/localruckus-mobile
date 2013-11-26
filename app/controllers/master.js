@@ -39,8 +39,7 @@ function changeTime(e) {
 			break;														
 		default : 
 			Alloy.Globals.timeFrame = {start: moment().startOf('day')};
-	}
-	alert(Alloy.Globals.timeFrame.start);	
+	}	
 }
 function openDetail(e) {
 	controller = Alloy.createController('detail');
@@ -216,6 +215,16 @@ exports.loadInitialData = function(options) {
 			$.locationLabel.text = Alloy.Globals.cityState;
 			$.addressTextField.value = Alloy.Globals.displayAddress;
 			if (!options.skip) {
+				tableData = _.sortBy(tableData, function(item) {
+					if (Alloy.Globals.timeFrame.start.isAfter(moment().endOf('day'))) {
+						ne = _.find(item.eventData.occurrences, function(occ) {
+							return moment(occ.start).isAfter(Alloy.Globals.timeFrame.start);
+						});
+						return moment(ne.start).toISOString();						
+					} else {
+						return moment(item.eventData.nextOccurrence.start).toISOString();
+					}
+				});				
 				$.table.setData(tableData);
 				Alloy.Globals.stopWaiting();
 			} else if (options.success) {
