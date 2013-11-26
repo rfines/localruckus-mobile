@@ -39,3 +39,23 @@
 	top:50,
 	hintText:"Address, City or Zip"
 }
+".link":{
+	font: {
+		fontSize:15,
+		fontFamily: 'HelveticaNeue-Light'
+	},
+	textAlign:"left",
+	color:'686767',
+	top:5,
+	bottom:5,
+	left:40
+}
+".anyTimeBtn":{
+	width:100,
+	left:100,
+	top:15,
+	borderWidth:1,
+	borderColor:'#686767',
+	borderRadius:"7%",
+	color:'white'
+}
