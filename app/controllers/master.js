@@ -1,3 +1,4 @@
+var flurry = require('sg.flurry');
 var api = require('utils/lrApiCall');
 var geo = require('utils/geoCoder');
 var moment = require('alloy/moment');
@@ -142,6 +143,7 @@ var reset = false;
 var page = 0;
 var radius = 10000;
 function loadEntertainment(e) {
+	flurry.logEvent('viewEvents', {category: 'ENTERTAINMENT'});
 	page = 0;
 	reset = true;
 	exports.loadInitialData({
@@ -152,6 +154,7 @@ function loadEntertainment(e) {
 }
 
 function loadFood(e) {
+	flurry.logEvent('viewEvents', {category: 'FOOD-AND-DRINK'});
 	page = 0;
 	reset = true;
 	tag = "FOOD-AND-DRINK";
@@ -164,6 +167,7 @@ function loadFood(e) {
 }
 
 function loadMusic(e) {
+	flurry.logEvent('viewEvents', {category: 'MUSIC'});
 	page = 0;
 	reset = true;
 	tag = "MUSIC";
@@ -175,6 +179,7 @@ function loadMusic(e) {
 }
 
 function loadArts(e) {
+	flurry.logEvent('viewEvents', {category: 'ARTS'});
 	page = 0;
 	reset = true;
 	tag = "ARTS";
@@ -186,6 +191,7 @@ function loadArts(e) {
 }
 
 function loadFamily(e) {
+	flurry.logEvent('viewEvents', {category: 'FAMILY-AND-CHILDREN'});
 	page = 0;
 	reset = true;
 	tag = "FAMILY-AND-CHILDREN";

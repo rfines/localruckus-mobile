@@ -44,6 +44,7 @@
         <module platform="android">facebook</module>
         <module platform="iphone">facebook</module>
         <module platform="iphone">dk.napp.social</module>
+		<module version="2.6" platform="iphone">sg.flurry</module>  
     </modules>
     <deployment-targets>
         <target device="android">true</target>

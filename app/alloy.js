@@ -1,3 +1,9 @@
+var flurry = require('sg.flurry');
+flurry.startSession('M3MCW6KYR53Y83CVXF3M');
+flurry.logUncaughtExceptions(true);
+flurry.crashReportingEnabled(true);
+flurry.logEvent('start');
+
 Alloy.Globals.baseUrl = "http://api-stage.hoopla.io";
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 

@@ -1,3 +1,4 @@
+var flurry = require('sg.flurry');
 exports.myLocation = function(onError, onSuccess) {
 	if (Ti.Geolocation.locationServicesEnabled) {
 	    Titanium.Geolocation.purpose = 'Get Current Location';
@@ -7,6 +8,7 @@ exports.myLocation = function(onError, onSuccess) {
 				onError();
 	        } else {
 		        Alloy.Globals.location = e;
+		        flurry.setLatitude(e.coords.latitude, e.coords.longitude);
 		        Titanium.Geolocation.reverseGeocoder(e.coords.latitude, e.coords.longitude, function(reverseGeocoderResonse) {
 		        	if(reverseGeocoderResonse.places[0] != undefined){
 		        		Alloy.Globals.displayAddress = reverseGeocoderResonse.places[0].address;
