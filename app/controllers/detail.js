@@ -5,6 +5,7 @@ function backToList() {
 	$.myWindow.close();
 }
 
+var activityButtons = [];
 var data = {};
 var business = {};
 
@@ -78,16 +79,14 @@ function callEvent(evt) {
 	// DIALOG EVENT CLICK
 	dialog.addEventListener('click', function(e) {
 		if (e.index == '1') {
-			Titanium.Platform.openURL(url);
+			Ti.Platform.openURL(url);
 		}
 	});
 	dialog.show();
 }
 
 function buyTickets(evt) {
-	if (data.ticketUrl) {
-		Titanium.Platform.openURL(data.ticketUrl);
-	}
+
 }
 
 function share(evt) {
@@ -187,17 +186,18 @@ function share(evt) {
 	if (data.media != undefined && data.media.length > 0) {
 		image = data.media[0].url;
 	}
+
 	var Social = require('dk.napp.social');
 	Social.activityView({
 		text : defaultMessage,
 		image : image,
-		removeIcons : "print,copy,camera"
-	}, []);
+		removeIcons : "camera,contact,print,copy"
+	}, activityButtons);
 
 }
 
 function getDirections(evt) {
-	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
+
 }
 
 function getBusiness(id, callback) {
@@ -233,22 +233,33 @@ function setWindow(eventData, business) {
 	$.name.text = eventData.name;
 	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar() + " until " + moment(eventData.nextOccurrence.end).utc().format("h:mm a");
 	$.businessName.text = business.name;
+	var url = eventData.website || "http://localruckus.com/event/" + data._id.toString();
+	var mi = {
+		title : "More Info",
+		image : "/images/safari.png",
+		callback : function(e) {
+			Titanium.Platform.openURL(url);
+		}
+	};
+	activityButtons.push(mi);
 
-	if (eventData.website != undefined && eventData.website.length > 0) {
-		var webBtn = Ti.UI.createButton({
-			title : "More Info",
-			id : "moreInfoBtn"
-		});
-		webBtn.addEventListener('click', moreInfo);
-		buttons.push(webBtn);
-	}
 	if (eventData.contactPhone != undefined && eventData.contactPhone.length > 0) {
 		var phoneBtn = Ti.UI.createButton({
 			title : "Call Event",
 			id : "callBtn"
 		});
 		phoneBtn.addEventListener('click', callEvent);
-		buttons.push(phoneBtn);
+		//buttons.push(phoneBtn);
+		var pb = {
+			title : "Call Event",
+			image : "/images/safari.png",
+			callback : function(e) {
+				var url = 'tel:' + data.contactPhone;
+				alert(url);
+				Titanium.Platform.openURL(url);
+			}
+		};
+		activityButtons.push(pb);
 	}
 
 	if (eventData.ticketUrl != undefined && eventData.ticketUrl.length > 0) {
@@ -258,11 +269,30 @@ function setWindow(eventData, business) {
 		});
 		ticketBtn.addEventListener('click', buyTickets);
 		buttons.push(ticketBtn);
+		var tb = {
+			title : "Tickets",
+			image : "/images/safari.png",
+			callback : function(e) {
+				if (data.ticketUrl) {
+					Titanium.Platform.openURL(data.ticketUrl);
+				}
+			}
+		};
+		activityButtons.push(tb);
 	}
+	var gd = {
+		title : "Directions",
+		image : "/images/safari.png",
+		callback : function(e) {
+			Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
+		}
+	};
+	activityButtons.push(gd);
 	var shareBtn = Ti.UI.createButton({
 		title : "Share",
-		systemButton:Ti.UI.iPhone.SystemButton.ACTION,
-		id : "shareBtn"
+		systemButton : Ti.UI.iPhone.SystemButton.ACTION,
+		id : "shareBtn",
+		left:150
 	});
 	shareBtn.addEventListener('click', share);
 	buttons.push(shareBtn);
