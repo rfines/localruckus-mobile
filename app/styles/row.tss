@@ -20,7 +20,7 @@
 },
 "#detailImage": {
 	left: '5dp',
-	top: '3dp'
+	top: '6dp'
 },
 ".calendarPage": {
 	backgroundColor: 'rgba(255,255,255,0.4)',

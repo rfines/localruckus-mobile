@@ -14,7 +14,8 @@
 			</Picker>
 		</Window>
 		<View height="60dp" top="0">
-			<Label id="locationLabel" onClick="toggleSearchDrawer" color="#c4d82d"/>
+			<ImageView image="/images/search-icon.png" class="search-icon" onClick="toggleSearchDrawer"></ImageView>
+			<Label id="locationLabel" onClick="toggleSearchDrawer"/>
 		</View>
 		<Window id="topDrawer" width="Ti.UI.FILL" height = "0" top="60" opacity="0.8">
 			<View backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL" layout="vertical">
@@ -45,7 +46,7 @@
 			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
 			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMore" />
 		</TableView>
-		<Toolbar platform="ios" bottom="0" height="60dp">
+		<Toolbar platform="ios" bottom="0" height="60dp" barColor="rgba(255,255,255,0.4)" translucent="true">
 			<Items>
 				<Button onClick="loadEntertainment" backgroundImage="/images/toolbar_icons/everything_star.png"></Button>
 				<FlexSpace/>

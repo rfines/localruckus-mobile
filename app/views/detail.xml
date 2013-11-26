@@ -1,6 +1,6 @@
 <Alloy>
 	<Window id="myWindow">
-		<Button onClick="backToList" height="60dp" right="20dp" top="10dp">Back</Button>
+		<Button onClick="backToList" height="50dp" right="5dp" top="8dp">Back</Button>
 		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="150dp" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
         <ScrollView height="Ti.UI.SIZE" top="210dp" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">

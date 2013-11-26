@@ -2,6 +2,7 @@ var flurry = require('sg.flurry');
 var api = require('utils/lrApiCall');
 var geo = require('utils/geoCoder');
 var moment = require('alloy/moment');
+
 	
 Alloy.Globals.timeFrame = {start: moment().startOf('day')};;
 exports.initialStateNoLocation = function() {

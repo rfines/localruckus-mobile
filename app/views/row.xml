@@ -1,6 +1,6 @@
 <Alloy>
 	<TableViewRow className="tableRow" selectedBackgroundColor="white" selectedColor="white">
-		<View class="eventImage" width="20%" left="0">
+		<View class="eventImage" width="18%" left="0">
 			<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"/>
 		</View>
 		<View class="eventDetails" width="60%" selectedColor="white">

@@ -11,14 +11,19 @@
 	top: 40,
 	opacity: 0.8
 },
+".search-icon" : {
+	top:30,
+	left: 5,
+	width:26,
+	height:26
+},
 "#locationLabel" : {
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-	color: "#336699",
-	top: 30, 
+	top: 25, 
 	width: Ti.UI.FILL, 
+	color: "#4579f7",
 	height:30, 
-	backgroundColor:"black",
-	opacity: 0.8,
+	backgroundColor:"white",
 	textAlign:"center"
 },
 ".topDrawerText" : {
