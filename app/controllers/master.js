@@ -98,9 +98,10 @@ function changeSearchCriteria(e) {
 		alert('Could not get your location');
 	};
 	var success = function() {
+		var radius=$.radiusLabel.text.toString().split(' ')[0];
 		keyword = undefined;
 		params = {
-			radius : parseInt($.radiusLabel.text) * 1609,
+			radius : parseInt(radius) * 1609,
 			skip : 0
 		};
 		if ($.searchTerms.value && $.searchTerms.value != '') {
@@ -212,6 +213,8 @@ exports.loadInitialData = function(options) {
 				options.error(err);
 			}
 		} else {
+			$.slider.text = $.slider.value;
+			$.radiusLabel.text = $.slider.value.toString().split('.')[0]+" mi";
 			$.locationLabel.text = Alloy.Globals.cityState;
 			$.addressTextField.value = Alloy.Globals.displayAddress;
 			if (!options.skip) {
@@ -309,4 +312,14 @@ function suggestContent(evt) {
 	emailDialog.subject = "Event/Business Suggestion";
 	emailDialog.toRecipients = ['info@localruckus.com'];
 	emailDialog.open();
+}
+
+function updateLabel(e){
+	var val = $.slider.value.toString();
+	if(val.indexOf('.')>0){
+		$.radiusLabel.text = val.split('.')[0]+" mi";
+	}else{
+		$.radiusLabel.text=val+" mi";
+	}
+    
 }

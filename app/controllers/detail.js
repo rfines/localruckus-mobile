@@ -263,6 +263,7 @@ function setWindow(eventData, business) {
 	}
 	var shareBtn = Ti.UI.createButton({
 		title : "Share",
+		systemButton:Ti.UI.iPhone.SystemButton.ACTION,
 		id : "shareBtn"
 	});
 	shareBtn.addEventListener('click', share);
