@@ -9,10 +9,14 @@ exports.myLocation = function(onError, onSuccess) {
 		        Alloy.Globals.location = e;
 		        flurry.setLatitude(e.coords.latitude, e.coords.longitude);
 		        Titanium.Geolocation.reverseGeocoder(e.coords.latitude, e.coords.longitude, function(reverseGeocoderResonse) {
-		        	if(reverseGeocoderResonse.places[0] != undefined){
+		        	if(reverseGeocoderResonse.code == 0 && reverseGeocoderResonse.places[0] != undefined){
 		        		Alloy.Globals.displayAddress = reverseGeocoderResonse.places[0].address;
 		        		Alloy.Globals.cityState = reverseGeocoderResonse.places[0].city + ' - ' + reverseGeocoderResonse.places[0].zipcode;
 		    		}
+		    		else {
+		    			Alloy.Globals.displayAddress = '';
+		    			Alloy.Globals.cityState = "Location Unknown";
+		    		}		    		
 					onSuccess();
 		    	});     
 	    	}
@@ -27,9 +31,13 @@ exports.customLocation = function(address, onError, onSuccess) {
 		Alloy.Globals.location.coords.longitude = forwardGeocoderResponse.longitude;
 		Alloy.Globals.location.coords.latitude = forwardGeocoderResponse.latitude;
         Titanium.Geolocation.reverseGeocoder(forwardGeocoderResponse.latitude, forwardGeocoderResponse.longitude, function(reverseGeocoderResonse) {
-        	if(reverseGeocoderResonse.places[0] != undefined){
-	    		Alloy.Globals.displayAddress = reverseGeocoderResonse.places[0].address;
+        	if(reverseGeocoderResonse.code == 0 && reverseGeocoderResonse.places[0] != undefined){
+	    		Alloy.Globals.displayAddress = address;
 	    		Alloy.Globals.cityState = reverseGeocoderResonse.places[0].city + ' - ' + reverseGeocoderResonse.places[0].zipcode;        		
+    		}
+    		else {
+    			Alloy.Globals.displayAddress = address;
+    			Alloy.Globals.cityState = "Location Unknown";
     		}
 			onSuccess();
 		});

@@ -228,6 +228,8 @@ exports.loadInitialData = function(options) {
 			if (options.error) {
 				options.error(err);
 			}
+			$.table.setData([]);
+			Alloy.Globals.stopWaiting();
 		} else {
 			$.slider.text = $.slider.value;
 			$.radiusLabel.text = $.slider.value.toString().split('.')[0]+" mi";
