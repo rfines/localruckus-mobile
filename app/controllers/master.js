@@ -13,15 +13,15 @@ var timeFrames = [
 	{text : 'Later', tf: {start: moment().startOf('day').day(1).add('weeks',2)}}
 ];
 var radii = [
-	{text : '1 mile', distance : 1},
-	{text : '5 miles', distance : 5},
-	{text : '10 miles', distance : 10},
-	{text : '25 mile', distance : 25},
-	{text : '50 miles', distance : 50}
+	{text : '1 mile', distance : 1*1609},
+	{text : '5 miles', distance : 5*1609},
+	{text : '10 miles', distance : 10*1609},
+	{text : '25 mile', distance : 25*1609},
+	{text : '50 miles', distance : 50*1609}
 ];
 	
 Alloy.Globals.timeFrame = timeFrames[0].tf;
-Alloy.Globals.radius = radii[0].distance;
+Alloy.Globals.radius = radii[2].distance;
 exports.initialStateNoLocation = function() {
 	toggleSearchDrawer();
 };
@@ -107,10 +107,9 @@ function changeSearchCriteria(e) {
 		
 	};
 	var success = function() {
-		var radius=Alloy.Globals.radius;
 		keyword = undefined;
 		params = {
-			radius : parseInt(radius) * 1609,
+			radius : Alloy.Globals.radius,
 			skip : 0
 		};
 		if ($.searchTerms.value && $.searchTerms.value != '') {
@@ -131,7 +130,6 @@ var drawerOpen = false;
 function toggleSearchDrawer() {
 	view = $.topDrawer;
 	if (drawerOpen) {
-		$.timePicker.close();
 		var slideUp = Titanium.UI.createAnimation();
 		slideUp.height = "0";
 		slideUp.duration = 300;
@@ -149,7 +147,6 @@ var loading = false;
 var tag = "ENTERTAINMENT";
 var reset = false;
 var page = 0;
-var radius = 10000;
 function loadEntertainment(e) {
 	flurry.logEvent('viewEvents', {category: 'ENTERTAINMENT'});
 	page = 0;
@@ -157,7 +154,7 @@ function loadEntertainment(e) {
 	tag = "ENTERTAINMENT";
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		skip : 0
 	});
 }
@@ -168,7 +165,7 @@ function loadCampus(e) {
 	tag = "CAMPUS";
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		skip : 0
 	});
 }
@@ -179,7 +176,7 @@ function loadFood(e) {
 	tag = "FOOD-AND-DRINK";
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		skip : 0
 	});
 
@@ -192,7 +189,7 @@ function loadMusic(e) {
 	tag = "MUSIC";
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		skip : 0
 	});
 }
@@ -204,7 +201,7 @@ function loadArts(e) {
 	tag = "ARTS";
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		skip : 0
 	});
 }
@@ -216,7 +213,7 @@ function loadFamily(e) {
 	tag = "FAMILY-AND-CHILDREN";
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		skip : 0
 	});
 }
@@ -224,7 +221,7 @@ function loadFamily(e) {
 exports.loadInitialData = function(options) {
 	Alloy.Globals.startWaiting();
 	var options = options || {};
-	options.radius = options.radius || radius;
+	options.radius = options.radius || Alloy.Globals.radius;
 	options.tags = options.tags || 'ENTERTAINMENT';
 	options.ll = Alloy.Globals.location.coords.longitude + ',' + Alloy.Globals.location.coords.latitude;
 	options.start = options.start || Alloy.Globals.timeFrame.start.toISOString();
@@ -271,7 +268,7 @@ function myLoader(e) {
 		loading = true;
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		success : function() {
 			el.hide();
 		},
@@ -290,7 +287,7 @@ function loadMore(e) {
 	var skipNum = page * 25;
 	exports.loadInitialData({
 		tags : tag,
-		radius : radius,
+		radius : Alloy.Globals.radius,
 		skip : skipNum,
 		success : function(data) {
 			$.table.appendRow(data);
