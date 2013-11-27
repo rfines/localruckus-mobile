@@ -219,6 +219,7 @@ function createActions(){
 	var toolbar = Titanium.UI.iOS.createToolbar({
 		items : [shareBtn],
 		bottom : 0,
+		translucent : true,
 		borderTop : true,
 		borderBottom : false
 	});

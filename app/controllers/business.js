@@ -261,6 +261,7 @@ function createActions(bus) {
 	var toolbar = Titanium.UI.iOS.createToolbar({
 		items : buttons,
 		bottom : 0,
+		translucent : true,
 		borderTop : true,
 		borderBottom : false
 	});
