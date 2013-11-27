@@ -22,55 +22,9 @@ exports.setBusinessInfo = function(bus) {
 			image = bus.media[0].url;
 		}
 		$.detailImage.image = image;
-		//Toolbar buttons
 		var url = bus.website || "http://localruckus.com/event/" + bus._id.toString();
-		var mi = {
-			title : "More Info",
-			image : "/images/safari.png",
-			callback : function(e) {
-				Titanium.Platform.openURL(url);
-			}
-		};
-		activityButtons.push(mi);
-		if (bus.phone != undefined && bus.phone.length > 0) {
-			var phoneBtn = Ti.UI.createButton({
-				title : "Call Event",
-				id : "callBtn"
-			});
-			phoneBtn.addEventListener('click', callBusiness);
-			//buttons.push(phoneBtn);
-			var pb = {
-				title : "Call Event",
-				image : "/images/safari.png",
-				callback : function(e) {
-					var url = 'tel:' + bus.contactPhone;
-					Titanium.Platform.openURL(url);
-				}
-			};
-			activityButtons.push(pb);
-		}
-
-		var shareBtn = Ti.UI.createButton({
-			title : "Share",
-			systemButton : Ti.UI.iPhone.SystemButton.ACTION,
-			id : "shareBtn",
-			left : 150
-		});
-		shareBtn.addEventListener('click', share);
-		buttons.push(shareBtn);
-		var eventBtn = Ti.UI.createButton({
-			title : "Events",
-			id : "eventsBtn"
-		});
-		eventBtn.addEventListener('click', businessEvents);
-		buttons.push(eventBtn);
-		var toolbar = Titanium.UI.iOS.createToolbar({
-			items : buttons,
-			bottom : 0,
-			borderTop : true,
-			borderBottom : false
-		});
-		win.add(toolbar);
+		var actions = createActions(bus);
+		win.add(actions.toolbar);
 
 		var loc = Ti.Map.createAnnotation({
 			latitude : bus.location.geo.coordinates[1],
@@ -265,3 +219,52 @@ function getDirections(evt) {
 	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + business.location.geo.coordinates[1] + "," + business.location.geo.coordinates[0]);
 }
 
+function createActions(bus) {
+	var actions = {
+		toolbar : undefined,
+		buttons : []
+	};
+	var mi = {
+		title : "More Info",
+		image : "/images/safari.png",
+		callback : function(e) {
+			Titanium.Platform.openURL(url);
+		}
+	};
+	activityButtons.push(mi);
+	if (bus.phone != undefined && bus.phone.length > 0) {
+		var pb = {
+			title : "Call Business",
+			image : "/images/safari.png",
+			callback : function(e) {
+				var url = 'tel:' + bus.contactPhone.replace(/[^0-9]/g,"");
+				Titanium.Platform.openURL(url);
+			}
+		};
+		activityButtons.push(pb);
+	}
+
+	var shareBtn = Ti.UI.createButton({
+		title : "Share",
+		systemButton : Ti.UI.iPhone.SystemButton.ACTION,
+		id : "shareBtn",
+		left : 150
+	});
+	shareBtn.addEventListener('click', share);
+	buttons.push(shareBtn);
+	var eventBtn = Ti.UI.createButton({
+		title : "Events",
+		id : "eventsBtn"
+	});
+	eventBtn.addEventListener('click', businessEvents);
+	buttons.push(eventBtn);
+	var toolbar = Titanium.UI.iOS.createToolbar({
+		items : buttons,
+		bottom : 0,
+		borderTop : true,
+		borderBottom : false
+	});
+	actions.toolbar = toolbar;
+	actions.buttons = activityButtons;
+	return actions;
+}

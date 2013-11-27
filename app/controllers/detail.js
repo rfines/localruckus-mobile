@@ -233,7 +233,17 @@ function setWindow(eventData, business) {
 	$.name.text = eventData.name;
 	$.time.text = moment(eventData.nextOccurrence.start).utc().calendar() + " until " + moment(eventData.nextOccurrence.end).utc().format("h:mm a");
 	$.businessName.text = business.name;
-	var url = eventData.website || "http://localruckus.com/event/" + data._id.toString();
+	var actions = createActions();
+	win.add(actions.toolbar);
+	setMap();
+
+}
+function createActions(){
+	var actions={
+		toolbar:undefined,
+		buttons:activityButtons
+	};
+	var url = data.website || "http://localruckus.com/event/" + data._id.toString();
 	var mi = {
 		title : "More Info",
 		image : "/images/safari.png",
@@ -243,14 +253,14 @@ function setWindow(eventData, business) {
 	};
 	activityButtons.push(mi);
 
-	if (eventData.contactPhone != undefined && eventData.contactPhone.length > 0) {
+	if (data.contactPhone != undefined && data.contactPhone.length > 0) {
 		var phoneBtn = Ti.UI.createButton({
 			title : "Call Event",
 			id : "callBtn"
 		});
 		phoneBtn.addEventListener('click', callEvent);
 		//buttons.push(phoneBtn);
-		var cleanNumb = eventData.contactPhone.replace(/[^0-9]/g,"");
+		var cleanNumb = data.contactPhone.replace(/[^0-9]/g,"");
 		var pb = {
 			title : "Call Event",
 			image : "/images/safari.png",
@@ -262,7 +272,7 @@ function setWindow(eventData, business) {
 		activityButtons.push(pb);
 	}
 
-	if (eventData.ticketUrl != undefined && eventData.ticketUrl.length > 0) {
+	if (data.ticketUrl != undefined && data.ticketUrl.length > 0) {
 		var ticketBtn = Ti.UI.createButton({
 			title : "Tickets",
 			id : "ticketBtn"
@@ -295,21 +305,23 @@ function setWindow(eventData, business) {
 		left:"300dp"
 	});
 	shareBtn.addEventListener('click', share);
-	buttons.push(shareBtn);
 	var toolbar = Titanium.UI.iOS.createToolbar({
-		items : buttons,
+		items : [shareBtn],
 		bottom : 0,
 		borderTop : true,
 		borderBottom : false
 	});
-	win.add(toolbar);
-
+	actions.toolbar = toolbar;
+	actions.buttons = activityButtons;
+	return actions;
+}
+function setMap(){
 	var loc = Ti.Map.createAnnotation({
-		latitude : eventData.location.geo.coordinates[1],
-		longitude : eventData.location.geo.coordinates[0],
-		title : eventData.name,
-		subtitle : eventData.location.address,
-		myid : eventData._id,
+		latitude : data.location.geo.coordinates[1],
+		longitude : data.location.geo.coordinates[0],
+		title : data.name,
+		subtitle : data.location.address,
+		myid : data._id,
 		animate : true,
 		pincolor : Ti.Map.ANNOTATION_RED
 	});
@@ -324,8 +336,8 @@ function setWindow(eventData, business) {
 	$.mapView = map;
 
 	$.mapview.region = {
-		latitude : eventData.location.geo.coordinates[1],
-		longitude : eventData.location.geo.coordinates[0],
+		latitude : data.location.geo.coordinates[1],
+		longitude : data.location.geo.coordinates[0],
 		latitudeDelta : 0.01,
 		longitudeDelta : 0.01
 	};
@@ -337,5 +349,4 @@ function setWindow(eventData, business) {
 		}
 	});
 	$.mapview.addAnnotation(loc);
-
 }
