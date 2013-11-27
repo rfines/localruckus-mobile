@@ -12,7 +12,7 @@
         	<Label id="businessName" onClick="showBusinessDetails" />
     		<Label id="location" class="location" onClick="getDirections"/> 
     		<Button onClick="getDirections" class="getDirections">Get Directions</Button>
-        	<Label><Label id="descriptionView" height="Ti.UI.SIZE" top="0" bottom="0" left="10" right="10"></Label></Label>
+        	<Label><Label id="descriptionView" height="Ti.UI.SIZE" top="0" bottom="50" left="10" right="10"></Label></Label>
 		</ScrollView>
 	</Window>
 </Alloy>

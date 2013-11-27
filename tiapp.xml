@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>com.localruckus.mobile</id>
-    <name>localruckus-alloy</name>
+    <name>Local Ruckus</name>
     <version>1.0</version>
     <publisher>adamengland</publisher>
     <url>http://localruckus.com</url>
-    <description>not specified</description>
-    <copyright>2013 by adamengland</copyright>
+    <description>Local Ruckus - The best place to find local events.</description>
+    <copyright>2013 by Hoopla.io</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
