@@ -253,7 +253,7 @@ function createActions(bus) {
 	shareBtn.addEventListener('click', share);
 	buttons.push(shareBtn);
 	var eventBtn = Ti.UI.createButton({
-		title : "Events",
+		title : "Upcoming Events at this Venue",
 		id : "eventsBtn"
 	});
 	eventBtn.addEventListener('click', businessEvents);

@@ -37,7 +37,6 @@
 						<Label id="terms" class="terms link" text="Terms of use"  color="white" onClick="terms" height="30"/>
 						<View bottom="0" left="0" right="0" height="1" borderWidth="1" borderColor="#d6f442" />
 						<Label id="privacy" class="privacy link" text="Privacy Policy"  color="white" onClick="privacy" height="30"/>
-					</View>
 				</View>
 			</View>
 		</View>
