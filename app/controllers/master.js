@@ -3,73 +3,73 @@ var api = require('utils/lrApiCall');
 var geo = require('utils/geoCoder');
 var moment = require('alloy/moment');
 
+var timeFrames = [
+	{text : 'Any Time', tf: {start: moment().startOf('day')}},
+	{text : 'Today', tf: {start: moment().startOf('day'), end : moment().endOf('day')}},
+	{text : 'Tomorrow', tf:{start: moment().startOf('day').add('days',1), end : moment().endOf('day').add('days',1)}},
+	{text : 'This Weekend', tf: {start: moment().day(5).startOf('day'), end : moment().day(7).endOf('day')}},
+	{text : 'Next Week', tf:{start: moment().startOf('week').add('weeks',1).add('days',1), end : moment().endOf('week').add('weeks', 1).add('days',1)}},
+	{text : 'Next Weekend', tf:{start: moment().day(5).startOf('day').add('weeks',1), end : moment().day(7).endOf('day').add('weeks',1)}},
+	{text : 'Later', tf: {start: moment().startOf('day').day(1).add('weeks',2)}}
+];
+var radii = [
+	{text : '1 mile', distance : 1},
+	{text : '5 miles', distance : 5},
+	{text : '10 miles', distance : 10},
+	{text : '25 mile', distance : 25},
+	{text : '50 miles', distance : 50}
+];
 	
-Alloy.Globals.timeFrame = {start: moment().startOf('day')};;
+Alloy.Globals.timeFrame = timeFrames[0].tf;
+Alloy.Globals.radius = radii[0].distance;
 exports.initialStateNoLocation = function() {
 	toggleSearchDrawer();
 };
 
-function showTimePicker() {
-	view = $.timePicker;
-	var slideUp = Titanium.UI.createAnimation();
-	slideUp.height = "200";
-	slideUp.duration = 300;
-	view.open(slideUp);
+function increaseTimeFrame() {
+	i = _.indexOf(timeFrames, _.find(timeFrames, function(i) {
+		return $.selectedTimeFrame.text == i.text;
+	}));
+	if (i < timeFrames.length-1) {
+		$.selectedTimeFrame.text = timeFrames[i+1].text;
+		Alloy.Globals.timeFrame = 	timeFrames[i+1].tf;	
+	}
 }
-function changeTime(e) {
-	switch (e.selectedValue[0]){
-		case "Any Time": 
-			Alloy.Globals.timeFrame = {start: moment().startOf('day')};
-			break;
-		case "Today": 
-			Alloy.Globals.timeFrame = {start: moment().startOf('day'), end : moment().endOf('day')};
-			break;
-		case "Tomorrow": 
-			Alloy.Globals.timeFrame = {start: moment().startOf('day').add('days',1), end : moment().endOf('day').add('days',1)};
-			break;
-		case "This Weekend": 
-			Alloy.Globals.timeFrame = {start: moment().day(5).startOf('day'), end : moment().day(7).endOf('day')};
-			break;
-		case "Next Week": 
-			Alloy.Globals.timeFrame = {start: moment().startOf('week').add('weeks',1).add('days',1), end : moment().endOf('week').add('weeks', 1).add('days',1)};
-			break;
-		case "Next Weekend": 
-			Alloy.Globals.timeFrame = {start: moment().day(5).startOf('day').add('weeks',1), end : moment().day(7).endOf('day').add('weeks',1)};
-			break;
-		case "Later": 
-			Alloy.Globals.timeFrame = {start: moment().startOf('day').day(1).add('weeks',2)};
-			break;														
-		default : 
-			Alloy.Globals.timeFrame = {start: moment().startOf('day')};
-	}	
+function decreaseTimeFrame() {
+	i = _.indexOf(timeFrames, _.find(timeFrames, function(i) {
+		return $.selectedTimeFrame.text == i.text;
+	}));
+	if (i != 0) {
+		$.selectedTimeFrame.text = timeFrames[i-1].text;
+		Alloy.Globals.timeFrame = 	timeFrames[i-1].tf;
+	}
 }
+
+function increaseRadius() {
+	i = _.indexOf(radii, _.find(radii, function(i) {
+		return $.selectedRadius.text == i.text;
+	}));
+	if (i < radii.length-1) {
+		$.selectedRadius.text = radii[i+1].text;
+		Alloy.Globals.radius = radii[i+1].distance;	
+	}
+}
+function decreaseRadius() {
+	i = _.indexOf(radii, _.find(radii, function(i) {
+		return $.selectedRadius.text == i.text;
+	}));
+	if (i != 0) {
+		$.selectedRadius.text = radii[i-1].text;
+		Alloy.Globals.radius = 	radii[i-1].distance;
+	}
+}
+
+
 function openDetail(e) {
 	controller = Alloy.createController('detail');
 	d = controller.getView();
 	controller.setEvent(e.rowData.eventData);
 	d.open();
-}
-
-function decreaseRadius(e) {
-	var currentRadius = parseInt($.radiusLabel.text);
-	var newRadius = currentRadius;
-	if (currentRadius == 5) {
-		newRadius = 1;
-	} else if (currentRadius != 1) {
-		newRadius = currentRadius - 5;	
-	}
-	$.radiusLabel.text = newRadius;
-	
-}
-function increaseRadius(e) {
-	var currentRadius = parseInt($.radiusLabel.text);
-	var newRadius = currentRadius;
-	if (currentRadius == 1) {
-		newRadius = 5;
-	} else if (currentRadius != 50) {
-		newRadius = currentRadius + 5;	
-	}
-	$.radiusLabel.text = newRadius;	
 }
 
 var newAddress = undefined;
@@ -107,7 +107,7 @@ function changeSearchCriteria(e) {
 		
 	};
 	var success = function() {
-		var radius=$.radiusLabel.text.toString().split(' ')[0];
+		var radius=Alloy.Globals.radius;
 		keyword = undefined;
 		params = {
 			radius : parseInt(radius) * 1609,
@@ -240,8 +240,6 @@ exports.loadInitialData = function(options) {
 			$.table.setData([]);
 			Alloy.Globals.stopWaiting();
 		} else {
-			$.slider.text = $.slider.value;
-			$.radiusLabel.text = $.slider.value.toString().split('.')[0]+" mi";
 			$.locationLabel.text = Alloy.Globals.cityState;
 			$.addressTextField.value = Alloy.Globals.displayAddress;
 			if (!options.skip) {
@@ -345,14 +343,4 @@ function suggestContent(evt) {
 	emailDialog.subject = "Event/Business Suggestion";
 	emailDialog.toRecipients = ['info@localruckus.com'];
 	emailDialog.open();
-}
-
-function updateLabel(e){
-	var val = $.slider.value.toString();
-	if(val.indexOf('.')>0){
-		$.radiusLabel.text = val.split('.')[0]+" mi";
-	}else{
-		$.radiusLabel.text=val+" mi";
-	}
-    
 }

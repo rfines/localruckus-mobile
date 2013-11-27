@@ -66,4 +66,14 @@
 	borderColor:'#686767',
 	borderRadius:"7%",
 	color:'white'
+},
+".stepper": {
+	font: {
+		fontSize:20,
+		fontFamily: 'HelveticaNeue-Light'
+	},
+},
+".stepperLabel": {
+	color: "#fff",
+	width: 60
 }
