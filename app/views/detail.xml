@@ -1,17 +1,16 @@
 <Alloy>
 	<Window id="myWindow">
-		<Button onClick="backToList" height="50dp" right="5dp" top="8dp">Back</Button>
-		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="150dp" opacity="0.7" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+		<Button onClick="backToList" height="60dp" right="5dp" top="5dp">Back</Button>
+		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="130dp" opacity="0.7" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
-        <ScrollView height="Ti.UI.SIZE" top="200dp" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
-        	<View id="nameView" layout="vertical" height="Ti.UI.SIZE">
+        <ScrollView height="Ti.UI.SIZE" top="180dp" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
+        	<View id="nameView" layout="vertical" height="Ti.UI.SIZE" width="98%">
         		<Label id="name" class="name"/>
         		<Label id="time"/>
         	</View>
     		<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"></ImageView>
         	<Label id="businessName" onClick="showBusinessDetails" />
     		<Label id="location" class="location" onClick="getDirections"/> 
-    		<Button onClick="getDirections" class="getDirections">Get Directions</Button>
         	<Label><Label id="descriptionView" height="Ti.UI.SIZE" top="0" bottom="0" left="10" right="10"></Label></Label>
 		</ScrollView>
 	</Window>

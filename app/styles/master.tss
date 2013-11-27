@@ -49,8 +49,8 @@
 }
 ".link":{
 	font: {
-		fontSize:15,
-		fontFamily: 'HelveticaNeue-Light'
+		fontSize:16,
+		fontFamily: 'HelveticaNeue-Regular'
 	},
 	textAlign:"left",
 	color:'686767',
@@ -69,11 +69,27 @@
 },
 ".stepper": {
 	font: {
-		fontSize:20,
+		fontSize:30,
 		fontFamily: 'HelveticaNeue-Light'
 	},
 },
 ".stepperLabel": {
 	color: "#fff",
-	width: 60
+	width: 60,
+	font: {
+		fontSize:14,
+		fontFamily: 'HelveticaNeue-Bold'
+	},
+},
+"#selectedRadius": {
+font: {
+        fontFamily: 'HelveticaNeue-Thin',
+        fontSize: '30dp'
+       },	
+},
+"#selectedTimeFrame": {
+font: {
+        fontFamily: 'HelveticaNeue-Thin',
+        fontSize: '30dp'
+       }		
 }

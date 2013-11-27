@@ -16,10 +16,10 @@
 }
 "#location":{
 	font: {
-		fontFamily: 'HelveticaNeue-Light',
-		fontSize:'11dp'
+		fontFamily: 'HelveticaNeue-Light'
 	},
-	color:'686767'
+	color:"#5180f3",
+	top: "3"
 }
 "#locationView":{
 	top: 10
@@ -28,10 +28,11 @@
 	color:'686767'
 }
 "#businessName":{
-	font: {
-		fontFamily: 'HelveticaNeue-Light'
+font: {
+		fontFamily: 'HelveticaNeue-Medium',
+		fontSize: "16dp"
 	},
-	color:'686767'
+	color:"#5180f3"
 }
 "#detailImage":{
 	top:"10dp"
@@ -41,5 +42,6 @@
 	font: {
 		fontFamily: 'HelveticaNeue-Light'
 	},
-	color:'686767'
+	color:'686767',
+	top: "15"
 }
