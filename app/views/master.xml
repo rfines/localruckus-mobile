@@ -11,7 +11,7 @@
 				</View>
 
 				<View top="8" height="Ti.UI.SIZE">
-				<TextField id="searchTerms" class="topDrawerText" color="black" width="87%" left="10%"/>
+				<TextField id="searchTerms" class="topDrawerText" color="black" width="87%" left="10%" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS"/>
 					<Button id="myLocation" left="3" top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundImage="/images/myLocation-icon.png" onClick="myLocation"></Button>
 					<TextField id="addressTextField" class="topDrawerText" color="black" onChange="changeAddress" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS" width="87%" left="10%"/>
 					<View layout="horizontal" top="95">
