@@ -29,7 +29,7 @@ exports.getEvents = function(options) {
 			options.callback(e,undefined);
 		}
 	});
-	Ti.API.error("Sending xhr request");
+	Ti.API.info("Sending xhr request to "+url);
 	xhr.open("GET", url);
 	xhr.setTimeout(30000);
 	xhr.setRequestHeader("Authorization", "Basic aHJkZmVwU3p6UGVPQ1dvVVNvVDU6Nlg2MlF1SEdCZFIxcExOTXFQSlEwVE5KVU9WcjBnS0daVXlESU01bQ==");

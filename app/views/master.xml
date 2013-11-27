@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="eventList" title="Local Ruckus">
+	<Window id="mainWindow" class="eventList" title="Local Ruckus">
 		<Window id="timePicker" bottom="0" selectionIndicator="true" useSpinner="true" height="0" opacity="1.0" backgroundColor="white" zIndex="999">
 			<Picker id="picker" width="Ti.UI.FILL" height="Ti.UI.FILL" onChange="changeTime">
 				<PickerColumn id="column1">

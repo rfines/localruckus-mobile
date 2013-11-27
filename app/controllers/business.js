@@ -44,7 +44,6 @@ exports.setBusinessInfo = function(bus) {
 				image : "/images/safari.png",
 				callback : function(e) {
 					var url = 'tel:' + bus.contactPhone;
-					alert(url);
 					Titanium.Platform.openURL(url);
 				}
 			};

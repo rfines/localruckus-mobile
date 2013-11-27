@@ -98,7 +98,13 @@ function myLocation(e) {
 function changeSearchCriteria(e) {
 	toggleSearchDrawer();
 	var failure = function() {
-		alert('Could not get your location');
+		var dialog = Ti.UI.createAlertDialog({
+			title:"Oops",
+			message:"The address you entered could not be found.  Try entering your city and state or your zip code.",
+			animate:true,
+			ok:'Ok'
+		}).show();
+		
 	};
 	var success = function() {
 		var radius=$.radiusLabel.text.toString().split(' ')[0];
@@ -139,7 +145,7 @@ function toggleSearchDrawer() {
 	drawerOpen = !drawerOpen;
 
 }
-
+var loading = false;
 var tag = "ENTERTAINMENT";
 var reset = false;
 var page = 0;
@@ -148,17 +154,20 @@ function loadEntertainment(e) {
 	flurry.logEvent('viewEvents', {category: 'ENTERTAINMENT'});
 	page = 0;
 	reset = true;
+	tag = "ENTERTAINMENT";
 	exports.loadInitialData({
-		tags : 'ENTERTAINMENT',
+		tags : tag,
 		radius : radius,
 		skip : 0
 	});
 }
 function loadCampus(e) {
+	flurry.logEvent('viewEvents', {category: 'CAMPUS'});
 	page = 0;
 	reset = true;
+	tag = "CAMPUS";
 	exports.loadInitialData({
-		tags : 'CAMPUS',
+		tags : tag,
 		radius : radius,
 		skip : 0
 	});
@@ -245,7 +254,8 @@ exports.loadInitialData = function(options) {
 					} else {
 						return moment(item.eventData.nextOccurrence.start).toISOString();
 					}
-				});				
+				});
+				(tableData.length ===25) ? $.is.state="DONE" : $.is.state="SUCCESS";				
 				$.table.setData(tableData);
 				Alloy.Globals.stopWaiting();
 			} else if (options.success) {
@@ -256,9 +266,11 @@ exports.loadInitialData = function(options) {
 	};
 	api.getEvents(options);
 };
-$.master.open();
+$.mainWindow.open();
 function myLoader(e) {
 	var el = e;
+	if(!loading){
+		loading = true;
 	exports.loadInitialData({
 		tags : tag,
 		radius : radius,
@@ -269,6 +281,9 @@ function myLoader(e) {
 			el.hide();
 		}
 	});
+	}else{
+		el.hide();
+	}
 }
 
 function loadMore(e) {
