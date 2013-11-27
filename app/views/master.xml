@@ -10,31 +10,30 @@
 					<Button onClick="changeSearchCriteria" color="white" zIndex="9999" right="10">Done</Button>
 				</View>
 				<View top="10" height="Ti.UI.SIZE">
-				<TextField id="searchTerms" class="topDrawerText" color="black" width="87%" left="10%"/>
-					<Button id="myLocation" left="3" top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundImage="/images/myLocation-icon.png" onClick="myLocation"></Button>
-					<TextField id="addressTextField" class="topDrawerText" color="black" onChange="changeAddress" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS" width="87%" left="10%"/>
-					<View layout="horizontal" top="95">
-						<Label id="radiusLabel" class="stepperLabel">Radius</Label>
-						<Button color="white" id="decreaseRadius" class="stepper stepperDown" onClick="decreaseRadius">-</Button>
-						<Label color="white" id="selectedRadius" width="200" textAlign="center">10 miles</Label>
-						<Button color="white" id="increaseRadius" class="stepper stepperUp" onClick="increaseRadius">+</Button>						
-					</View>
-					<View layout="horizontal" top="120">
-						<Label id="radiusLabel" class="stepperLabel">When</Label>
-						<Button color="white" id="decreaseTimeFrame" class="stepper stepperDown" onClick="decreaseTimeFrame">-</Button>
-						<Label color="white" id="selectedTimeFrame" width="200" textAlign="center">Any Time</Label>
-						<Button color="white" id="increaseTimeFrame" class="stepper stepperUp" onClick="increaseTimeFrame">+</Button>
-					</View>					
-					<View top="200" bottom="0" left="0" right="0" height="1" borderWidth="1" borderColor="orange" />
-					<View layout="vertical" top="225">
-						<Label id="addContent" class="addContent link" text="Add Event to Local Ruckus" color="silver" onClick="addContent"/>
-						<Label id="suggestContent" class="suggestContent link" text="Suggest a Business or Event" color="silver" onClick="suggestContent"/>
-						<Label id="terms" class="terms link" text="Terms of use" color="silver" onClick="terms"/>
-						<Label id="privacy" class="privacy link" text="Privacy Policy" color="silver" onClick="privacy"/>
-					</View>
+				<TextField id="searchTerms" class="topDrawerText" color="black" width="87%" left="10%" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS" />
+				<Button id="myLocation" left="3" top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundImage="/images/myLocation-icon.png" onClick="myLocation"></Button>
+				<TextField id="addressTextField" class="topDrawerText" color="black" onChange="changeAddress" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS" width="87%" left="10%"/>
+				<View layout="horizontal" top="95">
+					<Label id="radiusLabel" class="stepperLabel">Radius</Label>
+					<Button color="white" id="decreaseRadius" class="stepper stepperDown" onClick="decreaseRadius">-</Button>
+					<Label color="white" id="selectedRadius" width="200" textAlign="center">10 miles</Label>
+					<Button color="white" id="increaseRadius" class="stepper stepperUp" onClick="increaseRadius">+</Button>						
+				</View>
+				<View layout="horizontal" top="120">
+					<Label id="radiusLabel" class="stepperLabel">When</Label>
+					<Button color="white" id="decreaseTimeFrame" class="stepper stepperDown" onClick="decreaseTimeFrame">-</Button>
+					<Label color="white" id="selectedTimeFrame" width="200" textAlign="center">Any Time</Label>
+					<Button color="white" id="increaseTimeFrame" class="stepper stepperUp" onClick="increaseTimeFrame">+</Button>
+				</View>					
+				<View top="200" bottom="0" left="0" right="0" height="1" borderWidth="1" borderColor="orange" />
+				<View layout="vertical" top="225">
+					<Label id="addContent" class="addContent link" text="Add Event to Local Ruckus" color="silver" onClick="addContent"/>
+					<Label id="suggestContent" class="suggestContent link" text="Suggest a Business or Event" color="silver" onClick="suggestContent"/>
+					<Label id="terms" class="terms link" text="Terms of use" color="silver" onClick="terms"/>
+					<Label id="privacy" class="privacy link" text="Privacy Policy" color="silver" onClick="privacy"/>
 				</View>
 			</View>
-
+		</View>
 		</Window>
 		<TableView id="table" onClick="openDetail" top="60dp" height="Ti.UI.FILL"  backgroundColor="transparent"  borderColor="#55a9a7a7">
 			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
