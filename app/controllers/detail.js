@@ -292,7 +292,7 @@ function setWindow(eventData, business) {
 		title : "Share",
 		systemButton : Ti.UI.iPhone.SystemButton.ACTION,
 		id : "shareBtn",
-		left:150
+		left:"300dp"
 	});
 	shareBtn.addEventListener('click', share);
 	buttons.push(shareBtn);

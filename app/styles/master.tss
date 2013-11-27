@@ -11,19 +11,22 @@
 	top: 40,
 	opacity: 0.8
 },
-".search-icon" : {
-	top:30,
-	left: 5,
-	width:26,
-	height:26
+".bar-search-icon" : {
+	top:29,
+	right: 5,
+	width:28,
+	height:28
 },
+"#myLocation" :{
+	
+}
 "#locationLabel" : {
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	top: 25, 
 	width: Ti.UI.FILL, 
 	color: "#4579f7",
 	height:30, 
-	backgroundColor:"white",
+	backgroundColor:"transparent",
 	textAlign:"center"
 },
 ".topDrawerText" : {
