@@ -253,6 +253,10 @@ exports.loadInitialData = function(options) {
 				(tableData.length ===25) ? $.is.state="DONE" : $.is.state="SUCCESS";				
 				$.table.setData(tableData);
 				Alloy.Globals.stopWaiting();
+				if(options.success){
+					options.success(tableData);
+				}
+				
 			} else if (options.success) {
 				options.success(tableData);
 				Alloy.Globals.stopWaiting();

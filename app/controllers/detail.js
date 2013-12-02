@@ -154,11 +154,12 @@ function createActions(){
 		toolbar:undefined,
 		buttons:activityButtons
 	};
-	var url = data.website || "http://localruckus.com/event/" + data._id.toString();
+	
 	var mi = {
 		title : "More Info",
 		image : "/images/safari.png",
 		callback : function(e) {
+			var url = data.website || "http://localruckus.com/event/" + data._id.toString();
 			Titanium.Platform.openURL(url);
 		}
 	};
@@ -171,11 +172,11 @@ function createActions(){
 		});
 		phoneBtn.addEventListener('click', callEvent);
 		//buttons.push(phoneBtn);
-		var cleanNumb = data.contactPhone.replace(/[^0-9]/g,"");
 		var pb = {
 			title : "Call Event",
 			image : "/images/safari.png",
 			callback : function(e) {
+				var cleanNumb = data.contactPhone.replace(/[^0-9]/g,"");
 				var url = 'tel:'+cleanNumb;
 				Titanium.Platform.openURL(url);
 			}
@@ -194,9 +195,7 @@ function createActions(){
 			title : "Tickets",
 			image : "/images/safari.png",
 			callback : function(e) {
-				if (data.ticketUrl) {
-					Titanium.Platform.openURL(data.ticketUrl);
-				}
+				Titanium.Platform.openURL(data.ticketUrl);
 			}
 		};
 		activityButtons.push(tb);
@@ -212,8 +211,7 @@ function createActions(){
 	var shareBtn = Ti.UI.createButton({
 		title : "Share",
 		systemButton : Ti.UI.iPhone.SystemButton.ACTION,
-		id : "shareBtn",
-		left:"300dp"
+		id : "shareBtn"
 	});
 	shareBtn.addEventListener('click', share);
 	var toolbar = Titanium.UI.iOS.createToolbar({
