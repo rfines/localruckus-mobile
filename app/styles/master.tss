@@ -93,3 +93,6 @@ font: {
         fontSize: '30dp'
        }		
 }
+".button-text":{
+bottom: '0dp'
+}

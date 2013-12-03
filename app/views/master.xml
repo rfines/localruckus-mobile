@@ -47,7 +47,7 @@
 		</TableView>
 		<Toolbar platform="ios" bottom="0" height="60dp" barColor="rgba(255,255,255,0.4)" translucent="true">
 			<Items>
-				<Button onClick="loadEntertainment" backgroundImage="/images/toolbar_icons/everything_star.png"></Button>
+				<Button onClick="loadEntertainment" backgroundImage="/images/toolbar_icons/everything_star.png" title="All" selectedColor="blue"></Button>
 				<FlexSpace/>
 				<Button onClick="loadMusic" backgroundImage="/images/toolbar_icons/music_note.png"></Button>
 				<FlexSpace/>

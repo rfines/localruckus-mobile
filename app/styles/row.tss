@@ -6,12 +6,9 @@
 	textAlign: "left"
 },
 ".eventDetails": {
-	textAlign: "left",
-	width: Ti.UI.FILL
 },
 "#name": {
-	textAlign:"left",
-	padding:"10dp",
+	textAlign:"TEXT_ALIGNMENT_LEFT",
     font: {
         fontSize: '16dp',
         fontFamily: 'HelveticaNeue-Thin'

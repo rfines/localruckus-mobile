@@ -11,7 +11,7 @@
     		<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"></ImageView>
         	<Label id="businessName" onClick="showBusinessDetails" />
     		<Label id="location" class="location" onClick="getDirections"/> 
-        	<Label><Label id="descriptionView" height="Ti.UI.SIZE" top="0" bottom="0" left="10" right="10"></Label></Label>
+        	<Label><Label id="descriptionView" height="Ti.UI.SIZE" top="0" bottom="60" left="10" right="10"></Label></Label>
 		</ScrollView>
 	</Window>
 </Alloy>

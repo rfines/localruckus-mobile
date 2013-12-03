@@ -4,7 +4,7 @@
 			<ImageView id="detailImage" image="/images/localRuckusPlaceholder.png"/>
 		</View>
 		<View class="eventDetails" width="60%" selectedColor="white">
-			<Label id="name" />
+			<Label id="name" textAlign="TEXT_ALIGNMENT_LEFT" left="2dp"/>
 		</View>
 		<View class="eventTime" width="18%" right="0">
 			<View class="calendarPage">

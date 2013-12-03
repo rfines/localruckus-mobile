@@ -90,7 +90,7 @@ function buyTickets(evt) {
 }
 
 function share(evt) {
-	var defaultMessage = "Check out this awesome event! I'm thinking about going, who wants to go with me?";
+	var defaultMessage = "Check out this awesome event -";
 	var link = "http://localruckus.com/event/" + data._id;
 	defaultMessage = defaultMessage + " " + link;
 	var image = "";
@@ -157,7 +157,7 @@ function createActions(){
 	
 	var mi = {
 		title : "More Info",
-		image : "/images/safari.png",
+		image : "/images/more-info-icon.png",
 		callback : function(e) {
 			var url = data.website || "http://localruckus.com/event/" + data._id.toString();
 			Titanium.Platform.openURL(url);
@@ -174,7 +174,7 @@ function createActions(){
 		//buttons.push(phoneBtn);
 		var pb = {
 			title : "Call Event",
-			image : "/images/safari.png",
+			image : "/images/call-me-icon.png",
 			callback : function(e) {
 				var cleanNumb = data.contactPhone.replace(/[^0-9]/g,"");
 				var url = 'tel:'+cleanNumb;
@@ -193,7 +193,7 @@ function createActions(){
 		//buttons.push(ticketBtn);
 		var tb = {
 			title : "Tickets",
-			image : "/images/safari.png",
+			image : "/images/ticket-icon.png",
 			callback : function(e) {
 				Titanium.Platform.openURL(data.ticketUrl);
 			}
@@ -202,7 +202,7 @@ function createActions(){
 	}
 	var gd = {
 		title : "Directions",
-		image : "/images/safari.png",
+		image : "/images/get-directions-icon.png",
 		callback : function(e) {
 			Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
 		}
