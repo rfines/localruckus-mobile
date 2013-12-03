@@ -1,0 +1,5 @@
+<p>0.4.0
+    Added changeIndex() function
+    Fixed some bugs that affected the index and multiClickIndex properties
+0.3.1
+    Fixed guid to address the "Unlicensed" error that some users were getting</p>

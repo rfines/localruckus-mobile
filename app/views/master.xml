@@ -45,14 +45,14 @@
 			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
 			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMore" />
 		</TableView>
-		<TabbedBar platform="ios" bottom="0" height="60dp" barColor="rgba(255,255,255,0.4)" translucent="true" style="Titanium.UI.iPhone.SystemButtonStyle.BAR">
+		<TabbedBar platform="ios" bottom="0" backgroundColor="rgba(255,255,255,0.7)" borderWidth="0"   style="Titanium.UI.iPhone.SystemButtonStyle.Plain">
 			<Labels>
-				<Label onClick="loadEntertainment" backgroundImage="/images/toolbar_icons/everything_star.png" title="All"></Label>
-				<Label onClick="loadMusic" backgroundImage="/images/toolbar_icons/music_note.png" title="Music"></Label>
-				<Label onClick="loadArts" backgroundImage="/images/toolbar_icons/arts_pallett.png" title="Art"></Label>
-				<Label onClick="loadFamily" backgroundImage="/images/toolbar_icons/family_family.png" title="Family"></Label>
-				<Label onClick="loadFood" backgroundImage="/images/toolbar_icons/food_utensils.png" title="Dining"></Label>
-				<Label onClick="loadCampus" backgroundImage="/images/toolbar_icons/student_only.png" title="Campus"></Label>
+				<Label backgroundImage="/images/toolbar_icons/everything_star.png" color="#000000">All</Label>
+				<Label  backgroundImage="/images/toolbar_icons/music_note.png" title="Music"></Label>
+				<Label  backgroundImage="/images/toolbar_icons/arts_pallett.png" title="Art"></Label>
+				<Label  backgroundImage="/images/toolbar_icons/family_family.png" title="Family"></Label>
+				<Label backgroundImage="/images/toolbar_icons/food_utensils.png" title="Dining"></Label>
+				<Label backgroundImage="/images/toolbar_icons/student_only.png" title="Campus"></Label>
 			</Labels>
 		</TabbedBar>
 	</Window>

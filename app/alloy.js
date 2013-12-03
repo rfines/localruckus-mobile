@@ -4,6 +4,8 @@ flurry.logUncaughtExceptions(true);
 flurry.crashReportingEnabled(true);
 flurry.logEvent('start');
 
+var fancytabbedbar = require('com.pudgyfish.fancytabbedbar');
+
 Alloy.Globals.baseUrl = "http://api.hoopla.io";
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 

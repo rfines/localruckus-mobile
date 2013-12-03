@@ -44,7 +44,8 @@
         <module platform="android">facebook</module>
         <module platform="iphone">facebook</module>
         <module platform="iphone">dk.napp.social</module>
-		<module version="2.6" platform="iphone">sg.flurry</module>  
+        <module platform="iphone" version="2.6">sg.flurry</module>
+        <module platform="iphone">com.pudgyfish.fancytabbedbar</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>
