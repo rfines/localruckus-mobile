@@ -185,28 +185,29 @@ function toggleSearchDrawer() {
 	drawerOpen = !drawerOpen;
 
 }
-
+var bar = {};
 var loading = false;
 var tag = "ENTERTAINMENT";
 var reset = false;
 var page = 0;
-function iconHandler(e, initial){
-	if(e.index === 0){
+function iconHandler(e) {
+	if (e.index === 0) {
 		loadEntertainment(e);
-	}else if(e.index === 1){
+	} else if (e.index === 1) {
 		loadMusic(e);
-	}else if(e.index === 2){
+	} else if (e.index === 2) {
 		loadArts(e);
-	}else if(e.index ===3){
+	} else if (e.index === 3) {
 		loadFamily(e);
-	}else if(e.index === 4){
+	} else if (e.index === 4) {
 		loadFood(e);
-	}else if(e.index === 5){
+	} else if (e.index === 5) {
 		loadCampus(e);
-	}else{
+	} else {
 		loadEntertainment(e);
 	}
 }
+
 function loadEntertainment(e) {
 	flurry.logEvent('viewEvents', {
 		category : 'ENTERTAINMENT'
@@ -339,6 +340,7 @@ exports.loadInitialData = function(options) {
 	};
 	api.getEvents(options);
 };
+setTabbedBar();
 $.mainWindow.open();
 function myLoader(e) {
 	var el = e;
@@ -415,4 +417,69 @@ function suggestContent(evt) {
 	emailDialog.subject = "Event/Business Suggestion";
 	emailDialog.toRecipients = ['info@localruckus.com'];
 	emailDialog.open();
+}
+
+function setTabbedBar() {
+	var win = $.mainWindow;
+	var fancytabbedbar = require('com.pudgyfish.fancytabbedbar');
+	
+	var tabbedBar = fancytabbedbar.createFancyTabbedBar({
+		id:"tabbedBar",
+		bottom : 0,
+		height : 40,
+		index : 0,
+		labels : [{
+			width:40,
+			left:10,
+			backgroundImage : 'images/toolbar_icons/everything_star.png',
+			backgroundSelectedImage : 'images/toolbar_icons/everything_star_selected.png',
+			textProps : {
+				color : '#900'
+			}
+			
+		}, {
+			width:40,
+			left:10,
+			backgroundImage : 'images/toolbar_icons/music_note.png',
+			backgroundSelectedImage : 'images/toolbar_icons/music_note_selected.png',
+			textProps : {
+				color:"#900"
+			}
+		}, {
+			width:40,
+			left:10,
+			backgroundImage : 'images/toolbar_icons/arts_pallett.png',
+			backgroundSelectedImage : 'images/toolbar_icons/arts_pallett_selected.png',
+			textProps:{
+				color:"#900"
+			}
+		}, {
+			width:40,
+			left:10,
+			backgroundImage : 'images/toolbar_icons/family_family.png',
+			backgroundSelectedImage : 'images/toolbar_icons/family_family_selected.png',
+			textProps:{
+				color:"#900"
+			}
+		}, {
+			width:40,
+			left:10,
+			backgroundImage : 'images/toolbar_icons/food_utensils.png',
+			backgroundSelectedImage : 'images/toolbar_icons/food_utensils_selected.png',
+			textProps:{
+				color:"#900"
+			}
+		}, {
+			width:40,
+			left:10,
+			backgroundImage : 'images/toolbar_icons/student_only.png',
+			backgroundSelectedImage : 'images/toolbar_icons/student_only_selected.png',
+			textProps:{
+				color:"#900"
+			}
+		}]
+	});
+	tabbedBar.addEventListener("click", iconHandler);
+	win.add(tabbedBar);
+	bar = tabbedBar;
 }
