@@ -93,9 +93,10 @@ function share(evt) {
 		removeIcons : "camera,contact,print,copy"
 	}, activityButtons);
 	Social.addEventListener("customActivity", function(e) {
-		Ti.API.error(e);
 		if (e.title === "Call Event") {
-			callEvent(e);
+			var clean = data.contactPhone.toString().replace(/[^0-9\.]+/g, '');
+			var url = 'tel:' + clean; 
+			Ti.Platform.openURL(url);
 		} else if (e.title === "More Info") {
 			moreInfo(e);
 		} else if (e.title === "Tickets") {
