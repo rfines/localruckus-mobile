@@ -190,6 +190,23 @@ var loading = false;
 var tag = "ENTERTAINMENT";
 var reset = false;
 var page = 0;
+function iconHandler(e, initial){
+	if(e.index === 0){
+		loadEntertainment(e);
+	}else if(e.index === 1){
+		loadMusic(e);
+	}else if(e.index === 2){
+		loadArts(e);
+	}else if(e.index ===3){
+		loadFamily(e);
+	}else if(e.index === 4){
+		loadFood(e);
+	}else if(e.index === 5){
+		loadCampus(e);
+	}else{
+		loadEntertainment(e);
+	}
+}
 function loadEntertainment(e) {
 	flurry.logEvent('viewEvents', {
 		category : 'ENTERTAINMENT'
