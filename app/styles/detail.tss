@@ -19,11 +19,10 @@
 		fontFamily: 'HelveticaNeue-Light'
 	},
 	color:"#5180f3",
-	top: "3"
+	top: 10,
+	width: "98%"
 }
-"#locationView":{
-	top: 10
-}
+
 "#nameView":{
 	color:'686767'
 }
@@ -32,7 +31,8 @@ font: {
 		fontFamily: 'HelveticaNeue-Medium',
 		fontSize: "16dp"
 	},
-	color:"#5180f3"
+	color:"#5180f3",
+	top: 10
 }
 "#detailImage":{
 	top:"10dp"

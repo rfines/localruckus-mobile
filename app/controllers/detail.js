@@ -108,7 +108,7 @@ function share(evt) {
 }
 
 function getDirections(evt) {
-
+	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
 }
 
 function getBusiness(id, callback) {

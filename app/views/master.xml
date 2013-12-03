@@ -7,12 +7,12 @@
 		<Window id="topDrawer" width="Ti.UI.FILL" height = "0" top="60" opacity="0.9">
 			<ScrollView  backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
 				<View top="10" height="Ti.UI.SIZE">
-					<Button onClick="changeSearchCriteria" color="white" zIndex="9999" right="12" fontSize="15dp">Search</Button>
+					<Button onClick="changeSearchCriteria" color="white" zIndex="9999" right="12" fontSize="18dp" class="search-button">Search</Button>
 				</View>
 
 				<View top="8" height="Ti.UI.SIZE">
 				<TextField id="searchTerms" class="topDrawerText" color="black" width="87%" left="10%" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS"/>
-					<Button id="myLocation" left="3" top="50" borderRadius="2" borderColor="black" borderWidth="2" backgroundImage="/images/myLocation-icon.png" onClick="myLocation"></Button>
+					<Button id="myLocation" left="3" top="52" borderRadius="2" borderColor="black" borderWidth="2" backgroundImage="/images/myLocation-icon.png" onClick="myLocation"></Button>
 					<TextField id="addressTextField" class="topDrawerText" color="black" onChange="changeAddress" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS" width="87%" left="10%"/>
 					<View layout="horizontal" top="95">
 						<Button color="white" id="decreaseRadius" class="stepper stepperDown" onClick="decreaseRadius" zIndex="9998">-</Button>
@@ -45,20 +45,15 @@
 			<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="myLoader" />
 			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMore" />
 		</TableView>
-		<Toolbar platform="ios" bottom="0" height="60dp" barColor="rgba(255,255,255,0.4)" translucent="true">
-			<Items>
-				<Button onClick="loadEntertainment" backgroundImage="/images/toolbar_icons/everything_star.png" title="All" selectedColor="blue"></Button>
-				<FlexSpace/>
-				<Button onClick="loadMusic" backgroundImage="/images/toolbar_icons/music_note.png"></Button>
-				<FlexSpace/>
-				<Button onClick="loadArts" backgroundImage="/images/toolbar_icons/arts_pallett.png"></Button>
-				<FlexSpace/>
-				<Button onClick="loadFamily" backgroundImage="/images/toolbar_icons/family_family.png"></Button>
-				<FlexSpace/>
-				<Button onClick="loadFood" backgroundImage="/images/toolbar_icons/food_utensils.png"></Button>
-				<FlexSpace/>
-				<Button onClick="loadCampus" backgroundImage="/images/toolbar_icons/student_only.png"></Button>
-			</Items>
-		</Toolbar>
+		<TabbedBar platform="ios" bottom="0" height="60dp" barColor="rgba(255,255,255,0.4)" translucent="true" style="Titanium.UI.iPhone.SystemButtonStyle.BAR">
+			<Labels>
+				<Label onClick="loadEntertainment" backgroundImage="/images/toolbar_icons/everything_star.png" title="All"></Label>
+				<Label onClick="loadMusic" backgroundImage="/images/toolbar_icons/music_note.png" title="Music"></Label>
+				<Label onClick="loadArts" backgroundImage="/images/toolbar_icons/arts_pallett.png" title="Art"></Label>
+				<Label onClick="loadFamily" backgroundImage="/images/toolbar_icons/family_family.png" title="Family"></Label>
+				<Label onClick="loadFood" backgroundImage="/images/toolbar_icons/food_utensils.png" title="Dining"></Label>
+				<Label onClick="loadCampus" backgroundImage="/images/toolbar_icons/student_only.png" title="Campus"></Label>
+			</Labels>
+		</TabbedBar>
 	</Window>
 </Alloy>

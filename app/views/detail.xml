@@ -1,9 +1,9 @@
 <Alloy>
 	<Window id="myWindow">
-		<Button onClick="backToList" height="60dp" right="5dp" top="5dp">Back</Button>
-		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="50" height="130dp" opacity="0.7" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
+		<Button onClick="backToList" height="60dp" right="5dp" top="7dp">Back</Button>
+		<View id="mapview" ns="Ti.Map" layout="vertical" onClick="doClick" top="60" height="130dp" opacity="0.7" animate="true" regionFit="true" userLocation="true" mapType="Ti.Map.STANDARD_TYPE" >
         </View>
-        <ScrollView height="Ti.UI.SIZE" top="180dp" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
+        <ScrollView height="Ti.UI.SIZE" top="190dp" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
         	<View id="nameView" layout="vertical" height="Ti.UI.SIZE" width="98%">
         		<Label id="name" class="name"/>
         		<Label id="time"/>
