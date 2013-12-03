@@ -63,24 +63,14 @@ function linkToPage(evt) {
 }
 
 function moreInfo(evt) {
-		Titanium.Platform.openURL(data.website);
+	var url = data.website || "http://localruckus.com/event/" + data._id.toString();
+	Titanium.Platform.openURL(url);
 }
 
 function callEvent(evt) {
 	var url = 'tel:' + data.contactPhone;
-	var optionsAlertOpts = {
-		buttonNames : ['Cancel', 'Call'],
-		message : "Would you like to call now?",
-		title : 'Call Contact Number'
-	};
-	var dialog = Titanium.UI.createAlertDialog(optionsAlertOpts);
-	// DIALOG EVENT CLICK
-	dialog.addEventListener('click', function(e) {
-		if (e.index == '1') {
-			Ti.Platform.openURL(url);
-		}
-	});
-	dialog.show();
+	Ti.Platform.openURL(url);
+	
 }
 
 function buyTickets(evt) {
@@ -102,14 +92,16 @@ function share(evt) {
 		image : image,
 		removeIcons : "camera,contact,print,copy"
 	}, activityButtons);
-	Social.addEventListener("customActivity", function(e){
-		Ti.API.info("customActivity");        
+	Social.addEventListener("customActivity", function(e){        
 		Ti.API.error(e);  
-		switch(e.title){
-			case "Call Event": callEvent(e);
-			case "More Info": moreInfo(e);
-			case "Tickets": buyTickets(e);
-			case "Direcions":getDirections(e);
+		if(e.title === "Call Event"){
+			callEvent(e);
+		}else if(e.title ==="More Info"){
+			 moreInfo(e);
+		}else if(e.title="Tickets"){
+			buyTickets(e);
+		}else if(e.title==="Directions"){
+		 getDirections(e);
 		}     
                 
         });
@@ -119,7 +111,6 @@ function share(evt) {
 function getDirections(evt) {
 	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
 }
-
 function getBusiness(id, callback) {
 	var url = Alloy.Globals.baseUrl + "/business/" + id + "?height=150&width=150&imageType=circle";
 	var xhr = Ti.Network.createHTTPClient({
@@ -167,11 +158,7 @@ function createActions(){
 	
 	var mi = {
 		title : "More Info",
-		image : "/images/more-info-icon.png",
-		callback : function(e) {
-			var url = data.website || "http://localruckus.com/event/" + data._id.toString();
-			Titanium.Platform.openURL(url);
-		}
+		image : "/images/more-info-icon.png"
 	};
 	activityButtons.push(mi);
 
@@ -185,12 +172,6 @@ function createActions(){
 		var pb = {
 			title : "Call Event",
 			image : "/images/call-me-icon.png",
-			callback : function(e) {
-				var cleanNumb = data.contactPhone.replace(/[^0-9]/g,"");
-				alert(cleanNumb);
-				var url = 'tel:'+cleanNumb;
-				Titanium.Platform.openURL(url);
-			}
 		};
 		activityButtons.push(pb);
 	}
@@ -205,20 +186,12 @@ function createActions(){
 		var tb = {
 			title : "Tickets",
 			image : "/images/ticket-icon.png",
-			callback : function(e) {
-				alert(data.ticketUrl);
-				Titanium.Platform.openURL(data.ticketUrl);
-			}
 		};
 		activityButtons.push(tb);
 	}
 	var gd = {
 		title : "Directions",
 		image : "/images/get-directions-icon.png",
-		callback : function(e) {
-			alert("Opening Maps app to give directions.");
-			Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
-		}
 	};
 	activityButtons.push(gd);
 	var shareBtn = Ti.UI.createButton({
