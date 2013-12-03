@@ -70,7 +70,7 @@ function moreInfo(evt) {
 function callEvent(evt) {
 	var url = 'tel:' + data.contactPhone;
 	Ti.Platform.openURL(url);
-	
+
 }
 
 function buyTickets(evt) {
@@ -92,25 +92,27 @@ function share(evt) {
 		image : image,
 		removeIcons : "camera,contact,print,copy"
 	}, activityButtons);
-	Social.addEventListener("customActivity", function(e){        
-		Ti.API.error(e);  
-		if(e.title === "Call Event"){
+	Social.addEventListener("customActivity", function(e) {
+		Ti.API.error(e);
+		if (e.title === "Call Event") {
 			callEvent(e);
-		}else if(e.title ==="More Info"){
-			 moreInfo(e);
-		}else if(e.title="Tickets"){
+		} else if (e.title === "More Info") {
+			moreInfo(e);
+		} else if (e.title === "Tickets") {
 			buyTickets(e);
-		}else if(e.title==="Directions"){
-		 getDirections(e);
-		}     
-                
-        });
+		} else if (e.title === "Directions") {
+			getDirections(e);
+		}
+
+	});
 
 }
 
 function getDirections(evt) {
-	Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
+	var url = "http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0];
+	Ti.Platform.openURL(url);
 }
+
 function getBusiness(id, callback) {
 	var url = Alloy.Globals.baseUrl + "/business/" + id + "?height=150&width=150&imageType=circle";
 	var xhr = Ti.Network.createHTTPClient({
@@ -146,16 +148,17 @@ function setWindow(eventData, business) {
 	$.businessName.text = business.name;
 	var actions = createActions();
 	win.add(actions.toolbar);
-	
+
 	setMap();
 
 }
-function createActions(){
-	var actions={
-		toolbar:undefined,
-		buttons:activityButtons
+
+function createActions() {
+	var actions = {
+		toolbar : undefined,
+		buttons : activityButtons
 	};
-	
+
 	var mi = {
 		title : "More Info",
 		image : "/images/more-info-icon.png"
@@ -163,26 +166,14 @@ function createActions(){
 	activityButtons.push(mi);
 
 	if (data.contactPhone != undefined && data.contactPhone.length > 0) {
-		var phoneBtn = Ti.UI.createButton({
-			title : "Call Event",
-			id : "callBtn"
-		});
-		phoneBtn.addEventListener('click', callEvent);
-		//buttons.push(phoneBtn);
 		var pb = {
 			title : "Call Event",
 			image : "/images/call-me-icon.png",
 		};
 		activityButtons.push(pb);
 	}
-	
+
 	if (data.ticketUrl != undefined && data.ticketUrl.length > 0) {
-		var ticketBtn = Ti.UI.createButton({
-			title : "Tickets",
-			id : "ticketBtn"
-		});
-		ticketBtn.addEventListener('click', buyTickets);
-		//buttons.push(ticketBtn);
 		var tb = {
 			title : "Tickets",
 			image : "/images/ticket-icon.png",
@@ -211,7 +202,8 @@ function createActions(){
 	actions.buttons = activityButtons;
 	return actions;
 }
-function setMap(){
+
+function setMap() {
 	var loc = Ti.Map.createAnnotation({
 		latitude : data.location.geo.coordinates[1],
 		longitude : data.location.geo.coordinates[0],
