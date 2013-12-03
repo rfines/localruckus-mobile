@@ -63,9 +63,7 @@ function linkToPage(evt) {
 }
 
 function moreInfo(evt) {
-	if (data.website) {
 		Titanium.Platform.openURL(data.website);
-	}
 }
 
 function callEvent(evt) {
@@ -86,7 +84,7 @@ function callEvent(evt) {
 }
 
 function buyTickets(evt) {
-
+	Titanium.Platform.openURL(data.ticketUrl);
 }
 
 function share(evt) {
@@ -104,6 +102,17 @@ function share(evt) {
 		image : image,
 		removeIcons : "camera,contact,print,copy"
 	}, activityButtons);
+	Social.addEventListener("customActivity", function(e){
+		Ti.API.info("customActivity");        
+		Ti.API.error(e);  
+		switch(e.title){
+			case "Call Event": callEvent(e);
+			case "More Info": moreInfo(e);
+			case "Tickets": buyTickets(e);
+			case "Direcions":getDirections(e);
+		}     
+                
+        });
 
 }
 
@@ -146,6 +155,7 @@ function setWindow(eventData, business) {
 	$.businessName.text = business.name;
 	var actions = createActions();
 	win.add(actions.toolbar);
+	
 	setMap();
 
 }
@@ -177,13 +187,14 @@ function createActions(){
 			image : "/images/call-me-icon.png",
 			callback : function(e) {
 				var cleanNumb = data.contactPhone.replace(/[^0-9]/g,"");
+				alert(cleanNumb);
 				var url = 'tel:'+cleanNumb;
 				Titanium.Platform.openURL(url);
 			}
 		};
 		activityButtons.push(pb);
 	}
-
+	
 	if (data.ticketUrl != undefined && data.ticketUrl.length > 0) {
 		var ticketBtn = Ti.UI.createButton({
 			title : "Tickets",
@@ -195,6 +206,7 @@ function createActions(){
 			title : "Tickets",
 			image : "/images/ticket-icon.png",
 			callback : function(e) {
+				alert(data.ticketUrl);
 				Titanium.Platform.openURL(data.ticketUrl);
 			}
 		};
@@ -204,6 +216,7 @@ function createActions(){
 		title : "Directions",
 		image : "/images/get-directions-icon.png",
 		callback : function(e) {
+			alert("Opening Maps app to give directions.");
 			Ti.Platform.openURL("http://maps.apple.com/?saddr=" + Alloy.Globals.location.coords.latitude + "," + Alloy.Globals.location.coords.longitude + "&daddr=" + data.location.geo.coordinates[1] + "," + data.location.geo.coordinates[0]);
 		}
 	};

@@ -3,23 +3,64 @@ var api = require('utils/lrApiCall');
 var geo = require('utils/geoCoder');
 var moment = require('alloy/moment');
 
-var timeFrames = [
-	{text : 'Any Time', tf: {start: moment().startOf('day')}},
-	{text : 'Today', tf: {start: moment().startOf('day'), end : moment().endOf('day')}},
-	{text : 'Tomorrow', tf:{start: moment().startOf('day').add('days',1), end : moment().endOf('day').add('days',1)}},
-	{text : 'This Weekend', tf: {start: moment().day(5).startOf('day'), end : moment().day(7).endOf('day')}},
-	{text : 'Next Week', tf:{start: moment().startOf('week').add('weeks',1).add('days',1), end : moment().endOf('week').add('weeks', 1).add('days',1)}},
-	{text : 'Next Weekend', tf:{start: moment().day(5).startOf('day').add('weeks',1), end : moment().day(7).endOf('day').add('weeks',1)}},
-	{text : 'Later', tf: {start: moment().startOf('day').day(1).add('weeks',2)}}
-];
-var radii = [
-	{text : '1 mile', distance : 1*1609},
-	{text : '5 miles', distance : 5*1609},
-	{text : '10 miles', distance : 10*1609},
-	{text : '25 mile', distance : 25*1609},
-	{text : '50 miles', distance : 50*1609}
-];
-	
+var timeFrames = [{
+	text : 'Any Time',
+	tf : {
+		start : moment().startOf('day')
+	}
+}, {
+	text : 'Today',
+	tf : {
+		start : moment().startOf('day'),
+		end : moment().endOf('day')
+	}
+}, {
+	text : 'Tomorrow',
+	tf : {
+		start : moment().startOf('day').add('days', 1),
+		end : moment().endOf('day').add('days', 1)
+	}
+}, {
+	text : 'This Weekend',
+	tf : {
+		start : moment().day(5).startOf('day'),
+		end : moment().day(7).endOf('day')
+	}
+}, {
+	text : 'Next Week',
+	tf : {
+		start : moment().startOf('week').add('weeks', 1).add('days', 1),
+		end : moment().endOf('week').add('weeks', 1).add('days', 1)
+	}
+}, {
+	text : 'Next Weekend',
+	tf : {
+		start : moment().day(5).startOf('day').add('weeks', 1),
+		end : moment().day(7).endOf('day').add('weeks', 1)
+	}
+}, {
+	text : 'Later',
+	tf : {
+		start : moment().startOf('day').day(1).add('weeks', 2)
+	}
+}];
+var radii = [{
+	text : '1 mile',
+	distance : 1 * 1609
+}, {
+	text : '5 miles',
+	distance : 5 * 1609
+}, {
+	text : '10 miles',
+	distance : 10 * 1609
+}, {
+	text : '25 mile',
+	distance : 25 * 1609
+}, {
+	text : '50 miles',
+	distance : 50 * 1609
+}];
+
 Alloy.Globals.timeFrame = timeFrames[0].tf;
 Alloy.Globals.radius = radii[2].distance;
 exports.initialStateNoLocation = function() {
@@ -30,18 +71,19 @@ function increaseTimeFrame() {
 	i = _.indexOf(timeFrames, _.find(timeFrames, function(i) {
 		return $.selectedTimeFrame.text == i.text;
 	}));
-	if (i < timeFrames.length-1) {
-		$.selectedTimeFrame.text = timeFrames[i+1].text;
-		Alloy.Globals.timeFrame = 	timeFrames[i+1].tf;	
+	if (i < timeFrames.length - 1) {
+		$.selectedTimeFrame.text = timeFrames[i + 1].text;
+		Alloy.Globals.timeFrame = timeFrames[i + 1].tf;
 	}
 }
+
 function decreaseTimeFrame() {
 	i = _.indexOf(timeFrames, _.find(timeFrames, function(i) {
 		return $.selectedTimeFrame.text == i.text;
 	}));
 	if (i != 0) {
-		$.selectedTimeFrame.text = timeFrames[i-1].text;
-		Alloy.Globals.timeFrame = 	timeFrames[i-1].tf;
+		$.selectedTimeFrame.text = timeFrames[i - 1].text;
+		Alloy.Globals.timeFrame = timeFrames[i - 1].tf;
 	}
 }
 
@@ -49,21 +91,21 @@ function increaseRadius() {
 	i = _.indexOf(radii, _.find(radii, function(i) {
 		return $.selectedRadius.text == i.text;
 	}));
-	if (i < radii.length-1) {
-		$.selectedRadius.text = radii[i+1].text;
-		Alloy.Globals.radius = radii[i+1].distance;	
+	if (i < radii.length - 1) {
+		$.selectedRadius.text = radii[i + 1].text;
+		Alloy.Globals.radius = radii[i + 1].distance;
 	}
 }
+
 function decreaseRadius() {
 	i = _.indexOf(radii, _.find(radii, function(i) {
 		return $.selectedRadius.text == i.text;
 	}));
 	if (i != 0) {
-		$.selectedRadius.text = radii[i-1].text;
-		Alloy.Globals.radius = 	radii[i-1].distance;
+		$.selectedRadius.text = radii[i - 1].text;
+		Alloy.Globals.radius = radii[i - 1].distance;
 	}
 }
-
 
 function openDetail(e) {
 	controller = Alloy.createController('detail');
@@ -99,12 +141,12 @@ function changeSearchCriteria(e) {
 	toggleSearchDrawer();
 	var failure = function() {
 		var dialog = Ti.UI.createAlertDialog({
-			title:"Oops",
-			message:"The address you entered could not be found.  Try entering your city and state or your zip code.",
-			animate:true,
-			ok:'Ok'
+			title : "Oops",
+			message : "The address you entered could not be found.  Try entering your city and state or your zip code.",
+			animate : true,
+			ok : 'Ok'
 		}).show();
-		
+
 	};
 	var success = function() {
 		keyword = undefined;
@@ -143,12 +185,15 @@ function toggleSearchDrawer() {
 	drawerOpen = !drawerOpen;
 
 }
+
 var loading = false;
 var tag = "ENTERTAINMENT";
 var reset = false;
 var page = 0;
 function loadEntertainment(e) {
-	flurry.logEvent('viewEvents', {category: 'ENTERTAINMENT'});
+	flurry.logEvent('viewEvents', {
+		category : 'ENTERTAINMENT'
+	});
 	page = 0;
 	reset = true;
 	tag = "ENTERTAINMENT";
@@ -158,8 +203,11 @@ function loadEntertainment(e) {
 		skip : 0
 	});
 }
+
 function loadCampus(e) {
-	flurry.logEvent('viewEvents', {category: 'CAMPUS'});
+	flurry.logEvent('viewEvents', {
+		category : 'CAMPUS'
+	});
 	page = 0;
 	reset = true;
 	tag = "CAMPUS";
@@ -169,8 +217,11 @@ function loadCampus(e) {
 		skip : 0
 	});
 }
+
 function loadFood(e) {
-	flurry.logEvent('viewEvents', {category: 'FOOD-AND-DRINK'});
+	flurry.logEvent('viewEvents', {
+		category : 'FOOD-AND-DRINK'
+	});
 	page = 0;
 	reset = true;
 	tag = "FOOD-AND-DRINK";
@@ -183,7 +234,9 @@ function loadFood(e) {
 }
 
 function loadMusic(e) {
-	flurry.logEvent('viewEvents', {category: 'MUSIC'});
+	flurry.logEvent('viewEvents', {
+		category : 'MUSIC'
+	});
 	page = 0;
 	reset = true;
 	tag = "MUSIC";
@@ -195,7 +248,9 @@ function loadMusic(e) {
 }
 
 function loadArts(e) {
-	flurry.logEvent('viewEvents', {category: 'ARTS'});
+	flurry.logEvent('viewEvents', {
+		category : 'ARTS'
+	});
 	page = 0;
 	reset = true;
 	tag = "ARTS";
@@ -207,7 +262,9 @@ function loadArts(e) {
 }
 
 function loadFamily(e) {
-	flurry.logEvent('viewEvents', {category: 'FAMILY-AND-CHILDREN'});
+	flurry.logEvent('viewEvents', {
+		category : 'FAMILY-AND-CHILDREN'
+	});
 	page = 0;
 	reset = true;
 	tag = "FAMILY-AND-CHILDREN";
@@ -241,22 +298,22 @@ exports.loadInitialData = function(options) {
 			$.addressTextField.value = Alloy.Globals.displayAddress;
 			if (!options.skip) {
 				tableData = _.sortBy(tableData, function(item) {
-					if (Alloy.Globals.timeFrame.start.isAfter(moment().endOf('day'))) {
+					if (Alloy.Globals.timeFrame.start.isAfter(moment().utc().endOf('day'))) {
 						ne = _.find(item.eventData.occurrences, function(occ) {
-							return moment(occ.start).isAfter(Alloy.Globals.timeFrame.start);
+							return moment(occ.start).utc().isAfter(Alloy.Globals.timeFrame.start);
 						});
-						return moment(ne.start).toISOString();						
+						return moment(ne.start).utc().toISOString();
 					} else {
-						return moment(item.eventData.nextOccurrence.start).toISOString();
+						return moment(item.eventData.nextOccurrence.start).utc().toISOString();
 					}
 				});
-				(tableData.length ===25) ? $.is.state="DONE" : $.is.state="SUCCESS";				
+				(tableData.length === 25) ? $.is.state = "DONE" : $.is.state = "SUCCESS";
 				$.table.setData(tableData);
 				Alloy.Globals.stopWaiting();
-				if(options.success){
+				if (options.success) {
 					options.success(tableData);
 				}
-				
+
 			} else if (options.success) {
 				options.success(tableData);
 				Alloy.Globals.stopWaiting();
@@ -268,19 +325,19 @@ exports.loadInitialData = function(options) {
 $.mainWindow.open();
 function myLoader(e) {
 	var el = e;
-	if(!loading){
+	if (!loading) {
 		loading = true;
-	exports.loadInitialData({
-		tags : tag,
-		radius : Alloy.Globals.radius,
-		success : function() {
-			el.hide();
-		},
-		error : function() {
-			el.hide();
-		}
-	});
-	}else{
+		exports.loadInitialData({
+			tags : tag,
+			radius : Alloy.Globals.radius,
+			success : function() {
+				el.hide();
+			},
+			error : function() {
+				el.hide();
+			}
+		});
+	} else {
 		el.hide();
 	}
 }
@@ -304,7 +361,7 @@ function loadMore(e) {
 }
 
 function addContent(evt) {
-	
+
 	var popup = Ti.UI.createAlertDialog({
 		title : "Add Event?",
 		backgroundColor : 'white',
@@ -317,13 +374,10 @@ function addContent(evt) {
 		if (e.index === e.source.cancel) {
 			Ti.API.info('The cancel button was clicked');
 			popup.hide();
-		}else if(e.index === 1){
+		} else if (e.index === 1) {
 			popup.hide();
 			Titanium.Platform.openURL("https://www.hoopla.io");
 		}
-		Ti.API.info('e.cancel: ' + e.cancel);
-		Ti.API.info('e.source.cancel: ' + e.source.cancel);
-		Ti.API.info('e.index: ' + e.index);
 	});
 	popup.show();
 
