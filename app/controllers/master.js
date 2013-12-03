@@ -185,7 +185,6 @@ function toggleSearchDrawer() {
 	drawerOpen = !drawerOpen;
 
 }
-var bar = {};
 var loading = false;
 var tag = "ENTERTAINMENT";
 var reset = false;
@@ -422,12 +421,12 @@ function suggestContent(evt) {
 function setTabbedBar() {
 	var win = $.mainWindow;
 	var fancytabbedbar = require('com.pudgyfish.fancytabbedbar');
-	
 	var tabbedBar = fancytabbedbar.createFancyTabbedBar({
 		id:"tabbedBar",
 		bottom : 0,
 		height : 40,
 		index : 0,
+		backgroundColor:"gray",
 		labels : [{
 			width:40,
 			left:10,
