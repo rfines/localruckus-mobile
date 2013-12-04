@@ -16,7 +16,12 @@ exports.setEvent = function(eventData) {
 	} else {
 		if (Alloy.Globals.businesses != undefined && Alloy.Globals.businesses.length > 0) {
 			business = _.find(Alloy.Globals.businesses, function(b) {
-				return b._id === eventData.host || b._id === eventData.business;
+				if (eventData.host != undefined) {
+					return b._id === eventData.host
+				} else {
+					return b._id === eventData.business;
+				}
+
 			});
 		} else {
 			Alloy.Globals.businesses = [];
@@ -95,7 +100,7 @@ function share(evt) {
 	Social.addEventListener("customActivity", function(e) {
 		if (e.title === "Call Event") {
 			var clean = data.contactPhone.toString().replace(/[^0-9\.]+/g, '');
-			var url = 'tel:' + clean; 
+			var url = 'tel:' + clean;
 			Ti.Platform.openURL(url);
 		} else if (e.title === "More Info") {
 			moreInfo(e);
