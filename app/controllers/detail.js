@@ -16,7 +16,7 @@ exports.setEvent = function(eventData) {
 	} else {
 		if (Alloy.Globals.businesses != undefined && Alloy.Globals.businesses.length > 0) {
 			business = _.find(Alloy.Globals.businesses, function(b) {
-				return b._id == eventData.host;
+				return b._id === eventData.host || b._id === eventData.business;
 			});
 		} else {
 			Alloy.Globals.businesses = [];
