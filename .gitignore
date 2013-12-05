@@ -1,3 +1,4 @@
+
 .fastdev.lock
 .DS_Store
 build.log
@@ -9,3 +10,4 @@ tmp
 Resources
 .settings/com.appcelerator.titanium.mobile.prefs
 modules/iphone/com.pudgyfish.fancytabbedbar/0.4.0/manifest
+.metadata/
