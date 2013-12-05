@@ -1,7 +1,6 @@
 <Alloy>
 	<Window id="mainWindow" class="eventList" title="Local Ruckus">
 		<View height="60dp" top="0">
-			<ImageView image="/images/search-icon.png" class="bar-search-icon" onClick="toggleSearchDrawer"></ImageView>
 			<Label id="locationLabel" onClick="toggleSearchDrawer"/>
 		</View>
 		<Window id="topDrawer" width="Ti.UI.FILL" height = "0" top="60" opacity="0.9">

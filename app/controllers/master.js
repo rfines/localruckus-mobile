@@ -424,12 +424,14 @@ function setTabbedBar() {
 	var tabbedBar = fancytabbedbar.createFancyTabbedBar({
 		id:"tabbedBar",
 		bottom : 0,
-		height : 40,
+		height : 50,
 		index : 0,
-		backgroundColor:"gray",
+		backgroundColor:"rgba(255,255,255,0.9)",
 		labels : [{
 			width:40,
-			left:10,
+			height:  41,
+			left:6,
+			top:4,
 			backgroundImage : 'images/toolbar_icons/everything_star.png',
 			backgroundSelectedImage : 'images/toolbar_icons/everything_star_selected.png',
 			textProps : {
@@ -438,7 +440,9 @@ function setTabbedBar() {
 			
 		}, {
 			width:40,
-			left:10,
+			height:  41,
+			left:12,
+			top:4,
 			backgroundImage : 'images/toolbar_icons/music_note.png',
 			backgroundSelectedImage : 'images/toolbar_icons/music_note_selected.png',
 			textProps : {
@@ -446,7 +450,9 @@ function setTabbedBar() {
 			}
 		}, {
 			width:40,
-			left:10,
+			height: 41,
+			left:12,
+			top:4,
 			backgroundImage : 'images/toolbar_icons/arts_pallett.png',
 			backgroundSelectedImage : 'images/toolbar_icons/arts_pallett_selected.png',
 			textProps:{
@@ -454,7 +460,9 @@ function setTabbedBar() {
 			}
 		}, {
 			width:40,
-			left:10,
+			height:  41,
+			left:14,
+			top:4,
 			backgroundImage : 'images/toolbar_icons/family_family.png',
 			backgroundSelectedImage : 'images/toolbar_icons/family_family_selected.png',
 			textProps:{
@@ -462,7 +470,9 @@ function setTabbedBar() {
 			}
 		}, {
 			width:40,
-			left:10,
+			height:  41,
+			left:9,
+			top:4,
 			backgroundImage : 'images/toolbar_icons/food_utensils.png',
 			backgroundSelectedImage : 'images/toolbar_icons/food_utensils_selected.png',
 			textProps:{
@@ -470,7 +480,9 @@ function setTabbedBar() {
 			}
 		}, {
 			width:40,
-			left:10,
+			height:  41,
+			left:9,
+			top:4,
 			backgroundImage : 'images/toolbar_icons/student_only.png',
 			backgroundSelectedImage : 'images/toolbar_icons/student_only_selected.png',
 			textProps:{

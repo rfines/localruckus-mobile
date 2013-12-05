@@ -37,6 +37,11 @@ font: {
 "#detailImage":{
 	top:"10dp"
 }
+"#mapview":{
+	borderBottom:true,
+	borderColor: "#cccccc",
+	borderWidth: "1dp"
+}
 "#descriptionView":{
 	textAlign:"left",
 	font: {

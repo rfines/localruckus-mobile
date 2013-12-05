@@ -33,7 +33,7 @@ color: "#d6f442"
 	top: 25, 
 	width: Ti.UI.FILL, 
 	color: "#4579f7",
-	height:30, 
+	height:25, 
 	backgroundColor:"transparent",
 	textAlign:"center"
 },
