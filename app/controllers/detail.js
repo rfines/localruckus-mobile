@@ -164,7 +164,7 @@ function createActions() {
 		toolbar : undefined,
 		buttons : activityButtons
 	};
-
+	
 	var mi = {
 		title : "More Info",
 		image : "/images/more-info-icon.png"
@@ -191,20 +191,42 @@ function createActions() {
 		image : "/images/get-directions-icon.png",
 	};
 	activityButtons.push(gd);
+	//action buttons
 	var shareBtn = Ti.UI.createButton({
 		title : "Share",
 		systemButton : Ti.UI.iPhone.SystemButton.ACTION,
-		id : "shareBtn"
+		id : "shareBtn",
+		right:10,
+		top:13
 	});
 	shareBtn.addEventListener('click', share);
-	var toolbar = Titanium.UI.iOS.createToolbar({
-		items : [shareBtn],
-		bottom : 0,
-		translucent : true,
-		borderTop : true,
-		borderBottom : false
+	var backBtn = Ti.UI.createButton({
+		title:"Back",
+		left:10,
+		top:13
 	});
-	actions.toolbar = toolbar;
+	backBtn.addEventListener("click",backToList);
+	var view = Ti.UI.createView({
+		height:50,
+		top:0,
+		backgroundColor:"white",
+		opacity:0.6,
+		width:Ti.UI.FILL
+	});
+	var flexSpace = Titanium.UI.createButton({
+        systemButton: Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
+    }); 
+	var toolbar = Titanium.UI.iOS.createToolbar({
+		items : [backBtn,flexSpace,flexSpace,flexSpace,shareBtn],
+		height:60,
+		top:13,
+		right:0,
+		translucent : true,
+		borderTop : false,
+		borderBottom : false,
+	});
+	view.add(toolbar);
+	actions.toolbar = view;
 	actions.buttons = activityButtons;
 	return actions;
 }
