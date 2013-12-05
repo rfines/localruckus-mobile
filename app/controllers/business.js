@@ -25,6 +25,7 @@ exports.setBusinessInfo = function(bus) {
 		var url = bus.website || "http://localruckus.com/event/" + bus._id.toString();
 		var actions = createActions(bus);
 		win.add(actions.toolbar);
+		win.add(actions.eventsBar);
 
 		var loc = Ti.Map.createAnnotation({
 			latitude : bus.location.geo.coordinates[1],
@@ -243,29 +244,55 @@ function createActions(bus) {
 		};
 		activityButtons.push(pb);
 	}
-
-	var shareBtn = Ti.UI.createButton({
-		title : "Share",
-		systemButton : Ti.UI.iPhone.SystemButton.ACTION,
-		id : "shareBtn",
-		left : 150
-	});
-	shareBtn.addEventListener('click', share);
-	buttons.push(shareBtn);
-	var eventBtn = Ti.UI.createButton({
+var eventBtn = Ti.UI.createButton({
 		title : "Upcoming Events at this Venue",
 		id : "eventsBtn"
 	});
 	eventBtn.addEventListener('click', businessEvents);
 	buttons.push(eventBtn);
+	var shareBtn = Ti.UI.createButton({
+		title : "Share",
+		systemButton : Ti.UI.iPhone.SystemButton.ACTION,
+		id : "shareBtn",
+		right:10,
+		top:13
+	});
+	shareBtn.addEventListener('click', share);
+	var backBtn = Ti.UI.createButton({
+		title:"Back",
+		left:10,
+		top:13
+	});
+	backBtn.addEventListener("click",backToList);
+	var view = Ti.UI.createView({
+		height:50,
+		top:0,
+		backgroundColor:"white",
+		opacity:0.6,
+		width:Ti.UI.FILL
+	});
+	var flexSpace = Titanium.UI.createButton({
+        systemButton: Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
+    }); 
 	var toolbar = Titanium.UI.iOS.createToolbar({
-		items : buttons,
-		bottom : 0,
+		items : [backBtn,flexSpace,flexSpace,flexSpace,shareBtn],
+		height:60,
+		top:13,
+		translucent : true,
+		borderTop : false,
+		borderBottom : false,
+	});
+	var eventBar = Titanium.UI.iOS.createToolbar({
+		items : [eventBtn],
+		height:60,
+		bottom:0,
 		translucent : true,
 		borderTop : true,
-		borderBottom : false
+		borderBottom : false,
 	});
-	actions.toolbar = toolbar;
+	view.add(toolbar);
+	actions.toolbar = view;
+	actions.eventsBar = eventBar;
 	actions.buttons = activityButtons;
 	return actions;
 }
