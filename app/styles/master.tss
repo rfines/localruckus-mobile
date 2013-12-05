@@ -9,15 +9,13 @@
 	width:Ti.UI.FILL,
 	height:0,
 	top: 40,
-	opacity: 0.8
+	opacity: 1.0
 },
 ".search-button" :{
 	font: {
 		fontFamily: 'HelveticaNeue-Bold',
-		fontSize: 18
-		
-},
-color: "#d6f442"
+		fontSize: 18		
+}
 }
 ".bar-search-icon" : {
 	top:29,
@@ -38,17 +36,18 @@ color: "#d6f442"
 	textAlign:"center"
 },
 ".topDrawerText" : {
-	color: "black",
 	width: Ti.UI.FILL,
 	height:30,
-	color: "white",
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
-}
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	font: {
+		fontSize:13
+	},
+},
 "#searchTerms" : {
 	 left:20,
 	 top: 10,
-	 borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-	 hintText:"Category, Keyword, or Venue"
+	 hintText:"Category, Keyword, or Venue",
+	 opacity: 1.0
 },
 "#addressTextField" : {
 	left:20,
@@ -100,7 +99,7 @@ font: {
         fontFamily: 'HelveticaNeue-Thin',
         fontSize: '30dp'
        }		
-}
+},
 ".button-text":{
 bottom: '0dp'
 }

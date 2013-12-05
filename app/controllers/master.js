@@ -386,7 +386,7 @@ function addContent(evt) {
 		buttonNames : ['Cancel', 'OK'],
 		exitOnCLose : true,
 		fullscreen : false,
-		message : "Local Ruckus is powered by the Hoopla.io event platform, click 'OK' to enter your event for free."
+		message : "Local Ruckus is powered by the Hoopla.io event platform, click 'OK' to visit www.hoopla.io and enter your event for free."
 	});
 	popup.addEventListener('click', function(e) {
 		if (e.index === e.source.cancel) {

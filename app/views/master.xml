@@ -3,31 +3,30 @@
 		<View height="60dp" top="0">
 			<Label id="locationLabel" onClick="toggleSearchDrawer"/>
 		</View>
-		<Window id="topDrawer" width="Ti.UI.FILL" height = "0" top="60" opacity="0.9">
-			<ScrollView  backgroundColor="black" height="Ti.UI.FILL" width="Ti.UI.FILL" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
-				<View top="10" height="Ti.UI.SIZE">
-					<Button onClick="changeSearchCriteria" color="white" zIndex="9999" right="12" fontSize="18dp" class="search-button">Search</Button>
-				</View>
+		<Window id="topDrawer" width="Ti.UI.FILL" height = "0" top="60">
+			<ScrollView  backgroundColor="#000000" height="Ti.UI.FILL" width="Ti.UI.FILL" layout="vertical" scrollType="vertical" contentWidth="Ti.UI.FILL">
 
 				<View top="8" height="Ti.UI.SIZE">
 				<TextField id="searchTerms" class="topDrawerText" color="black" width="87%" left="10%" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS"/>
 					<Button id="myLocation" left="3" top="52" borderRadius="2" borderColor="black" borderWidth="2" backgroundImage="/images/myLocation-icon.png" onClick="myLocation"></Button>
 					<TextField id="addressTextField" class="topDrawerText" color="black" onChange="changeAddress" clearButtonMode="Ti.UI.INPUT_BUTTONMODE_ALWAYS" width="87%" left="10%"/>
-					<View layout="horizontal" top="95">
+					<View layout="horizontal" top="85">
 						<Button color="white" id="decreaseRadius" class="stepper stepperDown" onClick="decreaseRadius" zIndex="9998">-</Button>
 						<Label color="#d6f442" id="selectedRadius" width="80%" textAlign="center">10 miles</Label>
 						<Button color="white" id="increaseRadius" class="stepper stepperUp" onClick="increaseRadius" zIndex="9997">+</Button>		
 						<Label id="radiusLabel" class="stepperLabel" width="100%"  textAlign="center">Radius</Label>
 					</View>
-					<View layout="horizontal" top="180">
+					<View layout="horizontal" top="170">
 						
 						<Button color="white" id="decreaseTimeFrame" class="stepper stepperDown" onClick="decreaseTimeFrame" zIndex="9996">-</Button>
 						<Label color="#d6f442" id="selectedTimeFrame" width="80%" textAlign="center">Any Time</Label>
 						<Button color="white" id="increaseTimeFrame" class="stepper stepperUp" onClick="increaseTimeFrame" zIndex="9995">+</Button>
 						<Label id="radiusLabel" class="stepperLabel" width="100%" textAlign="center">Time-Frame</Label>
 					</View>					
-					
-					<View layout="vertical" top="270" >
+						<View height="Ti.UI.SIZE" top="260">
+					<Button onClick="changeSearchCriteria" zIndex="9999" right="11" fontSize="18dp" class="search-button" style="DONE" selectedColor="#d6f442">Search</Button>
+				</View>
+					<View layout="vertical" top="320" >
 						<View bottom="0" left="0" right="0" height="1" borderWidth="1"  borderColor="#d6f442" />
 						<Label id="addContent" class="addContent link" text="Add Event to Local Ruckus" color="white" onClick="addContent" height="30"/>
 						<View bottom="0" left="0" right="0" height="1" borderWidth="1" borderColor="#d6f442" />
